@@ -25,6 +25,12 @@ Significant realignment means users will need to modify current deployments to c
   * Modifies fifth footprint integration segment to increase scale factor of aerodynamic height used to calculate max range by factor of 5 (200&rarr;1000)
     and to iterate up to a fixed number of times instead of estimating number of steps required.
 
+It also includes a number of fixes and enhancements:
+
+* Eliminate compiler warning about unused Topp equation function if not using Decagon 5TM sensors. Fixes [#4]
+
+[#4]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/4
+
 
 ## [ProgSig 40826] 2018-11-29
 

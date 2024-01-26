@@ -1952,6 +1952,11 @@ Units profile_5TM_tmpr = C
 Units profile_5TM_wc = frac_v_wtr
 '*** End of 5TM profile constants and variables ***
 #EndIf
+#If ((SENSOR_5TM) OR (PROFILE_5TM)) Then
+Function Topp_equation( dielectric )
+  Return 4.3e-6*dielectric^3 - 5.5e-4*dielectric^2 + 2.92e-2*dielectric - 5.3e-2
+EndFunction
+#EndIf
 #If ((SENSOR_HFP) AND  (SENSOR_CS6XX) AND (SENSOR_SOIL_T)) Then
 
 '*** Beginning of variables for calculation of soil heat flux at soil surface ***
@@ -4640,15 +4645,6 @@ Sub Separation_Lag_Lateral_Distances (wnd_dir, separation_x, separation_y, separ
   separation_lag_dis =  separation_x*COS(wnd_dir) + separation_y*SIN(wnd_dir)
   separation_lat_dis = -separation_x*SIN(wnd_dir) + separation_y*COS(wnd_dir)
 EndSub
-
-
-'*****************'
-'*** FUNCTIONS ***'
-'*****************'
-Function Topp_equation( dielectric )
-  Return 4.3e-6*dielectric^3 - 5.5e-4*dielectric^2 + 2.92e-2*dielectric - 5.3e-2
-EndFunction
-
 
 '********************'
 '*** MAIN PROGRAM ***'
