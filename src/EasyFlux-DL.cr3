@@ -90,55 +90,39 @@ Const LTAR_CORE_TABLE  = TRUE       'Unique: TRUE if producing 15-min LTAR Commo
 Const LTAR_CORE_TABLE_1Minute = TRUE
 
 '*** SENSORS ****
-Const SENSOR_IRGASON     = FALSE    'Unique: IRGASON, if TRUE, SENSOR_CSAT3AEC150 must be set to FALSE
-Const SENSOR_CSAT3AEC150 = TRUE     'Unique: CSAT3A + EC150, if TRUE, SENSOR_IRGASON must be set to FALSE.
-Const SENSOR_FW          = FALSE    'Unique: FW05, FW1, FW3, or other fine wire thermocouple
-
-'Select at most 1 temperature/RH probe:
-Const SENSOR_HMP155A     = TRUE     'Unique: Vaisala HMP155A
-Const SENSOR_HC2S3       = FALSE    'Unique: Campbellsci HC2S3
-Const SENSOR_HMP45C      = FALSE    'Unique: Vaisala HMP45C
-
-Const SENSOR_NR_LITE     = TRUE     'Unique: NR Lite2: net radiometer, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
-Const SENSOR_CS300       = FALSE    'Unique: CS300: pyranometer, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
-Const SENSOR_LI200X      = FALSE    'Unique: LI200X: pyranometer, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
-Const SENSOR_LI190SB     = TRUE     'Unique: LI190SB: Quantum, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
-Const SENSOR_SI111       = FALSE    'Unique: SI111: Infrared radiometer, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
-Const SENSOR_NR01        = FALSE    'Unique: NR01: 4-way net radiometer, if true, SENSOR_NR_LITE and SENSOR_CNR4 must be set to FALSE
-Const SENSOR_CNR4        = FALSE    'Unique: CNR4: 4-way net radiometer, if true, SENSOR_NR_LITE and SENSOR_NR01 must be set to FALSE
-
-'Select at most 1 rain sensor:
-Const SENSOR_TE525       = FALSE    'Unique: TE525 (6") rain gage
-Const SENSOR_TE525WS     = TRUE     'Unique: TE525WS (8") rain gage
-Const SENSOR_TE525MM     = FALSE    'Unique: TE525MM (metric) rain gage
-Const SENSOR_TE525_wf    = FALSE    'Unique: TE525 or TE525MM rain gage with 8in funnel
-
-Const SENSOR_TCAV        = TRUE     'Unique: TCAV: type E thermocouple averaging soil temperature probes
-Const SENSOR_HFP01       = TRUE     'Unique: HFP01: soil heat flux plates, if true, SENSOR_HFP01SC must be set to FALSE
-Const SENSOR_HFP01SC     = FALSE    'Unique: HFP01SC: self-calibrated soil heat flux plates, if true, SENSOR_HFP01 must be set to FALSE
-'Select at most 1 soil T/VWC probe:
-Const SENSOR_CS616       = FALSE    'Unique: CS616: water content reflectometers for volumetric soil moisture
-Const SENSOR_CS65X       = FALSE    'Unique: CS650 or CS655: water content reflectometers for volumetric soil moisture
-Const SENSOR_TDR31X      = TRUE     'Unique: Acclima TDR-315L soil water content/temperature probes
-Const SENSOR_5TM         = FALSE    'Unique: Decagon Devices 5TM soil water content/temperature probes
-
-Const PROFILE_TDR31X     = TRUE     'Unique: soil profile composed of Acclima TDR-315L probes, if true, PROFILE_5TM must be false
-Const PROFILE_5TM        = FALSE    'Unique: soil profile composed of Decagon Devices 5TM probes, if true, PROFILE_TDR31X must be false
-
-Const SENSOR_034B        = TRUE     'Unique: MetOne 034B cup & vane wind set
-Const SENSOR_GPS16X      = TRUE     'Unique: Garmin GPS16x-HVS GPS receiver
-Const SENSOR_DOOR        = TRUE     'Unique: reed switch enclosure door sensor
-Const SENSOR_TS45        = TRUE     'Unique: MorningStar TriStar TS-45 charge controller
+Const SENSOR_IRGASON     = FALSE                  'Unique: IRGASON, if TRUE, SENSOR_CSAT3AEC150 must be set to FALSE
+Const SENSOR_CSAT3AEC150 = TRUE                   'Unique: CSAT3A + EC150, if TRUE, SENSOR_IRGASON must be set to FALSE.
+Const SENSOR_FW          = FALSE                  'Unique: FW05, FW1, FW3, or other fine wire thermocouple
+Const SENSOR_TMPR_RH     = TRUE                    'Unique: HC2S3 or HMP155A: temperature and relative humidity probe
+Const SENSOR_NR_LITE     = TRUE                   'Unique: NR Lite2: net radiometer, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
+Const SENSOR_CS300       = FALSE                  'Unique: CS300: pyranometer, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
+Const SENSOR_LI200X      = FALSE                  'Unique: LI200X: pyranometer, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
+Const SENSOR_LI190SB     = TRUE                   'Unique: LI190SB: Quantum, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
+Const SENSOR_SI111       = FALSE                  'Unique: SI111: Infrared radiometer, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
+Const SENSOR_NR01        = FALSE                   'Unique: NR01: 4-way net radiometer, if true, SENSOR_NR_LITE and SENSOR_CNR4 must be set to FALSE
+Const SENSOR_CNR4        = FALSE                  'Unique: CNR4: 4-way net radiometer, if true, SENSOR_NR_LITE and SENSOR_NR01 must be set to FALSE
+Const SENSOR_TE525mm     = TRUE                    'Unique: TE525mm rain gauge
+Const SENSOR_TCAV        = TRUE                    'Unique: TCAV: type E thermocouple averaging soil temperature probes
+Const SENSOR_HFP01       = TRUE                   'Unique: HFP01: soil heat flux plates, if true, SENSOR_HFP01SC must be set to FALSE
+Const SENSOR_HFP01SC     = FALSE                   'Unique: HFP01SC: self-calibrated soil heat flux plates, if true, SENSOR_HFP01 must be set to FALSE
+Const SENSOR_CS616       = FALSE                  'Unique: CS616: water content reflectometers for volumetric soil moisture, if true, SENSOR_CS65X, SENSOR_TDR31X and SENSOR_5TM must be set to FALSE
+Const SENSOR_CS65X       = FALSE                  'Unique: CS650 or CS655: water content reflectometers for volumetric soil moisture, if true, SENSOR_CS616, SENSOR_TDR31X and SENSOR_5TM must be set to FALSE
+Const SENSOR_TDR31X      = TRUE                   'Unique: Acclima TDR series soil moisture sensors, if true, SENSOR_CS616, SENSOR_CS65X and SENSOR_5TM must be set to FALSE
+Const SENSOR_5TM         = FALSE                  'Unique: Decagon Devices 5TM soil water content/temperature probes, if true, SENSOR_CS616, SENSOR_CS65X and SENSOR_TDR31X must be set to FALSE
+Const PROFILE_TDR31X     = TRUE                   'Unique: soil profile composed of Acclima TDR-315L probes, if true, PROFILE_5TM must be false
+Const PROFILE_5TM        = FALSE                  'Unique: soil profile composed of Decagon Devices 5TM probes, if true, PROFILE_TDR31X must be false
+Const SENSOR_034B        = TRUE                   'Unique: MetOne 034B cup & vane wind set, if true, either SENSOR_NR01 must be set to FALSE or SE input channel for WD must be changed
+Const SENSOR_GPS16X      = TRUE                   'Unique: Garmin GPS16x-HVS GPS receiver
+Const SENSOR_DOOR        = TRUE                   'Unique: reed switch enclosure door sensor
+Const SENSOR_TS45        = TRUE                   'Unique: MorningStar TriStar TS-45 charge controller
 
 'adjust to reflect reality
-Const NMBR_SHFP = 1         'Unique: number of HFP01 or HFP01SC sensors to measure (Maximum is 4) .
+Const NMBR_SHFP = 1         'Unique: number of HFP01 or HFP01SC sensors to measure (Maximum is 4)
 Const NMBR_CS6xx = 1        'Unique: number of CS616, CS650, CS655, TDR-315 or 5TM sensors (Maximum is 2)
 Const NMBR_PROFILE = 6      'Unique: number of T/VWC probes (TDR-315 or 5TM) in profile (Maximum is 6)
 
 'Composite boolean variables for variables above
-Const SENSOR_TMPR_RH     = ((SENSOR_HMP155A) OR (SENSOR_HC2S3) OR (SENSOR_HMP45C))
 Const SENSOR_Rn          = ((SENSOR_CNR4) OR (SENSOR_NR01) OR (SENSOR_NR_LITE))
-Const SENSOR_TE525x      = ((SENSOR_TE525) OR (SENSOR_TE525WS) OR (SENSOR_TE525MM) OR (SENSOR_TE525_wf))
 Const SENSOR_HFP         = ((SENSOR_HFP01) OR (SENSOR_HFP01SC))
 Const SENSOR_CS6XX       = ((SENSOR_CS616) OR (SENSOR_CS65X) OR (SENSOR_TDR31X) OR (SENSOR_5TM))
 Const SENSOR_SOIL_T      = ((SENSOR_TCAV) OR (SENSOR_CS65X) OR (SENSOR_TDR31X) OR (SENSOR_5TM))
@@ -168,7 +152,7 @@ Const SENSOR_PROFILE     = ((PROFILE_TDR31X) OR (PROFILE_5TM))
 #If (SENSOR_HFP) Then
 'Soil heat flux plates
 Const SHF_ANALOG_INPUT = 1  'Starting differential analog input channel.
-'Use `NMBR_SHFP` above to specify number of HFP01 or HFP01SC sensors to measure (Maximum is 4)
+'Use `NMBR_SHFP` above to specify number of HFP01 or HFP01SC sensors to measure (Maximum is 4) .
 
 Data 1000/SHFP_1_SENS                'Unique: multiplier for HFP01xx #1 (1000/sensitivity).
 #If (NMBR_SHFP >1) Then     'This conditional statement can avoid the confliction with Data statements for the numerical wTs transfer function from Dijk (2002)) if NMBR_SHFP < 2
@@ -188,11 +172,11 @@ Data 1000/SHFP_4_SENS                'Unique: multiplier for HFP01xx #4 (1000/se
 '*** Beginning of HFP01 wiring ***
 '1H      Signal #1 (white)
 '1L      Signal reference #1 (green)
-'gnd     Shield #1 (black)
+'gnd     Shield #1 (clear)
 
 '2H     Signal #2 (white)
 '2L     Signal reference #2 (green)
-'gnd    Shield #2 (black)
+'gnd    Shield #2 (clear)
 
 '3H     Signal #3 (white)
 '3L     Signal reference #3 (green)
@@ -265,7 +249,7 @@ Const FW_ANALOG_INPUT  = 5          'Differential analog input channel for FW (I
 #EndIf
 #If (SENSOR_Rn) Then
 ' Net radiations sensors
-Const NR_ANALOG_INPUT = 10           'Starting differential analog input channel for a net radiation sensor.
+Const NR_ANALOG_INPUT = 6           'Starting differential analog input channel for a net radiation sensor.
 
 #EndIf
 #If (SENSOR_NR_LITE) Then
@@ -368,7 +352,7 @@ Const PYRAN_OFFSET        = 0     'Unique: offset for LI200X [0 W/m^2] or CS300 
 #EndIf
 #If (SENSOR_LI190SB) Then
 
-Const QUANTUM_ANALOG_INPUT  = 11    'Differential analog input channel for quantum PAR sensor
+Const QUANTUM_ANALOG_INPUT  = 8     'Differential analog input channel for quantum PAR sensor
 Const QUANTUM_VOLTAGE_RANGE = mV20  'Unique: measurement range of voltage
 Const QUANTUM_MULT          = 1000/(QUANTUM_SENS*0.604)   'Unique: multiplier (1000 C) for quantum PAR sensor.
 Const QUANTUM_OFFSET        = 0     'Unique: offset for for quantum PAR sensor.
@@ -402,12 +386,12 @@ Const b2_SI111 =  13114           'Unique: calbration b2
 #EndIf
 #If (SENSOR_TCAV) Then
 
-Const TCAV_ANALOG_INPUT = 5          'Staring differential analog input channel for TCAV.
+Const TCAV_ANALOG_INPUT = 11         'Staring differential analog input channel for TCAV.
 Const NMBR_TCAV         = 1          'Unique: number of TCAV (Maximum is 2)
 
 '*** Beginning of TCAV wiring ***
-'5H     Signal #1 (purple)
-'5L     Signal reference #1 (red)
+'11H     Signal #1 (purple)
+'11L     Signal reference #1 (red)
 'gnd     Shield #1 (clear)
 
 '12H     Signal #2 (purple)
@@ -460,7 +444,7 @@ Const CS65X_SDI12_Address_2 = 2        'Unique: SDI address for CS655 #2
 #EndIf
 #If (SENSOR_TDR31X) Then
 
-Const TDR31X_SDI12_PORT      = 7    'Control port for SDI-12 data
+Const TDR31X_SDI12_PORT      = 5    'Control port for SDI-12 data
 Const TDR31X_SDI12_Address_1 = 1    'Unique: SDI address for TDR-315 #1
 #If (NMBR_CS6xx = 2) Then
 Const TDR31X_SDI12_Address_2 = 2    'Unique: SDI address for TDR-315 #2
@@ -476,7 +460,7 @@ Const TDR31X_SDI12_Address_2 = 2    'Unique: SDI address for TDR-315 #2
 #EndIf
 #If (SENSOR_5TM) Then
 
-Const fiveTM_SDI12_PORT        = 7     'Control port for SDI-12 data
+Const fiveTM_SDI12_PORT        = 5     'Control port for SDI-12 data
 Const fiveTM_SDI12_Address_1   = 1     'Unique: SDI address for TDR-315 #1
 #If (NMBR_CS6xx = 2) Then
 Const fiveTM_SDI12_Address_2   = 2     'Unique: SDI address for TDR-315 #2
@@ -499,7 +483,7 @@ Const fiveTM_SDI12_Address_2   = 2     'Unique: SDI address for TDR-315 #2
 
 Const TDR31X_SDI12_Address_P = 3      'Unique: first address in sequential series
 #If (NOT SENSOR_TDR31X) Then
-Const TDR31X_SDI12_PORT    = 7      'Control port for SDI-12 data
+Const TDR31X_SDI12_PORT    = 5      'Control port for SDI-12 data
 '*** Beginning of TDR-315 wiring ***
 'C5       SDI-12 data #1 (blue)
 '         SDI-12 data #2 (blue
@@ -514,7 +498,7 @@ Const TDR31X_SDI12_PORT    = 7      'Control port for SDI-12 data
 
 Const fiveTM_SDI12_Address_P = 3      'Unique: first address in sequential series
 #If (NOT SENSOR_5TM) Then
-Const fiveTM_SDI12_PORT   = 7      'Control port for SDI-12 data
+Const fiveTM_SDI12_PORT   = 5      'Control port for SDI-12 data
 #EndIf
 '*** Beginning of 5TM wiring ***
 'C5       SDI-12 data #1 (red)
@@ -528,18 +512,9 @@ Const fiveTM_SDI12_PORT   = 7      'Control port for SDI-12 data
 #EndIf
 #If (SENSOR_TMPR_RH) Then
 
-Const TMPR_RH_ANALOG_INPUT = 8      'Starting differential analog input channel for temperature and humidity probe.
-Const TMPR_RH_MULT = (100-0)/1000   'Unique: RH multiplier, all models = 0.1
-Const TMPR_RH_OFFSET = 0            'Unique: RH offset, all models = 0
-
-#If (SENSOR_HMP155A) Then
-Const TMPR_RH_T_MULT   = (60 - -80)/1000  'Unique: temperature multiplier HMP155A = 0.14
-Const TMPR_RH_T_OFFSET = -80              'Unique: temperature offset HC2S3 = -40, HMP155A = -80, or HMP45C = -40.
-#EndIf
-#If (SENSOR_HC2S3 OR SENSOR_HMP45C) Then
-Const TMPR_RH_T_MULT   = (60 - -40)/1000  'Unique: temperature multiplier HC2S3 = 0.1
-Const TMPR_RH_T_OFFSET = -40              'Unique: temperature offset HC2S3 = -40
-#EndIf
+Const TMPR_RH_ANALOG_INPUT = 27     'Single-end analog input channel for temperature and humidity probe.
+Const TMPR_RH_T_MULT       = 0.14   'Unique: multiplier for temperature; HC2S3 = 0.1, HMP155A = 0.14, or HMP45C = 0.1.
+Const TMPR_RH_T_OFFSET     = -80    'Unique: offset for temperature; HC2S3 = -40, HMP155A = -80, or HMP45C = -40.
 
 '*** Beginning of HC2S3 or HMP wiring ***
 '14H     Temperature signal (brown/yellow)
@@ -553,21 +528,12 @@ Const TMPR_RH_T_OFFSET = -40              'Unique: temperature offset HC2S3 = -4
 'G       Power reference (gray/black)
 '*** End of HC2S3 or HMP wiring ***
 #EndIf
-#If (SENSOR_TE525x) Then
+#If (SENSOR_TE525mm) Then
 
-Const TE525_PULSE_INPUT = 2          'Pulse input channel rain gauge.
+Const TE525_PULSE_INPUT = 1          'Pulse input channel rain gauge.
+Const TE525_MULT        = 0.1        'Unique: multiplier for TE525MM [0.1], TE525 or TE525WS [0.254], or 8" funnel on TE525 or TE525MM [0.1459] rain gauge
 
-#If (SENSOR_TE525MM) Then
-Const TE525_MULT = 0.1        'Unique: multiplier for TE525MM
-#EndIf
-#If (SENSOR_TE525 OR SENSOR_TE525WS) Then
-Const TE525_MULT = 0.254      'Unique: multiplier for TE525 & TE525WS
-#EndIf
-#If (SENSOR_TE525_wf) Then
-Const TE525_MULT = 0.1459     'Unique: multipler for TE525 or TE525MM w/ 8in funnel
-#EndIf
-
-'*** Beginning of TE525x wiring ***
+'*** Beginning of TE525mm wiring ***
 'P1      Precipitation (black)
 'gnd     Signal reference (white)
 'gnd     Shield (clear/clear)
@@ -575,30 +541,30 @@ Const TE525_MULT = 0.1459     'Unique: multipler for TE525 or TE525MM w/ 8in fun
 #EndIf
 #If (SENSOR_034B) Then
 
-Const o34B_WD_ANALOG_INPUT = 23 'Single-ended analog input channel for 034B wind direction
-Const o34B_WD_EXCITATION = 1    'Voltage excitation channel for 034B wind direction
-Const o34B_WS_PULSE_INPUT = 1   'Pulse input channel for 034B wind speed
+Const o34B_WD_ANALOG_INPUT = 20      'Single-ended analog input channel for 034B wind direction
+Const o34B_WD_EXCITATION = Vx3       'Voltage excitation channel for 034B wind direction
+Const o34B_WS_PULSE_INPUT = 2        'Pulse input channel for 034B wind speed
 
-Const o34B_WD_MULT = 720        'Unique: multipler for wind direction
-Const o34B_WD_OFFSET = 0        'Unique: offset for wind direction
-Const o34B_WS_MULT = 0.7989     'Unique: multiplier for wind speed
-Const o34B_WS_OFFSET = 0.28     'Unique: offset for wind speed
+Const o34B_WD_MULT = 720             'Unique: multipler for wind direction
+Const o34B_WD_OFFSET = 0             'Unique: offset for wind direction
+Const o34B_WS_MULT = 0.7989          'Unique: multiplier for wind speed
+Const o34B_WS_OFFSET = 0.28          'Unique: offset for wind speed
 
 'lower case'd in anticipation of future integration into settings array
 Const cupvane_azimuth = 0  'Unique: orientation of windset w.r.t. true north
 
 '*** Beginning of 034B wiring ***
-'1L      Wind direction signal (green)
-'VX1     Wind direction voltage excitation (blue)
+'10L     Wind direction signal (green)
+'VX3     Wind direction voltage excitation (blue)
 'gnd     Wind diretion reference (white)
-'P1      Wind speed pulsed input (red)
+'P2      Wind speed pulsed input (red)
 'gnd     Wind speed reference (black)
 'gnd     Shield (clear)
 '*** End of 034B wiring ***
 #EndIf
 #If (SENSOR_GPS16X) Then
 
-Const GPS16X_COM = Com2    'Serial port for GPS16X
+Const GPS16X_COM = Com4    'Serial port for GPS16X
 
 Const UTC_OFFSET = -8      'local time offset from UTC, in hours
 Const MAX_CLOCK_DRIFT = 0  'max clock drift permitted before setting clock, in msec
@@ -616,10 +582,10 @@ Const MAX_CLOCK_DRIFT = 0  'max clock drift permitted before setting clock, in m
 #EndIf
 #If (SENSOR_DOOR) Then
 
-Const DOOR_CTRL_INPUT = 8     'Control input port
+Const DOOR_CTRL_INPUT = 6     'Control input port
 Const DOOR_SWITCH_POLARITY = False   'switch NO vs NC; change if reported door state is inverted
 '*** Beginning of door reed switch wiring ***
-'C8      one wire
+'C6      one wire
 '+5V     the other wire
 '*** End of door switch wiring ***
 #EndIf
@@ -782,6 +748,7 @@ Dim slowsequence_5_disable_flg As Boolean   'Flag used to decimate statistics in
 Dim sys_conf_var_file         As Long        'Filehandle for the file that contains the system configuration variables in the CPU.
 
 Dim i, i_slow                 As Long        'Index variables for the outmost loop. "i" in main scan and "i_slow" in slow scan sequence
+
 Dim array_index               As Long        'Used for array index that must be calculated using loop index (to simplify expression and reduce computation for array index)
 
 Dim n = 1                                    'Used for counting the number of samples
@@ -1591,6 +1558,7 @@ DataTable (comp_mean, TRUE, 1)
 
 EndTable
 '*** End of IRGA constants, variables, and working data table ***
+
 #If (SENSOR_FW) Then
 '*** Beginning of FW constants, variables, and working data table ***
 Public time_const_FW =  0.001         'default value (seconds). It will be recalculated inside the program
@@ -1768,7 +1736,7 @@ DataTable (stats_tmpr_rh,TRUE,1)
 EndTable
 '*** End of temperature and humidity probe constants, variables, and working data table ***
 #EndIf
-#If (SENSOR_TE525x) Then
+#If (SENSOR_TE525mm) Then
 
 '*** Beginning of TE525mm constants and variables ***
 Public Precipitation
@@ -1812,7 +1780,7 @@ Units R_SW_in       = W/m^2
 Units R_SW_out      = W/m^2
 Units R_LW_in       = W/m^2
 Units R_LW_out      = W/m^2
-Units T_nr          = Kelvin
+Units T_nr          = Klvin
 Units R_LW_in_meas  = W/m^2
 Units R_LW_out_meas = W/m^2
 '*** End of NR01/CNR4 constants and variables ***
@@ -2337,6 +2305,7 @@ Const ONE_FULL_TABLE = TRUE         'Unique: TRUE if all hourly or half-hourly d
 DataTable (Flux, TRUE, FLUX_SIZE_CPU)
   DataInterval (0, OUTPUT_INTERVAL, Min, 10)
   TableFile ("CRD:"&Status.SerialNumber(1,1)&".Flux_", 64, -1, 0, NMBR_DAY_FLUX_CRD, Day, 0, 0)
+
   '**** Beginning of flux and quality classification data ***
   Sample (1, Fc_molar,    IEEE4)    'Carbon dioxide flux in umol/(m^2 s) after coordinate rotations, freq corrections, and WPL correction
   Sample (1, Fc_mass,     IEEE4)    'Carbon dioxide flux in mg/(m^2 s) after coordinate rotations, freq corrections, and WPL correction
@@ -2445,7 +2414,7 @@ DataTable (Flux, TRUE, FLUX_SIZE_CPU)
   Sample  (1, rho_d_probe_Avg, IEEE4)                                           'Measured from temperaure and humidity probe: dry air density in kg/m^3
   '*** End of temperature and humidity probe output data ***
   #EndIf
-  #If (SENSOR_TE525x) Then
+  #If (SENSOR_TE525mm) Then
 
   '*** Beginning of rain gauge output data ***
   Totalize (1, Precipitation, FP2, 0)
@@ -2567,7 +2536,7 @@ DataTable (Flux, TRUE, FLUX_SIZE_CPU)
     Units SHFP_4_SENS = uv/W/m^2
   #EndIf
   #EndIf
-  '*** End of HFP01 output data ***  
+  '*** End of HFP01 output data ***
   #EndIf
   #If (SENSOR_HFP01SC) Then
 
@@ -3008,7 +2977,7 @@ DataTable (LTAR_Met, TRUE, -1)
   #If (NOT SENSOR_IRGASON) Then
   Average (1, RH,         IEEE4, (irga_disable_f OR irga_amb_tmpr_f OR H2O_bad_rng_sig_array(MAX_LAG +1)))
   #EndIf
-  #If (SENSOR_TE525x) Then
+  #If (SENSOR_TE525mm) Then
   Totalize(1, Precipitation,      FP2, False)     'Precipitation (mm) [liquid precip]
   #EndIf
   '*** End of Phase 1 measurements ***
@@ -3248,7 +3217,7 @@ Sub  Displacement_roughness_heights (S_type, d_user, z0_user, h_canopy, h_measur
 
   EndIf
 
-  If ((S_type = FOREST) OR (S_type = SHRUB)) Then           'Forest and Shrub
+  If ((S_type = FOREST) OR (S_type = SHRUB)) Then          'Forest and Shrub
     displacement = 2*h_canopy/3                            'Forest canopy, 2/3 rule, page 116, Oke, 1987
     roughness    = 0.06*h_canopy                           'Forest canopy, Jarvis et al. (1976) ans Raupach et al. (1991)
   EndIf
@@ -4311,7 +4280,9 @@ Sub FootprintCharacteristics_KormannMeixner (Ustar, height_aerodynamic, Stabilit
 
   'Composite variables
   Dim r_KM                     'Shape factor (r_KM =2 + m_KM - n_KM) in footprint of Kormann and Meixner (2001)
-  Dim Xi                       'wnd_const/(k*r_KM^2) where k is von Kerman constant (0.41)
+  Dim Phi_c                    'Phi_c is the thermal stratification as a function of stability [see eq 1.32 in Kaimal & Finnigan 1994 and eq. 34 in Kormann and Meixner (2001)].
+  Dim kp                       'Constant in power-law profile of the eddy diffusivity (k*u_star*height_aerodynamic^(1.0 - n_KM)/Phi_c) 
+  Dim Xi                       'wnd_const/(kp*r_KM^2) where k is von Kerman constant (0.41)
   Dim Mu                       '(m_KM + 1)/r_KM
   Dim Gamma_Mu                 'Gamma function of Mu
   Dim xgz                      '((Xi^Mu)*(height_aerodynamic^(m_KM +1)))/Gamma_Mu
@@ -4333,80 +4304,82 @@ Sub FootprintCharacteristics_KormannMeixner (Ustar, height_aerodynamic, Stabilit
   Dim FP_M3                    'footprint at x = x_L + 0.75*(x_R - x_L)
   Dim FP_R                     'footprint at x = x_R
 
-  Dim Interval_count           'Used to calculate interval number after FP_90pct_range calculated, but before Upwnd_dist reaches
-  Dim J As Long                'Used for index of iteration. The upcase letter J is used to keep the editor's auto-correct feature
-  'From changing the case of J in units as lowcase (e.g. J/s m^2) throughout the program.
+  Dim J As Long                'Used for index of iteration. The uppercase letter J is used to keep the editor's auto-correct feature
+  'From changing the case of J in units as lowercase (e.g. J/s m^2) throughout the program.
   
 
    If ((Ustar <> NaN) AND (Stability <> NaN) AND (U <> NaN)) Then
+
   'Calculate the exponent of vertical profile of horizontal wind and the exponent of vertical profile of eddy diffusivity
-  
   If (Stability > 0) Then
     'Similarity functions are defined in a range of z/L from -2 to 2 (pages 28, 41~43, Kaimal & Finnigan 1994). Extened to +/-4 as shown in Fig 5.23 in Stull (1988)
    Select Case Stability 
      Case Is <= 4.0    
-       m_KM = (Ustar/(k*U))*(1 + 5*Stability)         'Exponent of vertical profile of horizontal wind
-       n_KM = 1/(1 + 5*Stability)                     'Exponent of vertical profile of eddy diffusivity
-     
-     Case Is > 4
-       m_KM = (Ustar/(k*U))*(1 + 5*4)                 'Exponent of vertical profile of horizontal wind
-       n_KM = 1/(1 + 5*4)                             'Exponent of vertical profile of eddy diffusivity
+       m_KM = (Ustar/(k*U))*(1.0 + 5.0*Stability)           'Exponent of vertical profile of horizontal wind
+       n_KM = 1.0/(1.0 + 5.0*Stability)                     'Exponent of vertical profile of eddy diffusivity
+       Phi_c = 1.0 + 5.0 * Stability                        'Thermal stratification as a function of stability 
+     Case Is > 4.0
+       m_KM = (Ustar/(k*U))*(1 + 5.0*4.0)                   'Exponent of vertical profile of horizontal wind
+       n_KM = 1.0/(1.0 + 5*4)                               'Exponent of vertical profile of eddy diffusivity
+       Phi_c = 1.0 + 5.0 * 4.0                              'Thermal stratification as a function of stability 
    EndSelect
   Else
     Select Case Stability
      Case Is >= -4.0  
-       m_KM = (Ustar/(k*U))/((1 - 16*Stability)^0.25) 'Exponent of vertical profile of horizontal wind
-       n_KM = (1-24*Stability)/(1 - 16*Stability)     'Exponent of vertical profile of eddy diffusivity
-   
+       m_KM = (Ustar/(k*U))/((1.0 - 16.0*Stability)^0.25)   'Exponent of vertical profile of horizontal wind
+       n_KM = (1.0 - 24.0*Stability)/(1.0 - 16.0*Stability) 'Exponent of vertical profile of eddy diffusivity
+       Phi_c = 1.0 /SQR(1.0 - 16.0*Stability)               'Thermal stratification as a function of stability 
      Case Is < -4.0
-       m_KM = (Ustar/(k*U))/((1 - 16*(-4))^0.25)      'Exponent of vertical profile of horizontal wind
-       n_KM = (1-24*(-4))/(1 - 16*(-4))               'Exponent of vertical profile of eddy diffusivity
+       m_KM = (Ustar/(k*U))/((1.0 - 16.0*(-4.0))^0.25)      'Exponent of vertical profile of horizontal wind
+       n_KM = (1.0 - 24.0*(-4.0))/(1.0 - 16.0*(-4.0))       'Exponent of vertical profile of eddy diffusivity
+       Phi_c = 1.0 /SQR(1.0 + 16.0*4)                       'Thermal stratification as a function of stability 
     EndSelect
   EndIf
 
   'Calculate the wind constant in the vertical profile of horizontal wind
-  wnd_const = U/(height_aerodynamic^m_KM)        'Wind constant
+  wnd_const = U/(height_aerodynamic^m_KM)                   'Wind constant
 
   'Calculate the composite variables
-  r_KM = 2 + m_KM - n_KM                        'Shape factor
-
-  Xi = wnd_const/(k*r_KM*r_KM)
+  r_KM = 2.0 + m_KM - n_KM                                  'Shape factor
+  kp = k * u_star * height_aerodynamic^(1.0 - n_KM)/Phi_c   'from eqs (11) and (32) in Kormann and Meixner (2001)
+  Xi = wnd_const/(kp*r_KM*r_KM)
   Mu = (m_KM + 1)/r_KM
 
-  Gamma_Mu = SQR(2*PI/Mu)*(((Mu + 1/(12*Mu - 0.1/Mu))/EXP(1))^Mu)    'Nemes (2007)
+  Gamma_Mu = SQR(2.0*PI/Mu)*(((Mu + 1.0/(12.0*Mu - 0.1/Mu))/EXP(1.0))^Mu)    'Nemes (2007)
 
   xgz = ((Xi^Mu)*(height_aerodynamic^(m_KM +1)))/Gamma_Mu
   xz  = Xi*(height_aerodynamic^r_KM)
 
   'Turnning and inflection points
-  x_max          = xz/(Mu + 1)                   'Upwind location of source/sink that contributes most to the measured flux
-  x_inflection_L = x_max*(1 - 1/SQR(Mu + 2))     'x at the left footprint inflection point
-  x_inflection_R = x_max*(1 + 1/SQR(Mu + 2))     'x at the right footprint inflection point
+  x_max          = xz/(Mu + 1.0)                             'Upwind location of source/sink that contributes most to the measured flux
+  x_inflection_L = x_max*(1.0 - 1.0/SQR(Mu + 2.0))           'x at the left footprint inflection point
+  x_inflection_R = x_max*(1.0 + 1.0/SQR(Mu + 2.0))           'x at the right footprint inflection point
 
   'Reset variables
-  FP_cumulative  = 0
-  FP_win_range   = 0
-  FP_40pct_range = 0
-  FP_55pct_range = 0
-  FP_90pct_range = 0
+  FP_cumulative  = 0.0
+  FP_win_range   = 0.0
+  FP_40pct_range = 0.0
+  FP_55pct_range = 0.0
+  FP_90pct_range = 0.0
 
   '***Calculate footprint characteristics: FP_win_range, FP_40pct_range, FP_55pct_range, and FP_90pct_range
   ' Use five numerical integration segments to calculate the footprint characteristics
   ' 1st: starting segment from 0 (+ Delt-->0)  to the left footprint inflection point (x_inflection_L)
   ' 2nd: the left footprint inflection point to the footprint maximum (x_max)
-  ' 3rd: the footprint maximum to the right footptint inflection point (x_inflection_R) then further to [x_inflection_R + (x_inflection_R - x_max)] or until cumulative footprint reaches 90%
-  ' 4th: from x > [x_inflection_R + (x_inflection_R - x_max)] or x at culumutive footprint > 90% and then until the distance of interest is reached, 
-  '      but limited x_max + 200*height_aerodynamic (x_200z).
-  ' 5th: If upwind range of interest has not been reached, this segment is integrated from x at FP_90 = 90% (x_90)
-  '      or x_max + 200*height_aerodynamic (x_200z) to upwind distance of interest, but limited to x_90 (or x_200z) + 100*height_aerodynamic.  
+  ' 3rd: the footprint maximum to the right footptint inflection point (x_inflection_R) then further to 
+  '      [x_inflection_R + (x_inflection_R - x_max)] or until cumulative footprint reaches 90% whichever is reached first.
+  ' 4th: from x > [x_inflection_R + (x_inflection_R - x_max)] or x at culumutive footprint > 90% if reached and then until the distance of interest or 
+  '      FP_90pct_range is reached if not reached in 3rd segment but limited further x_max + x_max + 1000*height_aerodynamic.
+  ' 5th: If upwind range of interest or FP_90pct_range has not been reached, this segment is integrated from x at FP_90 = 90% (x_90)
+  '      or the 4th segment end point to upwind distance of interest, but limited to integration further + 1000*height_aerodynamic.  
 
   ' Use a high resolution of integration intervals for the first three segments 
   '     a lower resolution for the 4th and 5th segments, but high precision numerical method of Boole's rule
 
    '1st numerical integration segment: Upwind range within the left inflection point
-    x_R  = 0                                                        'Reset
+    x_R  = 0.0                                                      'Reset
     Integration_interval = x_inflection_L/NMBR_INT_INTERV_SEGMENT   'In numerical integration, use x at the left footprint inflection point as the ending boundary of this segment
-    FP_R = 0                                                        'Reset
+    FP_R = 0.0                                                      'Reset
 
     'Upwind range within the left inflection point
     For J = 1 To NMBR_INT_INTERV_SEGMENT
@@ -4429,15 +4402,17 @@ Sub FootprintCharacteristics_KormannMeixner (Ustar, height_aerodynamic, Stabilit
       EndIf
 
       'Find the 40% footprint distance
-      If (FP_cumulative >= 0.4) AND (FP_40pct_range = 0) Then
+      If (FP_cumulative >= 0.4) AND (FP_40pct_range = 0.0) Then
         FP_40pct_range = x_R - Integration_interval*(FP_cumulative - 0.4)/(FP_cumulative - FP_cumulative_prev)
       EndIf
 
     Next J
 
     '2nd numerical integration segment: Upwind range from the left footprint inflection point to the maximum footprint
-    Integration_interval = (x_max - x_inflection_L)/NMBR_INT_INTERV_SEGMENT   'In this segment, use x at the left inflection point as the starting boundary and x_max as the ending boundary
+    'In this segment, use x at the left inflection point as the starting boundary and x_max as the ending boundary
 
+    Integration_interval = (x_max - x_inflection_L)/NMBR_INT_INTERV_SEGMENT   
+    
     For J = 1 To NMBR_INT_INTERV_SEGMENT
       x_L = x_R
       x_R = x_R + Integration_interval
@@ -4447,14 +4422,14 @@ Sub FootprintCharacteristics_KormannMeixner (Ustar, height_aerodynamic, Stabilit
       FP_L = FP_R
 
       'Footprint value at the right boundary of integral interval
-      FP_R = xgz*EXP(-xz/x_R)/(x_R^(Mu + 1))
+      FP_R = xgz*EXP(-xz/x_R)/(x_R^(Mu + 1.0))
 
       'The trapezoidal rule used for an individual interval to cumulate the footprint
-      FP_cumulative += Integration_interval*(FP_L + FP_R)/2
+      FP_cumulative += Integration_interval*(FP_L + FP_R)/2.0
 
       'Find the footprint w/in the range of interest
       If ((x_L < upwnd_dist) AND (x_R >= upwnd_dist)) Then
-        FP_win_range = 100*(FP_cumulative_prev + (FP_cumulative - FP_cumulative_prev)*(upwnd_dist - x_L)/Integration_interval)
+        FP_win_range = 100.0*(FP_cumulative_prev + (FP_cumulative - FP_cumulative_prev)*(upwnd_dist - x_L)/Integration_interval)
       EndIf
 
       'Find the 40% footprint distance
@@ -4469,8 +4444,10 @@ Sub FootprintCharacteristics_KormannMeixner (Ustar, height_aerodynamic, Stabilit
 
     Next J
 
-    '3rd numerical integration segment: Upwind range from the maximum footprint to the right footprint inflection point and further to [x_inflection_R + (x_inflection_R -x_max)] or until 90% footprint is reached
-    Integration_interval = (x_inflection_R - x_max)/NMBR_INT_INTERV_SEGMENT   'In this segment, use x_max as the starting boundary and x at the right inflection point as the boundary of middle interval
+    '3rd numerical integration segment: Upwind range from the maximum footprint to the right footprint inflection point and further to
+    ' [x_inflection_R + (x_inflection_R -x_max)] or until 90% footprint is reached
+    ' In this segment, use x_max as the starting boundary and x at the right inflection point as the boundary of middle interval
+    Integration_interval = (x_inflection_R - x_max)/NMBR_INT_INTERV_SEGMENT   
 
     'Upwind range within two times of range from x_max to the right inflection point
     For J = 1 To 2*NMBR_INT_INTERV_SEGMENT                                    'The fine resolution of integration is used even beyong x_inflection_R to [x_inflection_R + (x_inflection_R -x_max)] or until 90% footprint is reached
@@ -4482,14 +4459,14 @@ Sub FootprintCharacteristics_KormannMeixner (Ustar, height_aerodynamic, Stabilit
       FP_L = FP_R
 
       'Footprint value at the right boundary of integration interval
-      FP_R = xgz*EXP(-xz/x_R)/(x_R^(Mu + 1))
+      FP_R = xgz*EXP(-xz/x_R)/(x_R^(Mu + 1.0))
 
       'The trapezoidal rule used for an individual interval to cumulate footprint
-      FP_cumulative += Integration_interval*(FP_L + FP_R)/2
+      FP_cumulative += Integration_interval*(FP_L + FP_R)/2.0
 
       'Find the footprint w/in the range of interest
       If ((x_L < upwnd_dist) AND (x_R >= upwnd_dist)) Then
-        FP_win_range = 100*(FP_cumulative_prev + (FP_cumulative - FP_cumulative_prev)*(upwnd_dist - x_L)/Integration_interval)
+        FP_win_range = 100.0*(FP_cumulative_prev + (FP_cumulative - FP_cumulative_prev)*(upwnd_dist - x_L)/Integration_interval)
       EndIf
 
       'Find the 40% footprint distance
@@ -4510,12 +4487,12 @@ Sub FootprintCharacteristics_KormannMeixner (Ustar, height_aerodynamic, Stabilit
 
     Next J
 
-    '4th numerical integration segment: x > [x_inflection_R + (x_inflection_R - x_max)] or culumutive footprint > 90%
+    '4th numerical integration segment: x > [x_inflection_R + (x_inflection_R - x_max)] or culumutive footprint < 90%
     ' Use lower intergration resolution, but the more accurate numerical integration method of Boole's rule
-    Integration_interval = 4*height_aerodynamic
+    Integration_interval = 10*height_aerodynamic
 
-    'If upwind range of 90% footprint is not reached. Continue, but limited to x_max + 200*height_aerodynamic
-    While ((FP_cumulative < 0.9) AND (x_R - x_max < 200*height_aerodynamic))
+    'If upwind range of 90% footprint is not reached. Continue, but limited to x_max + 1000*height_aerodynamic
+    While ((FP_cumulative < 0.9) AND (x_R - x_max < 1000*height_aerodynamic))
       x_L = x_R
       x_R = x_R + Integration_interval
       FP_cumulative_prev = FP_cumulative
@@ -4525,19 +4502,19 @@ Sub FootprintCharacteristics_KormannMeixner (Ustar, height_aerodynamic, Stabilit
       FP_L = FP_R
 
       'Footprint value at the 1st, 2nd, and 3rd quarter integration interval
-      FP_M1 = xgz*EXP(-xz/(x_L + 0.25*Integration_interval))/((x_L + 0.25*Integration_interval)^(Mu + 1))
-      FP_M2 = xgz*EXP(-xz/(x_L + 0.50*Integration_interval))/((x_L + 0.50*Integration_interval)^(Mu + 1))
-      FP_M3 = xgz*EXP(-xz/(x_L + 0.75*Integration_interval))/((x_L + 0.75*Integration_interval)^(Mu + 1))
+      FP_M1 = xgz*EXP(-xz/(x_L + 0.25*Integration_interval))/((x_L + 0.25*Integration_interval)^(Mu + 1.0))
+      FP_M2 = xgz*EXP(-xz/(x_L + 0.50*Integration_interval))/((x_L + 0.50*Integration_interval)^(Mu + 1.0))
+      FP_M3 = xgz*EXP(-xz/(x_L + 0.75*Integration_interval))/((x_L + 0.75*Integration_interval)^(Mu + 1.0))
 
       'Footprint value at the right boundary of an integration interval
-      FP_R = xgz*EXP(-xz/x_R)/(x_R^(Mu + 1))
+      FP_R = xgz*EXP(-xz/x_R)/(x_R^(Mu + 1.0))
 
       'The Boole's rule used for an individual interval to cumulate the footprint
-      FP_cumulative += Integration_interval*(7*FP_L + 32*FP_M1 + 12*FP_M2 + 32*FP_M3 +7*FP_R)/90
+      FP_cumulative += Integration_interval*(7.0*FP_L + 32.0*FP_M1 + 12.0*FP_M2 + 32.0*FP_M3 +7.0*FP_R)/90.0
 
       'Find the footprint w/in the range of interest
       If ((x_L < upwnd_dist) AND (x_R >= upwnd_dist)) Then
-        FP_win_range = 100*(FP_cumulative_prev + (FP_cumulative - FP_cumulative_prev)*(upwnd_dist - x_L)/Integration_interval)
+        FP_win_range = 100.0*(FP_cumulative_prev + (FP_cumulative - FP_cumulative_prev)*(upwnd_dist - x_L)/Integration_interval)
       EndIf
 
       'Find the 40% footprint distance
@@ -4557,25 +4534,16 @@ Sub FootprintCharacteristics_KormannMeixner (Ustar, height_aerodynamic, Stabilit
       FP_90pct_range = x_R - Integration_interval*(FP_cumulative - 0.9)/(FP_cumulative - FP_cumulative_prev)
     EndIf
 
-    ' Assign FP_90pct_range as NaN if culmulative footprint can not reach 0.9 within x_max + 200*height_aerodynamic
-    If ((FP_cumulative < 0.90) AND (FP_90pct_range = 0)) Then
-      FP_90pct_range = NaN
-    EndIf
-
     ' 5th numerical integration segment:
-    ' If upwind range of interest has not been reached, this segment is integrated
-    ' from x at FP_90 = 90% (x_90) or x_max + 200*height_aerodynamic (x_200z)(if FP_90 is not reached) to upwind distance of interest, 
-    ' but limited to x_90 (or x_200z) + 100*height_aerodynamic. 
+    ' If upwind range of interest or FP_90pct has not been reached, this segment is integrated
+    ' from x at FP_90 = 90% (x_90) or the 4th segment end if upwind distance of interest or FP_90 is not reached, 
+    ' but limited to 1000*height_aerodynamic further. 
     
-    If (x_R < upwnd_dist) Then
+    If ((x_R < upwnd_dist) OR (FP_90pct_range = 0)) Then
 
-      'Control the integration w/in 25 iterations after above integrations
-      If ((upwnd_dist - x_R) < (100*height_aerodynamic)) Then
+        Integration_interval = 2*Integration_interval              'Rescale integration interval
 
-        Interval_count       = INT((upwnd_dist - x_R)/Integration_interval)
-        Integration_interval = (upwnd_dist - x_R)/Interval_count              'Rescale integration interval
-
-        For J = 1 To  Interval_count                                           '100*height_aerodynamic after above integration, the cumulative footprint is enough
+        For J = 1 To 50                                            '100*height_aerodynamic after above integration, the cumulative footprint is enough
           x_L = x_R
           x_R = x_R + Integration_interval
           FP_cumulative_prev = FP_cumulative
@@ -4585,32 +4553,44 @@ Sub FootprintCharacteristics_KormannMeixner (Ustar, height_aerodynamic, Stabilit
           FP_L = FP_R
 
           'Footprint value at the right boudary of the 1st, 2nd, and 3rd quarter integration interval
-          FP_M1 = xgz*EXP(-xz/(x_L + 0.25*Integration_interval))/((x_L + 0.25*Integration_interval)^(Mu + 1))
-          FP_M2 = xgz*EXP(-xz/(x_L + 0.50*Integration_interval))/((x_L + 0.50*Integration_interval)^(Mu + 1))
-          FP_M3 = xgz*EXP(-xz/(x_L + 0.75*Integration_interval))/((x_L + 0.75*Integration_interval)^(Mu + 1))
+          FP_M1 = xgz*EXP(-xz/(x_L + 0.25*Integration_interval))/((x_L + 0.25*Integration_interval)^(Mu + 1.0))
+          FP_M2 = xgz*EXP(-xz/(x_L + 0.50*Integration_interval))/((x_L + 0.50*Integration_interval)^(Mu + 1.0))
+          FP_M3 = xgz*EXP(-xz/(x_L + 0.75*Integration_interval))/((x_L + 0.75*Integration_interval)^(Mu + 1.0))
 
           'Footprint value at the right boundary of integration interval
-          FP_R = xgz*EXP(-xz/x_R)/(x_R^(Mu + 1))
+          FP_R = xgz*EXP(-xz/x_R)/(x_R^(Mu + 1.0))
 
-          FP_cumulative += Integration_interval*(7*FP_L + 32*FP_M1 + 12*FP_M2 + 32*FP_M3 +7*FP_R)/90
+          FP_cumulative += Integration_interval*(7.0*FP_L + 32.0*FP_M1 + 12.0*FP_M2 + 32.0*FP_M3 +7.0*FP_R)/90.0
           
-          'Try FP FP_90pct_range again in case that FP_90pct_range is not resolved
-          If ((FP_cumulative >= 0.9) AND (FP_90pct_range = NaN)) Then
+          'Find the footprint w/in the range of interest
+          If ((x_L < upwnd_dist) AND (x_R >= upwnd_dist)) Then
+            FP_win_range = 100.0*(FP_cumulative_prev + (FP_cumulative - FP_cumulative_prev)*(upwnd_dist - x_L)/Integration_interval)
+          EndIf
+          
+          'Try FP_90pct_range again in case that FP_90pct_range is not resolved
+          If ((FP_cumulative >= 0.9) AND (FP_90pct_range = 0)) Then
             FP_90pct_range = x_R - Integration_interval*(FP_cumulative - 0.9)/(FP_cumulative - FP_cumulative_prev)
           EndIf
-
+          
+          If ((x_R >= upwnd_dist) AND (FP_90pct_range > x_max)) Then
+              ExitFor 
+          EndIf
+ 
         Next J
 
+        If (FP_win_range = 0) Then
         Select Case FP_cumulative
         Case Is < 1.00
-          FP_win_range = 100*FP_cumulative
-        Case Is >=1
-          FP_win_range = 99
+          FP_win_range = 100.00*FP_cumulative
+        Case Is >=1.00
+          FP_win_range = 99.00
         EndSelect
-
-      Else
-        FP_win_range = 99
-      EndIf
+        EndIf
+        
+        'Assign FP_90pct_range as current x_R if cumulative footprint can not reach 0.9 within the integration range above. 
+          If ((FP_cumulative >= 0.9) AND (FP_90pct_range = 0)) Then
+            FP_90pct_range = x_R 
+          EndIf
 
     EndIf
 
@@ -4790,7 +4770,7 @@ BeginProg
 
   'Set the SDM clock speed.
   SDMSpeed (SDM_PER)
-  
+
   #If (SENSOR_TS45) Then
   	SerialOpen(TS45_COM,9600,7,50,1000) 'Open serial port for ModbusMaster
   #EndIf
@@ -4800,7 +4780,7 @@ BeginProg
     'Datalogger panel temperature
     PanelTemp (panel_tmpr, 250)
 
-    #If (SENSOR_TE525x) Then 'This is placed at beginning of scan because PulseCount() is not allowed in any conditional statements.
+    #If (SENSOR_TE525mm) Then 'This is placed at beginning of scan because PulseCount() is not allowed in any conditional statements.
     '*** Beginning of Precipitation measurements ***
     PulseCount (Precipitation, 1, TE525_PULSE_INPUT, 2, 0, TE525_MULT, 0)
     '*** End of Precipitation measurements ***
@@ -4896,7 +4876,7 @@ BeginProg
       ' Call Table for 5-minute and 30-minute table
       CallTable comp_cov_3d_5min                   'for Steady State Test
       CallTable comp_cov_3d
-    
+
       ' The data for Steady State Test (SST)
       If (comp_cov_3d_5min.Output(1, 1)) Then
         GetRecord (u_Avg_SST, comp_cov_3d_5min, 1)
@@ -5614,7 +5594,7 @@ BeginProg
 
         GetRecord (shf_plate_avg(1), stats_SHF, 1)
 
-        #If ((SENSOR_CS6XX) AND (SENSOR_SOIL_T)) Then
+        #If ((SENSOR_SOIL_T) AND (SENSOR_CS6XX)) Then
         AvgSpa(G_surface, NMBR_SHFP, shf_plate_avg(1))                           'G_surface is used as a temporary variable
 
         #If (SENSOR_TCAV) Then
@@ -5624,7 +5604,7 @@ BeginProg
         AvgSpa(Tsoil_current_Avg, NMBR_CS6xx, Tsoil_current (1))
         #EndIf
 
-        AvgSpa(soil_wtr_current_Avg, NMBR_CS6xx, soil_wtr_current (1)) 'XXXX
+        AvgSpa(soil_wtr_current_Avg, NMBR_CS6xx, soil_wtr_current (1))
 
         Delta_soil_ht_storage = ((Tsoil_current_Avg - Tsoil_prev_Avg)*Cds*soil_bulk_density + _
         (Tsoil_current_Avg*soil_wtr_current_Avg - Tsoil_prev_Avg*soil_wtr_prev_Avg)*1000*Cw)*thick_abv_SHFP/(60*OUTPUT_INTERVAL-Offset_intv_Delta_ht_storage)
@@ -5658,7 +5638,7 @@ BeginProg
 
       'Save averaged and calculated data.
       CallTable Flux
-    
+
       #If (NOT ONE_FULL_TABLE) Then
       CallTable Flux_Notes
       #EndIf
@@ -5672,7 +5652,7 @@ BeginProg
       #EndIf
       
       'Save 15 Minute Meteorology Data for LTAR CORE
-    slowsequence_disable_flg = TRUE
+      slowsequence_disable_flg = TRUE
       If (slowsequence_finished_flg) Then
         slowsequence_finished_flg = FALSE
         slowsequence_disable_flg  = FALSE
@@ -5684,7 +5664,7 @@ BeginProg
         slowsequence_5_disable_flg  = FALSE
       EndIf
       
-     Else
+    Else
       scan_count += 1
     EndIf
     CallTable diagnostic
@@ -5761,7 +5741,7 @@ BeginProg
 
     'Measure battery voltage.
     Battery (batt_volt)
-    
+
     'Check state of enclosure door
     #If (SENSOR_DOOR) Then
     If (CheckPort(DOOR_CTRL_INPUT) = DOOR_SWITCH_POLARITY) Then
@@ -5774,9 +5754,9 @@ BeginProg
     #If (SENSOR_TMPR_RH) Then
 
     '*** Beginning of temperature and humidity probe measurements ***
-    VoltDiff (T_probe, 2, mV1000, TMPR_RH_ANALOG_INPUT, TRUE, 0, ANALOG_INTEGRATION, 1, 0)
+    VoltSe (T_probe, 2, mV1000, TMPR_RH_ANALOG_INPUT, TRUE, 0, ANALOG_INTEGRATION, 1, 0)
     T_probe  = T_probe*TMPR_RH_T_MULT + TMPR_RH_T_OFFSET
-    RH_probe = RH_probe*TMPR_RH_MULT + TMPR_RH_OFFSET
+    RH_probe = RH_probe*0.1
     VaporPressure (e_probe, T_probe, RH_probe)
 
     'Saturation water pressure at current temperature
@@ -5889,9 +5869,7 @@ BeginProg
 
     '*** End of net radiation measurements ***
 
-   #EndIf
-    
-   
+    #EndIf
     #If (SENSOR_HFP01) Then
 
     '*** Beginning of HFP01 measurements ***
