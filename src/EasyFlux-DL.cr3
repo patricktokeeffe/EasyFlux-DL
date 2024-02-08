@@ -170,6 +170,10 @@ Data 1000/SHFP_4_SENS                'Unique: multiplier for HFP01xx #4 (1000/se
 #EndIf
 
 #If (SENSOR_HFP01) Then
+Units SHFP_1_SENS = uV/W/m^2
+Units SHFP_2_SENS = uV/W/m^2
+Units SHFP_3_SENS = uV/W/m^2
+Units SHFP_4_SENS = uV/W/m^2
 '*** Beginning of HFP01 wiring ***
 '1H      Signal #1 (white)
 '1L      Signal reference #1 (green)
@@ -2520,21 +2524,17 @@ DataTable (Flux, TRUE, FLUX_SIZE_CPU)
   #If (NOT SENSOR_HFP01SC) Then
   Sample (1, SHFP_1_SENS, FP2)
     FieldNames("SHFP_1_SENS")
-    Units SHFP_1_SENS = uv/W/m^2
   #If (NMBR_SHFP > 1) Then
   Sample (1, SHFP_2_SENS, FP2)
     FieldNames("SHFP_2_SENS")
-    Units SHFP_2_SENS = uv/W/m^2
   #EndIf
   #If (NMBR_SHFP > 2) Then
   Sample (1, SHFP_3_SENS, FP2)
     FieldNames("SHFP_3_SENS")
-    Units SHFP_3_SENS = uv/W/m^2
   #EndIf
   #If (NMBR_SHFP > 3) Then
   Sample (1, SHFP_4_SENS, FP2)
     FieldNames("SHFP_4_SENS")
-    Units SHFP_4_SENS = uv/W/m^2
   #EndIf
   #EndIf
   '*** End of HFP01 output data ***
@@ -2935,17 +2935,14 @@ DataTable (LTAR_Met_1Minute, TRUE, -1)
   #If (NMBR_SHFP > 1) Then
   Sample (1, SHFP_2_SENS, FP2)
     FieldNames("SHFP_2_SENS")
-    Units SHFP_2_SENS = uv/W/m^2
   #EndIf
   #If (NMBR_SHFP > 2) Then
   Sample (1, SHFP_3_SENS, FP2)
     FieldNames("SHFP_3_SENS")
-    Units SHFP_3_SENS = uv/W/m^2
   #EndIf
   #If (NMBR_SHFP > 3) Then
   Sample (1, SHFP_4_SENS, FP2)
     FieldNames("SHFP_4_SENS")
-    Units SHFP_4_SENS = uv/W/m^2
   #EndIf
   #EndIf
   '*** End of HFP01 output data ***  
@@ -3040,17 +3037,14 @@ Sample (1,LTAR_e_sat,IEEE4)
   #If (NMBR_SHFP > 1) Then
   Sample (1, SHFP_2_SENS, FP2)
     FieldNames("SHFP_2_SENS")
-    Units SHFP_2_SENS = uv/W/m^2
   #EndIf
   #If (NMBR_SHFP > 2) Then
   Sample (1, SHFP_3_SENS, FP2)
     FieldNames("SHFP_3_SENS")
-    Units SHFP_3_SENS = uv/W/m^2
   #EndIf
   #If (NMBR_SHFP > 3) Then
   Sample (1, SHFP_4_SENS, FP2)
     FieldNames("SHFP_4_SENS")
-    Units SHFP_4_SENS = uv/W/m^2
   #EndIf
   #EndIf
   '*** End of HFP01 output data ***  
