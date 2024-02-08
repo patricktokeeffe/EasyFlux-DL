@@ -1,102 +1,132 @@
 # EasyFlux<sup>&reg;</sup> DL for CR3000
 
-EasyFlux® DL for CR3000 is a free CRBasic program that enables a CR3000
-data logger to report fully corrected fluxes of CO<sub>2</sub>, latent heat
-(H<sub>2</sub>O), sensible heat, and momentum from a [Campbell Scientific](https://www.campbellsci.com/)
-open-path eddy-covariance (EC) system. For official program documentation and 
-downloads, refer to the project website: 
+EasyFlux<sup>&reg;</sup> DL is a free CRBasic program by Campbell Scientific for
+acquiring data from an open-path eddy-covariance system and computing fluxes of 
+carbon dioxide (CO<sub>2</sub>), latent heat (H<sub>2</sub>O), sensible heat and momentum 
+using commonly-applied techniques described in the scientific literature. 
+More information is available on the project website: 
 
 > EasyFlux<sup>&reg;</sup> DL: Eddy-Covariance Datalogger Program  
 > <https://www.campbellsci.com/easyflux-dl>
 
-## What's Here
+## Requirements
 
-This repository contains a version of EddyFlux-DL customized to run on research
-towers operated in partnership with the Laboratory for Atmospheric Research at
-Washington State University. These towers focus on agricultural research sites
-and belong to multiple networks and/or projects, including: 
+* CR3000 firmware version &ge; 28.0
+* EC100 firmware version &ge; 7.01
 
-* USDA ARS Long-Term Agroeconomic Research ([LTAR](https://ltarnetwork.org)) Network
-* Landscapes in Transition Pacific Northwest (LIT-PNW) Project
-* the [AmeriFlux](https://ameriflux.lbl.gov/) Network
+## Usage
 
-Program modifications are intended to be backwards-compatible and accretive,
-but not all changes satisfy these goals. To make identifying and merging changes 
-introduced by the vendor easier, official vendor releases are also tracked here
-in a separate and unrelated branch history. 
+Refer to the EasyFlux<sup>&reg;</sup> DL CR3000OP [Instruction Manual][#csi-manual]
+and the [supplemental documentation file](doc/readme.md) for complete directions,
+including sensor wiring, program configuration, data table descriptions and important usage notes. 
 
+### Getting Started
 
-## Getting Started
+1. Download a program [release][#gh-release] or clone this repo.
+1. Update the program file (`EasyFlux-DL.cr3`) according to your particular hardware configuration.
+1. Update the include file (`constants.cr3`) with unique sensor-specific calibration values.
+1. Push the include file to the datalogger, but do not run it.
+1. Push the program file to the datalogger and set to run automatically.
+    * Optional: upload the program file as `default.cr3` so it always runs automatically.
 
-### Required Equipment ###
+[#csi-manual]: https://s.campbellsci.com/documents/us/manuals/easyflux-dl.pdf
+[#gh-release]: https://github.com/wsular/EasyFlux-DL/releases/
 
-* CR3000 datalogger ([CR3000](https://www.campbellsci.com/cr3000))
-* Memory card module ([NL115](https://www.campbellsci.com/nl115), [NL116](https://www.campbellsci.com/nl116),
-  or [CFM100](https://www.campbellsci.com/cfm100))
-    * Network-enabled module is *highly recommended*
-* Open-path infrared gas analyzer with ultrasonic anemometer:
-    * [IRGASON](https://www.campbellsci.com/irgason), **OR**
-    * [EC150](https://www.campbellsci.com/ec150) with [CSAT3A](https://www.campbellsci.com/csat3a)
-* 16GB industrial-grade CompactFlash memory card
+## Features
 
-### Supported Optional Sensors
+### Editable constants
 
-> ***N.B.*** *this version has known channel assignment conflicts which prevent
-> certain optional sensors from being enabled, regardless of compatibility in
-> prior versions. Refer to comments in the program file for complete details. In
-> future versions, once compatibility is restored, this message will be removed.*
+This version of EddyFlux<sup>&reg;</sup> DL is modified to enable field editing of unique sensor constants using the keyboard display or a remote client (e.g. PC400).
+By separating constants to a separate include file, it becomes possible to edit the file in-memory and recompile the program despite the memory restrictions of the data logger.
+To facilitate quality-control and post-processing corrections, unique sensor constants are stored adjacent to corresponding sensor field names in output data tables.
 
-* Fine-wire thermocouple ([FW05](https://www.campbellsci.com/fw05),
-  [FW1](https://www.campbellsci.com/fw1), or [FW3](https://www.campbellsci.com/fw3))
-* Ambient temperature/relative humidity probe ([HC2S3](https://www.campbellsci.com/hc2s3)
-  or [HMP-155A](https://www.campbellsci.com/hmp155a))
-* Net radiometer ([CNR4](https://www.campbellsci.com/cnr4), [NR01](https://www.campbellsci.com/nr01),
-  or [NL-Lite2](https://www.campbellsci.com/nr-lite2))
-* Pyranometer ([CS300](https://www.campbellsci.com/cs300-pyranometer) or
-  [LI200X](https://www.campbellsci.com/li200x-l))
-* Quantum (PAR) sensor ([LI-190R](https://www.campbellsci.com/li190r-l) or
-  [LI-190SB](https://www.campbellsci.com/li190sb-l))
-* Infrared radiometer ([SI-111](https://www.campbellsci.com/si-111))
-* Tipping bucket rain gage ([TE525](https://www.campbellsci.com/te525-l),
-  [TE525WS](https://www.campbellsci.com/te525ws-l), [TE525M](https://www.campbellsci.com/te525mm-l),
-  or TE525/TE525MM with 8 inch funnel)
-* Averaging thermocouple ([TCAV](https://www.campbellsci.com/tcav-l))
-* Water content reflectometer, for heat storage term (up to 2 of
-  [CS616](https://www.campbellsci.com/cs616-reflectometer),
-  [CS650](https://www.campbellsci.com/cs650),
-  [CS655](https://www.campbellsci.com/cs655),
-  [5TM](https://www.metergroup.com/environment/articles/meter-legacy-soil-moisture-sensors/#5tm),
-  or [TDR-315/315L/310S](http://www.acclima.com))
-* Soil heat flux plates (up to 4 of [HFP01](https://www.campbellsci.com/hfp01))
-  or [HFP01SC](https://www.campbellsci.com/hfp01sc-l))
-* Water content reflectometer, for vertical profiling (up to 6 of
-  [5TM](https://www.metergroup.com/environment/articles/meter-legacy-soil-moisture-sensors/#5tm)
-  or [TDR-315/315L/310S](http://www.acclima.com))
-* Cup and vane wind set ([034B](https://www.campbellsci.com/034b))
-* GPS receiver ([GPS16X-HVS](https://www.campbellsci.com/gps16x-hvs))
-* Door switch sensor (magnetic reed switch, NO recommended)
+> ***N.B.** Field modification of unique sensor constants is currently not generalized and can only be used for particular sensor configurations.*
 
-### Quick Setup
+### New hardware support
 
-1. Connect the datalogger to power and sensors as described in relevant manuals.
-3. Update the unique calibration values in `src/constants.cr3` and upload to
-   to the datalogger.
-2. Modify the program file (`src/default.cr3`) as needed to:
-    * enable or disable sensors 
-    * update other constants, such as UTC offset
-3. Upload the program file to the datalogger.
-4. Update station variables, as necessary.
+The supported sensor list is expanded as follows (additions in bold):
 
-For additional details, refer to the [official user guide](https://www.campbellsci.com/easyflux-dl#documents_)
-as well as files in the [`/doc`](/doc) folder.
+* Gas analyzer and sonic anemometer (qty 1)
+    * EC150 with CSAT3A
+    * IRGASON
+* Fine-wire thermocouple (optional, qty 0 to 1)
+    * FW05
+    * FW1
+    * FW3
+* Biometeorology (biomet) and energy balance sensors (optional)
+    * Temperature/Relative Humidity (RH) Probe (qty 0 to 1)
+        * HC2S3
+        * HMP155A
+    * Radiation measurements
+        * Option 1
+            * NR Lite2 Net Radiometer (qty 0 to 1)
+            * CS300 or LI200x Pyranometer (qty 0 to 1)
+            * LI190x Quantum Sensor (qty 0 to 1)
+            * SI-111 Infrared Radiometer (qty 0 to 1)
+        * Option 2
+            * NR01 or CNR4 4-Way Radiometers (qty 0 to 1)
+    * TE525x Rain gauge (qty 0 to 1))
+    * **034B Cup-and-Vane Anemometer (qty 0 to 1)**<br/>*(Backported from Campbell Scientific pre-EasyFlux OPEC program)*
+    * TCAV Soil Thermocouple Probe (qty 0 to 2)
+    * Soil Water Content Reflectometer (qty 0 to 2)
+        * CS616
+        * CS650
+        * CS655
+        * **5TM** ([METER Group](https://metergroup.com/))
+        * **TDR31x** ([Acclima](https://acclima.com/))
+    * Soil Heat Flux Plates
+        * Option 1: HFP01 plates (qty 0 to 4)
+        * Option 2: HFP01SC self-calibrating plates (qty 0 to 4)
+* **Vertical Profile of Soil Sensors (optional)**
+    * **Option 1: 5TM (qty 0 to 6)**
+    * **Option 2: TDR31x (qty 0 to 6)**
+* **GPS Receiver (optional, qty 0 to 1)**
+    * **GPS16X-HVS**
+* **Enclosure door switch (optional, qty 0 to 1)**
+    * **Magnetic reed switch (generic)**
+* **Solar charge controller (optional)**
+    * **TriStar 45** ([MorningStar](https://www.morningstarcorp.com/))
 
+### High-frequency CO<sub>2</sub>
+
+This version of *EasyFlux DL* exposes the alternate CO<sub>2</sub> density output using humidity-corrected sonic temperature
+and adds it to the high-frequency time series output table.
+The value is not used for online flux computations and cannot be disabled.
+
+Using the fast-response temperature measurements from the sonic anemometer compensates for spectroscopic effects during high sensible heat flux regimes
+as explained in *Helbig et al. (2016)*. For more information, see:
+
+* CRBasic Program Reference for `EC100`. *Campbell Scientific, Inc.* CR3000.Std.32.04
+* Helbig, M., et al.: “Addressing a Systematic Bias in Carbon Dioxide Flux Measurements with the EC150 and the IRGASON Open-Path Gas Analyzers”, Agricultural and Forest Meteorol., 228-229 (2016), 349-359. [doi:10.1016/j.agrformet.2016.07.018](https://doi.org/10.1016/j.agrformet.2016.07.018)
+* Russell, E.S., et al.: "Adjustment of CO2 flux measurements due to the bias in the EC150 infrared gas analyzer", Agricultural and Forest Meteorol., 276-277 (2019), 107593. [doi:10.1016/j.agrformet.2019.05.024](https://doi.org/10.1016/j.agrformet.2019.05.024)
+
+### Data tables
+
+Several new data tables and changes to existing output data tables are summarized below.
+For full details, refer to the [instruction manual supplement](doc/readme.md).
+
+* Time_Series
+    * New field `CO2_hf` contains alternate CO<sub>2</sub> density output
+* Flux and Flux_Notes
+    * New fields for unique sensor calibration factors
+    * New fields for 034B cup-and-vane anemometer
+    * New fields for soil water content sensors
+    * New fields for vertical profile soil sensors
+    * New fields for solar charge controller
+    * New field for enclosure door status
+* New table: LTAR_Met 
+    * Added to satisfy reporting requirements for LTAR Common Observation Repository (CORe)
+    * Does averaging on a 15-minute basis
+    * Contains basic meteorology (TA, RH, PA, WS, WD, PAR, Rn, precip...) and soil-related data, including heat flux plates and vertical profile sensors
+* New table: LTAR_Met_1minute
+    * Added to acquire high-resolution meteorology data
+    * Does averaging on a 1-minute basis
+    * Contains same metrics as LTAR_Met, except no precipitation or soil vertical profile
 
 ## License
 
 * The EasyFlux-DL code base is *Copyright (c) 2014, 2015 Campbell Scientific,
   Inc. All rights reserved.* For more details, refer to the official
   [project website](https://www.campbellsci.com/easyflux-dl).
-* Original software contributions are licensed under 
-  [the MIT License](https://opensource.org/licenses/MIT).
-* Supporting documentation is subject to the Creative Commons Attribution 4.0
-  International ([CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/)).
+* Original software contributions are licensed under *TBD*
+* Supporting documentation is subject to the *TBD* 

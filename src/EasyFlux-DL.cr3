@@ -42,7 +42,7 @@
 'wnd    wind
 'wtr    water
 'hfp01xx HFP01 or HFP01SC soil heat flux plate sensor
-'This is a change
+
 '*** SIGN CONVENTION
 ' Positive fluxes away from the ground surface and negative towards the ground surface.
 
@@ -112,7 +112,7 @@ Const SENSOR_5TM         = FALSE                  'Unique: Decagon Devices 5TM s
 Const PROFILE_TDR31X     = TRUE                   'Unique: soil profile composed of Acclima TDR-315L probes, if true, PROFILE_5TM must be false
 Const PROFILE_5TM        = FALSE                  'Unique: soil profile composed of Decagon Devices 5TM probes, if true, PROFILE_TDR31X must be false
 Const SENSOR_034B        = TRUE                   'Unique: MetOne 034B cup & vane wind set, if true, either SENSOR_NR01 must be set to FALSE or SE input channel for WD must be changed
-Const SENSOR_GPS16X      = TRUE                   'Unique: Garmin GPS16x-HVS GPS receiver
+Const SENSOR_GPS16X      = TRUE                   'Unique: Garmin GPS16x-HVS GPS receiver; if serial no. >1A4189318 then level shifter is required for 3V PPS signal
 Const SENSOR_DOOR        = TRUE                   'Unique: reed switch enclosure door sensor
 Const SENSOR_TS45        = TRUE                   'Unique: MorningStar TriStar TS-45 charge controller
 
@@ -566,7 +566,7 @@ Const cupvane_azimuth = 0  'Unique: orientation of windset w.r.t. true north
 
 Const GPS16X_COM = Com4    'Serial port for GPS16X
 
-Const UTC_OFFSET = -8      'local time offset from UTC, in hours
+Const UTC_OFFSET = -8      'Unique: local time offset from UTC, in hours
 Const MAX_CLOCK_DRIFT = 0  'max clock drift permitted before setting clock, in msec
 
 '*** Beginning of GPS16X wiring ***
@@ -583,7 +583,7 @@ Const MAX_CLOCK_DRIFT = 0  'max clock drift permitted before setting clock, in m
 #If (SENSOR_DOOR) Then
 
 Const DOOR_CTRL_INPUT = 6     'Control input port
-Const DOOR_SWITCH_POLARITY = False   'switch NO vs NC; change if reported door state is inverted
+Const DOOR_SWITCH_POLARITY = False   'Unique: switch NO vs NC; change if reported door state is inverted
 '*** Beginning of door reed switch wiring ***
 'C6      one wire
 '+5V     the other wire
@@ -2232,10 +2232,6 @@ DisplayMenu ("System Control", TRUE)
     #EndIf
 
     MenuItem ("Sonic Azmth", sonic_azimuth)
-'needs integration into settings array before reveal
-'    #If (SENSOR_034B) Then
-'    MenuItem ("Windset Azmth", cupvane_azimuth)
-'    #EndIf
     MenuItem ("Latitude",    latitude)
     MenuItem ("Hemisph_Eq",  hemisphere_NS)
   MenuPick (Hemisphere_North, Hemisphere_South)

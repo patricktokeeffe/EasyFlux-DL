@@ -1,0 +1,327 @@
+Field	Units	Description
+Fc_molar	umol/(m^2 s)	Final corrected CO2 flux
+Fc_mass	mg/(m^2 s)	Final corrected CO2 flux
+Fc_qc_grade	Grade	Overall quality grade for Fc_molar and Fc_mass following Foken et al. 2012
+Fc_samples_Tot	samples	The total number of time series samples used in calculation of Fc
+LE	W/m^2	Final corrected latent heat flux
+LE_qc_grade	Grade	Overall quality grade for LE following Foken et al. 2012
+LE_samples_Tot	samples	The total number of time series samples used in calculation of LE
+H	W/m^2	Final corrected sensible heat flux derived from sonic sensible heat flux
+H_qc_grade	Grade	Overall quality grade for Hs following Foken et al. 2012
+H_samples_Tot	samples	The total number of time series samples used in calculation of H
+H_FW	W/m^2	Final corrected sensible heat flux derived from fine-wire thermocouple measurements
+H_FW_samples_Tot	samples	The total number of time series samples used in calculation of H_FW
+Rn	W/m^2	Average net radiation (corrected for wind)
+G_surface	W/m^2	Heat flux at the ground surface
+energy_closure	Fraction	The ratio of sensible and latent heat fluxes over surface heat flux plus net radiation
+Bowen_ratio	fraction	The ratio of final sensible heat flux over final latent heat flux
+tau	(kg m/s)/(m^2 s)	Final corrected momentum flux
+tau_qc_grade	Grade	Overall quality grade for tau following Foken et al. 2012
+u_star	m/s	Friction velocity after coordinate rotations and frequency corrections
+T_star	C	Scaling temperature after coordinate rotations, frequency corrections, and SND correction
+TKE	m^2/s^2	Specific turbulence kinetic energy after coordinate rotations
+amb_tmpr_Avg	C	Average ambient temperature from EC100 temperature probe
+Tc_Avg	C	Average air temperature derived from corrected sonic temperature
+Td_Avg	C	Average dewpoint temperature derived from gas analyzer and sonic measurements
+RH_Avg	%	Average relative humidity derived from gas analyzer measurements
+e_sat_Avg	kPa	Average saturation vapor pressure derived from gas analyzer measurements
+e_Avg	kPa	Average vapor pressure derived from gas analyzer measurements
+amb_press_Avg	kPa	Average ambient air pressure
+VPD_air	kpa	Vapor pressure deficit
+Ux_Avg	m/s	Average Ux
+Ux_Std	m/s	Standard deviation of Ux
+Uy_Avg	m/s	Average Uy
+Uy_Std	m/s	Standard deviation of Uy
+Uz_Avg	m/s	Average Uz
+Uz_Std	m/s	Standard deviation of Uz
+Ts_Avg	C	Average sonic temperature
+Ts_Std	C	Standard deviation of sonic temperature
+sonic_azimuth	degrees	Compass direction in which the sonic negative x-axis points
+wnd_spd	m/s	Average wind speed
+rslt_wnd_spd	m/s	Average horizontal wind speed
+wnd_dir_sonic	degrees	Average wind direction in the sonic coordinate system
+std_wnd_dir	degrees	Standard deviation of wind direction
+wnd_dir_compass	degrees	Average compass wind direction
+CO2_molfrac_Avg	umol/mol	Average CO2 mole fraction (wet basis)
+CO2_mixratio_Avg	umol/mol	Average CO2 dry molar mixing ratio
+CO2_Avg	mg/m^3	Average CO2 mass density
+CO2_Std	mg/m^3	Standard deviation of CO2 mass density
+H2O_molfrac_Avg	mmol/mol	Water vapor mole fraction (wet basis)
+H2O_mixratio_Avg	mmol/mol	Water vapor dry molar mixing ratio
+H2O_Avg	g/m^3	Water vapor mass density
+H2O_Std	g/m^3	Standard deviation of water vapor mass density
+CO2_sig_strgth_Min	fraction	Minimum CO2 signal strength
+H2O_sig_strgth_Min	fraction	Minimum H2O signal strength
+FW_Avg	C	Average fine-wire thermocouple temperature
+FW_Std	C	Standard deviation of fine-wire thermocouple temperature
+T_probe_Avg	C	Average ambient temperature measured by temp/RH probe
+e_probe_Avg	kPa	Average water vapor pressure derived from temp/RH probe
+e_sat_probe_Avg	kPa	Average saturation water vapor pressure derived from temp/RH probe
+Td_probe_Avg	C	Average dewpoint temperature derived from temp/RH probe
+H2O_probe_Avg	g/m^3	Average water vapor density derived from temp/RH probe measurements
+RH_probe_Avg	%	Average relative humidity from temp/RH probe
+rho_a_probe_Avg	kg/m^3	Average air density derived from temp/RH probe
+rho_d_probe_Avg	kg/m^3	Average dry air density derived from temp/RH probe
+Precipitation_Tot	mm	Total precipitation
+Rn_meas_Avg	W/m^2	Average net radiation (raw, not corrected for wind)
+NRLITE_SENS	uV/W/m^2	Net radiometer calibration factor
+albedo_Avg	unitless	Average albedo
+R_SW_in_Avg	W/m^2	Average incoming short wave radiation
+R_SW_out_Avg	W/m^2	Average outgoing short wave radiation
+R_LW_in_Avg	W/m^2	Average incoming long wave radiation
+R_LW_out_Avg	W/m^2	Average outgoing long wave radiation
+T_nr_Avg	Klvin	Average sensor body temperature
+R_LW_in_meas_Avg	W/m^2	Average raw incoming long wave radiation
+R_LW_out_meas_Avg	W/m^2	Average raw outgoing long wave radiation
+R_pyran_Avg	W/m^2	Average radiation measured by pyranometer
+PAR_density_Avg	umol/(s m^2)	Average density of photosynthetic active radiation
+QUANTUM_SENS	uA/mmol/m^2/s	Quantum (PAR) calibration factor
+T_SI111_targeted_Avg	C	Average temperature of targeted object
+T_SI111_body_Avg	C	Average temperature of sensor body
+cupvane_WS_Avg	m/s	Average wind speed from cup-and-vane anemometer
+cupvane_WS_rslt_Avg	m/s	Average wind vector magnitude from cup-and-vane anemometer
+cupvane_WD_rslt_Avg	degrees	Average compass wind direction from cup-and-vane anemometer
+cupvane_WD_csi_Std	degrees	Standard deviation of wind direction from cup-and-vane anemometer
+Tsoil_Avg(1)	C	Average soil temperature for each TCAV sensor; i identifies which TCAV sensor
+Tsoil_Avg(2)	C	Average soil temperature for each TCAV sensor; i identifies which TCAV sensor
+soil_wtr_T_Avg(1)	frac_v_wtr	Average soil water content with temperature correction for each CS616; i identifies which CS616 sensor
+soil_wtr_T_Avg(2)	frac_v_wtr	Average soil water content with temperature correction for each CS616; i identifies which CS616 sensor
+soil_wtr_Avg(1)	frac_v_wtr	Average soil water content without temperature correction; i indentifies which CS616 sensor
+soil_wtr_Avg(2)	frac_v_wtr	Average soil water content without temperature correction; i indentifies which CS616 sensor
+cs616_wcr_Avg(1)	uSeconds	Average water content reflectometer period for each CS616; i identifies which CS616 sensor
+cs616_wcr_Avg(2)	uSeconds	Average water content reflectometer period for each CS616; i identifies which CS616 sensor
+cs65x_wc_Avg(1)	frac_v_wtr	Average soil water content for each sensor; i identifies which CS650 or CS655 sensor
+cs65x_wc_Avg(2)	frac_v_wtr	Average soil water content for each sensor; i identifies which CS650 or CS655 sensor
+cs65x_ec_Avg(1)	dS/m	Average electrical conductivity for each sensor; i identifies which CS650 or CS655 sensor
+cs65x_ec_Avg(2)	dS/m	Average electrical conductivity for each sensor; i identifies which CS650 or CS655 sensor
+cs65x_tmpr_Avg(1)	C	Average soil temperature for each sensor; i identifies which CS650 or CS655 sensor
+cs65x_tmpr_Avg(2)	C	Average soil temperature for each sensor; i identifies which CS650 or CS655 sensor
+tdr31X_wc_Avg(1)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+tdr31X_wc_Avg(2)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+tdr31X_tmpr_Avg(1)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+tdr31X_tmpr_Avg(2)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+tdr31X_E_Avg(1)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+tdr31X_E_Avg(2)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+tdr31X_bulkEC_Avg(1)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+tdr31X_bulkEC_Avg(2)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+tdr31X_poreEC_Avg(1)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+tdr31X_poreEC_Avg(2)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+soil_5TM_E_Avg(1)	unitless	Average soil permittivity for each sensor; i identifies which 5TM sensor
+soil_5TM_E_Avg(2)	unitless	Average soil permittivity for each sensor; i identifies which 5TM sensor
+soil_5TM_tmpr_Avg(1)	C	Average soil temperature for each sensor; i identifies which 5TM sensor
+soil_5TM_tmpr_Avg(2)	C	Average soil temperature for each sensor; i identifies which 5TM sensor
+soil_5TM_wc_Avg(1)	frac_v_wtr	Average soil water content for each sensor; i identifies which 5TM sensor
+soil_5TM_wc_Avg(2)	frac_v_wtr	Average soil water content for each sensor; i identifies which 5TM sensor
+shf_plate_avg(1)	W/m^2	Average soil heat flux; i identifies which sensor
+shf_plate_avg(2)	W/m^2	Average soil heat flux; i identifies which sensor
+shf_plate_avg(3)	W/m^2	Average soil heat flux; i identifies which sensor
+shf_plate_avg(4)	W/m^2	Average soil heat flux; i identifies which sensor
+SHFP_1_SENS	uv/W/m^2	Heat flux plate #1 calibration factor
+SHFP_2_SENS	uv/W/m^2	Heat flux plate #2 calibration factor
+SHFP_3_SENS	uv/W/m^2	Heat flux plate #3 calibration factor
+SHFP_4_SENS	uv/W/m^2	Heat flux plate #4 calibration factor
+shf_plate_cal(1)	unitless	Coefficients found from the HFP01SC self-calibration and used to calculate shf_plate_Avg(1); i indicates which sensor
+shf_plate_cal(2)	unitless	Coefficients found from the HFP01SC self-calibration and used to calculate shf_plate_Avg(2); i indicates which sensor
+shf_plate_cal(3)	unitless	Coefficients found from the HFP01SC self-calibration and used to calculate shf_plate_Avg(3); i indicates which sensor
+shf_plate_cal(4)	unitless	Coefficients found from the HFP01SC self-calibration and used to calculate shf_plate_Avg(4); i indicates which sensor
+profile_tdr31X_wc_Avg(1)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_wc_Avg(2)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_wc_Avg(3)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_wc_Avg(4)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_wc_Avg(5)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_wc_Avg(6)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_tmpr_Avg(1)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_tmpr_Avg(2)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_tmpr_Avg(3)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_tmpr_Avg(4)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_tmpr_Avg(5)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_tmpr_Avg(6)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_E_Avg(1)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_E_Avg(2)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_E_Avg(3)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_E_Avg(4)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_E_Avg(5)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_E_Avg(6)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_bulkEC_Avg(1)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_bulkEC_Avg(2)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_bulkEC_Avg(3)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_bulkEC_Avg(4)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_bulkEC_Avg(5)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_bulkEC_Avg(6)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_poreEC_Avg(1)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_poreEC_Avg(2)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_poreEC_Avg(3)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_poreEC_Avg(4)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_poreEC_Avg(5)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_poreEC_Avg(6)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_5TM_E_Avg(1)	unitless	Average soil permittivity for each sensor; i identifies which 5TM sensor
+profile_5TM_E_Avg(2)	unitless	Average soil permittivity for each sensor; i identifies which 5TM sensor
+profile_5TM_E_Avg(3)	unitless	Average soil permittivity for each sensor; i identifies which 5TM sensor
+profile_5TM_E_Avg(4)	unitless	Average soil permittivity for each sensor; i identifies which 5TM sensor
+profile_5TM_E_Avg(5)	unitless	Average soil permittivity for each sensor; i identifies which 5TM sensor
+profile_5TM_E_Avg(6)	unitless	Average soil permittivity for each sensor; i identifies which 5TM sensor
+profile_5TM_tmpr_Avg(1)	C	Average soil temperature for each sensor; i identifies which 5TM sensor
+profile_5TM_tmpr_Avg(2)	C	Average soil temperature for each sensor; i identifies which 5TM sensor
+profile_5TM_tmpr_Avg(3)	C	Average soil temperature for each sensor; i identifies which 5TM sensor
+profile_5TM_tmpr_Avg(4)	C	Average soil temperature for each sensor; i identifies which 5TM sensor
+profile_5TM_tmpr_Avg(5)	C	Average soil temperature for each sensor; i identifies which 5TM sensor
+profile_5TM_tmpr_Avg(6)	C	Average soil temperature for each sensor; i identifies which 5TM sensor
+profile_5TM_wc_Avg(1)	frac_v_wtr	Average soil water content for each sensor; i identifies which 5TM sensor
+profile_5TM_wc_Avg(2)	frac_v_wtr	Average soil water content for each sensor; i identifies which 5TM sensor
+profile_5TM_wc_Avg(3)	frac_v_wtr	Average soil water content for each sensor; i identifies which 5TM sensor
+profile_5TM_wc_Avg(4)	frac_v_wtr	Average soil water content for each sensor; i identifies which 5TM sensor
+profile_5TM_wc_Avg(5)	frac_v_wtr	Average soil water content for each sensor; i identifies which 5TM sensor
+profile_5TM_wc_Avg(6)	frac_v_wtr	Average soil water content for each sensor; i identifies which 5TM sensor
+upwnd_dist_intrst	m	Upwind distance of interest for the average wind direction
+FP_dist_intrst	%	Percentage of footprint from within the upwind range of interest
+FP_max	m	Distance upwind where the maximum contribution to the footprint is found
+FP_40	m	Upwind distance that contains 40% of cumulative footprint
+FP_55	m	Upwind distance that contains 55% of footprint
+FP_90	m	Upwind distance that contains 90% of footprint. If NAN is returned, integration of the model never reached 90% within the allowable distance of integration. See Appendix G, Footprint (p. G-1), for more details.
+FP_Equation	authors	Returns either Kljun or KormannMeixner. The model of Kljun et al. (2004) is used for applicable atmospheric conditions, else the model of Kormann & Meixner (2001) is used.
+UxUy_Cov	(m/s)^2	Covariance of Ux and Uy
+UxUz_Cov	(m/s)^2	Covariance of Ux and Uz
+UyUz_Cov	(m/s)^2	Covariance of Uy and Uz
+TsUx_Cov	C m/s	Covariance of Ts and Ux
+TsUy_Cov	C m/s	Covariance of Ts and Uy
+TsUz_Cov	C m/s	Covariance of Ts and Uz
+u_star_R	m/s	Friction velocity after coordinate rotations
+u_Avg_R	m/s	Mean streamwise wind speed after coordinate rotations
+u_Std_R	m/s	Standard deviation of streamwise wind after coordinate rotations
+v_Avg_R	m/s	Average crosswind speed after coordinate rotations
+v_Std_R	m/s	Standard deviation of crosswind after coordinate rotations
+w_Avg_R	m/s	Average vertical wind speed after coordinate rotations
+w_Std_R	m/s	Standard deviation of vertical wind after coordinate rotations
+uv_Cov_R	(m/s)^2	Covariance of streamwise and crosswind after coordinate rotations
+uw_Cov_R	(m/s)^2	Covariance of streamwise and crosswind after coordinate rotations
+vw_Cov_R	(m/s)^2	Covariance of crosswind and vertical wind after coordinate rotations
+uTs_Cov_R	C m/s	Covariance of streamwise wind and sonic temperature after coordinate rotations
+vTs_Cov_R	C m/s	Covariance of crosswind and sonic temperature after coordinate rotations
+wTs_Cov_R	C m/s	Covariance of vertical wind (after coordinate rotations) and sonic temperature
+uw_Cov_R_F	(m/s)^2	Covariance of streamwise and vertical wind after coordinate rotations and frequency corrections
+vw_Cov_R_F	(m/s)^2	Covariance of cross and vertical wind after coordinate rotations and frequency corrections
+wTs_Cov_R_F	C m/s	Covariance of vertical wind and sonic temperature after coordinate rotations and frequency corrections
+wTs_Cov_R_F_SND	C m/s	Covariance of vertical wind and sonic temperature after coordinate rotations, frequency corrections, and SND correction
+sonic_samples_Tot	samples	Number of raw sonic samples in averaging period without diagnostic flags
+no_sonic_head_Tot	samples	Number of sonic samples where no sonic head was detected
+no_new_sonic_data_Tot	samples	Number of scans where no sonic data were received
+sonic_amp_l_f_Tot	samples	Number of sonic samples with amplitude low diagnostic flag
+sonic_amp_h_f_Tot	samples	Number of sonic samples with amplitude high diagnostic flag
+sonic_sig_lck_f_Tot	samples	Number of sonic samples with signal lock diagnostic flag
+sonic_del_T_f_Tot	samples	Number of sonic samples with delta temp diagnostic flag
+sonic_aq_sig_f_Tot	samples	Number of sonic samples with acquiring signal diagnostic flag
+sonic_cal_err_f_Tot	samples	Number of sonic samples with calibration error diagnostic flag
+UxCO2_Cov	mg/(m^2 s)	Covariance of Ux and CO2 density
+UyCO2_Cov	mg/(m^2 s)	Covariance of Uy and CO2 density
+UzCO2_Cov	mg/(m^2 s)	Covariance of Uz and CO2 density
+UxH2O_Cov	g/(m^2 s)	Covariance of Ux and water vapor density
+UyH2O_Cov	g/(m^2 s)	Covariance of Uy and water vapor density
+UzH2O_Cov	g/(m^2 s)	Covariance of Uz and water vapor density
+uCO2_Cov_R	mg/(m^2 s)	Covariance of streamwise wind and CO2 density after coordinate rotations
+vCO2_Cov_R	mg/(m^2 s)	Covariance of crosswind and CO2 density after coordinate rotations
+wCO2_Cov_R	mg/(m^2 s)	Covariance of vertical wind and CO2 density after coordinate rotations
+uH2O_Cov_R	g/(m^2 s)	Covariance of streamwise wind and H2O density after coordinate rotations
+vH2O_Cov_R	g/(m^2 s)	Covariance of crosswind and H2O density after coordinate rotations
+wH2O_Cov_R	g/(m^2 s)	Covariance of vertical wind and H2O density after coordinate rotations
+wCO2_Cov_R_F	mg/(m^2 s)	Covariance of vertical wind and CO2 density after coordinate rotations and frequency corrections
+wH2O_Cov_R_F	g/(m^2 s)	Covariance of vertical wind and H2O density after coordinate rotations and frequency corrections
+CO2_E_WPL_R_F	mg/(m^2 s)	CO2 flux WPL correction term due to water vapor flux after coordinate rotations and frequency corrections
+CO2_T_WPL_R_F	mg/(m^2 s)	CO2 flux WPL correction term due to sensible heat flux after coordinate rotations and frequency corrections
+H2O_E_WPL_R_F	g/(m^2 s)	H2O flux WPL correction term due to water vapor flux after coordinate rotations and frequency corrections
+H2O_T_WPL_R_F	g/(m^2 s)	H2O flux WPL correction term due to sensible heat flux after coordinate rotations and frequency corrections
+CO2_samples_Tot	samples	Number of CO2 samples without diagnostic flags and within thresholds for CO2 signal strength (default 0.6, see Section 4.1) and the factory calibrated CO2 measurement range (0 to 1000 umol/mol)
+H2O_samples_Tot	samples	Number of H2O samples without diagnostic flags and within thresholds for H2O signal strength (default 0.7, see Section 4.1) and the factory calibrated H2O measurement range (0 to 72 mmol/mol)
+no_irga_head_Tot	samples	Number of samples where no gas analyzer head was detected
+no_new_irga_data_Tot	samples	Number of scans where no gas analyzer data were received
+irga_bad_data_f_Tot	samples	Number of IRGA samples with any IRGA diagnostic flag set high
+irga_gen_fault_f_Tot	samples	Number of gas analyzer samples with general system fault diagnostic flag
+irga_startup_f_Tot	samples	Number of gas analyzer samples with startup diagnostic flag
+irga_motor_spd_f_Tot	samples	Number of gas analyzer samples with motor speed diagnostic flag
+irga_tec_tmpr_f_Tot	samples	Number of gas analyzer samples with TEC temperature diagnostic flag
+irga_src_pwr_f_Tot	samples	Number of gas analyzer samples with source power diagnostic flag
+irga_src_tmpr_f_Tot	samples	Number of gas analyzer samples with source temperature diagnostic flag
+irga_src_curr_f_Tot	samples	Number of gas analyzer samples with source current diagnostic flag
+irga_off_f_Tot	samples	Number of gas analyzer samples with gas head power down diagnostic flag
+irga_sync_f_Tot	samples	Number of gas analyzer samples with synchronization diagnostic flag
+irga_amb_tmpr_f_Tot	samples	Number of gas analyzer samples with ambient temperature probe diagnostic flag
+irga_amb_press_f_Tot	samples	Number of gas analyzer samples with ambient pressure diagnostic flag
+irga_CO2_I_f_Tot	samples	Number of gas analyzer samples with CO2 1 signal diagnostic flag
+irga_CO2_Io_f_Tot	samples	Number of gas analyzer samples with CO2 Io signal diagnostic flag
+irga_H2O_I_f_Tot	samples	Number of gas analyzer samples with H2O I signal diagnostic flag
+irga_H2O_Io_f_Tot	samples	Number of gas analyzer samples with H2O Io signal diagnostic flag
+irga_CO2_Io_var_f_Tot	samples	Number of gas analyzer samples with CO2 Io variation diagnostic flag
+irga_H2O_Io_var_f_Tot	samples	Number of gas analyzer samples with H2O Io variation diagnostic flag
+irga_CO2_sig_strgth_f_Tot	samples	Number of gas analyzer samples with CO2 signal strength diagnostic flag
+irga_H2O_sig_strgth_f_Tot	samples	Number of gas analyzer samples with H2O signal strength diagnostic flag
+irga_cal_err_f_Tot	samples	Number of gas analyzer samples with calibration file read error flag
+irga_htr_ctrl_off_f_Tot	samples	Number of gas analyzer samples with heater control off diagnostic flag
+UxFW_Cov	C m/s	Covariance of Ux and fine-wire thermocouple temperature
+UyFW_Cov	C m/s	Covariance of Uy and fine-wire thermocouple temperature
+UzFW_Cov	C m/s	Covariance of Uz and fine-wire thermocouple temperature
+uFW_Cov_R	C m/s	Covariance of streamwise wind and fine-wire thermocouple temperature after coordinate rotations
+vFW_Cov_R	C m/s	Covariance of crosswind and fine-wire thermocouple temperature after coordinate rotations
+wFW_Cov_R	C m/s	Covariance of vertical wind and fine-wire thermocouple temperature after coordinate rotations
+wFW_Cov_R_F	C m/s	Covariance of vertical wind and fine-wire thermocouple temperature after coordinate rotations and frequency corrections
+FW_samples_Tot	samples	The number of valid fine-wire thermocouple measurements in the averaging period from which covariances may be calculated
+alpha	degrees	Alpha angle used for coordinate rotations (regardless of planar fit or double rotation method, angle convention of Wilczak et al. 2001 used)
+beta	degrees	Beta angle used for coordinate rotations (regardless of planar fit or double rotation method, angle convention of Wilczak et al. 2001 used)
+gamma	degrees	Gamma angle used for coordinate rotations (regardless of planar fit or double rotation method, angle convention of Wilczak et al. 2001 used)
+height_measurement	m	User entered measurement height of EC sensors
+height_canopy	m	User entered canopy height
+surface_type_text		User entered surface type {crop, grass, forest, shrub, bare land, water}
+displacement_user	m	User entered displacement height; 0 for auto calculation
+d	m	Displacement height used in calculations; it will equal displacement_user if user entered a nonzero value; if displacement_user is zero, program will auto calculate
+roughness_user	m	User entered roughness length; 0 for auto calculation
+z0	m	Roughness length
+z	m	Aerodynamic height
+L	m	Obukhov length
+stability_zL	unitless	Atmospheric surface layer stability
+iteration_FreqFactor		Number of iterations for recalculating Obukhov length and frequency factors
+latitude	degrees	Latitude; positive for Nothern hemisphere, negative for Southern hemisphere
+longitude	degrees	Longitude; positive for Eastern hemisphere, negative for Western hemisphere
+separation_x_irga	m	Separation between sonic and gas analyzer with respect to sonic x-axis
+separation_y_irga	m	Separation between sonic and gas analyzer with respect to sonic y-axis
+separation_lat_dist_irga	m	Separation distance between sonic and gas analyzer along the axis perpendicular to oncoming wind
+separation_lag_dist_irga	m	Separation distance between sonic and gas analyzer along the axis parallel to oncoming wind
+separation_lag_scan_irga	scans	Number of scans to lag gas analyzer data relative to sonic data to account for separation along the axis of oncoming wind and wind velocity
+separation_x_FW	m	Separation between sonic and fine-wire thermocouple with respect to sonic x-axis
+separation_y_FW	m	Separation between sonic and fine-wire thermocouple with respect to sonic y-axis
+FW_diameter	m	Effective diameter of fine-wire thermocouple junction
+separation_lat_dist_FW	m	Separation distance between sonic and fine-wire thermocouple along axis perpendicular to oncoming wind
+separation_lag_dist_FW	m	Separation distance between sonic and fine-wire thermocouple along axis parallel to oncoming wind
+separation_lag_scan_FW	scans	Number of scans to lag fine-wire thermocouple data relative to sonic data to account for separation along axis of oncoming wind and wind velocity
+time_const_FW	s	Calculated time constant of the fine-wire thermocouple
+MAX_LAG		Maximum number of scans to lag gas analyzer or fine-wire thermocouple data with respect to sonic data when doing cross correlation for covariance maximization
+lag_irga	scans	The lag applied to gas analyzer data with respect to sonic data that maximizes covariance
+lag_FW	scans	The lag applied to fine-wire thermocouple data with respect to sonic data that maximizes covariance
+FreqFactor_uw_vw	unitless	Frequency correction factor applied to momentum fluxes
+FreqFactor_wTs	unitless	Frequency correction factor applied to wTs covariance
+FreqFactor_wCO2_wH2O	unitless	Frequency correction factor applied to wCO2 and wH2O covariances
+FreqFactor_wFW	unitless	Frequency correction factor applied to fine-wire thermocouple derived wFW covariance
+rho_d_Avg	kg/m^3	Average density of dry air
+rho_a_Avg	kg/m^3	Average density of ambient (moist) air
+Cp	J/(kg C)	Specific heat of ambient (moist) air at constant pressure
+Lv	J/g	Latent heat of vaporization
+batt_V_Avg	V	Average PV system battery voltage
+batt_sens_V_Avg	V	Average PV system battery sense voltage
+array_V_Avg	V	Average PV system array/load voltage
+charge_I_Avg	A	Average PV system charging current
+batt_V_slow_Avg	V	Average PV system battery voltage, slow filtered
+heatsink_T_Avg	C	Average PV charge controller heatsink temperature
+batt_T_Avg	C	Average PV system battery temperature
+reference_V_Avg	V	Average PV charge controller reference voltage
+ah_reset	Ah	PV charge controller resettable amp-hour meter
+ah_total	Ah	PV charge controller total amp-hour meter
+hourmeter	hr	PV charge controller hourmeter
+alarm_bits	unitless	PV charge controller alarms (bitfield)
+fault_bits	unitless	PV charge controller faults (bitfield)
+dip_num_Avg	unitless	PV charge controller DIP switch settings (bitfield)
+state_num_Avg	unitless	PV charge controller control state
+pwm_duty_Avg	fraction	PV charge controller PWM Duty Cycle
+door_is_open_Hst		Fraction of time door was open (0-1)
+panel_tmpr_Avg	C	Average temperature of the datalogger wiring panel
+batt_volt_Avg	V	Average battery voltage supplying power to the datalogger
+slowsequence_Tot	samples	Number of slow sequences during the averaging interval (for example, the number of times biomet and energy balance sensors were measured)
+process_time_Avg	ms	Average processing time for each scan
+process_time_Max	ms	Maximum processing time for a scan
+buff_depth_Max	scans	Maximum number of records stored in the buffer

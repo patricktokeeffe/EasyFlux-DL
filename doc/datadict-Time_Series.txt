@@ -1,0 +1,16 @@
+Field	Units	Description
+Ux	m/s	Wind speed along sonic x-axis
+Uy	m/s	Wind speed along sonic y-axis
+Uz	m/s	Wind speed along sonic z-axis
+Ts	C	Sonic temperature
+diag_sonic	unitless	Raw sonic diagnostic value (0 indicates no diagnostic flags set)
+CO2	mg/m^3	CO2 density
+H2O	g/m^3	Water vapor density
+diag_irga	unitless	Raw gas analyzer diagnostic value (0 indicates no diagnostic flags set)
+Tc	C	Air temperature derived from sonic temperature corrected for humidity and pressure
+amb_tmpr	C	Air temperature measured by the EC100 temperature probe
+amb_press	kPa	Ambient pressure
+CO2_sig_strgth	fraction	CO2 signal strength
+H2O_sig_strgth	fraction	H2O signal strength
+CO2_hf	mg/m^3	CO2 density using humidity-corrected sonic temperature
+FW	C	Air temperature measured by fine-wire thermocouple

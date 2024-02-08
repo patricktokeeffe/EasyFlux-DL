@@ -21,7 +21,7 @@ Significant realignment means users will need to modify current deployments to c
 * Subroutine `FootprintCharacteristics_KormannMeixner`:
   * Incorporates thermal stratification as a function of stability from eqns (11) and (32) in *Kormann and Meixner (2001)*.
   * Modifies fourth footprint integration segment to increase integration interval by factor of 2.5 (4&rarr;10 x aerodynamic height)
-    and increase scale factor ofaerodynamic height used to calculate max range by factor of 5 (200&rarr;1000).
+    and increase scale factor of aerodynamic height used to calculate max range by factor of 5 (200&rarr;1000).
   * Modifies fifth footprint integration segment to increase scale factor of aerodynamic height used to calculate max range by factor of 5 (200&rarr;1000)
     and to iterate up to a fixed number of times instead of estimating number of steps required.
 

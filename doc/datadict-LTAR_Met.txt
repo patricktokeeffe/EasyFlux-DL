@@ -1,0 +1,69 @@
+Field	Units	Description
+amb_tmpr_Avg	C	Average ambient temperature from EC100 temperature probe
+rslt_wnd_spd	m/s	Average horizontal wind speed
+wnd_dir_compass	degrees	Average compass wind direction
+RH_Avg	%	Average relative humidity derived from gas analyzer measurements
+Precipitation_Tot	mm	Total precipitation
+amb_press_Avg	kPa	Average ambient air pressure
+PAR_density_Avg	umol/(s m^2)	Average density of photosynthetic active radiation
+batt_volt_Avg	volts	Average temperature of the datalogger wiring panel
+panel_tmpr_Avg	C	Average battery voltage supplying power to the datalogger
+std_wnd_dir	degrees	Standard deviation of wind direction
+VPD_air	kpa	Vapor pressure deficit
+Rn_meas_Avg	W/m^2	Average net radiation (raw, not corrected for wind)
+e_sat	kPa	Average saturation vapor pressure derived from gas analyzer measurements
+e	kPa	Average vapor pressure derived from gas analyzer measurements
+tdr31X_wc_Avg(1)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+tdr31X_wc_Avg(2)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+tdr31X_tmpr_Avg(1)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+tdr31X_tmpr_Avg(2)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+tdr31X_E_Avg(1)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+tdr31X_E_Avg(2)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+tdr31X_bulkEC_Avg(1)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+tdr31X_bulkEC_Avg(2)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+tdr31X_poreEC_Avg(1)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+tdr31X_poreEC_Avg(2)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+Tsoil_Avg(1)	C	Average soil temperature for each TCAV sensor; i identifies which TCAV sensor
+Tsoil_Avg(2)	C	Average soil temperature for each TCAV sensor; i identifies which TCAV sensor
+profile_tdr31X_wc_Avg(1)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_wc_Avg(2)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_wc_Avg(3)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_wc_Avg(4)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_wc_Avg(5)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_wc_Avg(6)	%	Average soil water content for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_tmpr_Avg(1)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_tmpr_Avg(2)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_tmpr_Avg(3)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_tmpr_Avg(4)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_tmpr_Avg(5)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_tmpr_Avg(6)	C	Average soil temperature for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_E_Avg(1)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_E_Avg(2)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_E_Avg(3)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_E_Avg(4)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_E_Avg(5)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_E_Avg(6)	unitless	Average soil permittivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_bulkEC_Avg(1)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_bulkEC_Avg(2)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_bulkEC_Avg(3)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_bulkEC_Avg(4)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_bulkEC_Avg(5)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_bulkEC_Avg(6)	uS/cm	Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_poreEC_Avg(1)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_poreEC_Avg(2)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_poreEC_Avg(3)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_poreEC_Avg(4)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_poreEC_Avg(5)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+profile_tdr31X_poreEC_Avg(6)	uS/cm	Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor
+shf_plate_avg(1)	W/m^2	Average soil heat flux; i identifies which sensor
+shf_plate_avg(2)	W/m^2	Average soil heat flux; i identifies which sensor
+shf_plate_avg(3)	W/m^2	Average soil heat flux; i identifies which sensor
+shf_plate_avg(4)	W/m^2	Average soil heat flux; i identifies which sensor
+SHFP_1_SENS	uv/W/m^2	Heat flux plate #1 calibration factor
+SHFP_2_SENS	uv/W/m^2	Heat flux plate #2 calibration factor
+SHFP_3_SENS	uv/W/m^2	Heat flux plate #3 calibration factor
+SHFP_4_SENS	uv/W/m^2	Heat flux plate #4 calibration factor
+shf_plate_cal(1)	unitless	Coefficients found from the HFP01SC self-calibration and used to calculate shf_plate_Avg(i); i indicates which sensor
+shf_plate_cal(2)	unitless	Coefficients found from the HFP01SC self-calibration and used to calculate shf_plate_Avg(i); i indicates which sensor
+shf_plate_cal(3)	unitless	Coefficients found from the HFP01SC self-calibration and used to calculate shf_plate_Avg(i); i indicates which sensor
+shf_plate_cal(4)	unitless	Coefficients found from the HFP01SC self-calibration and used to calculate shf_plate_Avg(i); i indicates which sensor
