@@ -90,35 +90,36 @@ Const LTAR_CORE_TABLE  = TRUE       'Unique: TRUE if producing 15-min LTAR Commo
 Const LTAR_CORE_TABLE_1Minute = TRUE
 
 '*** SENSORS ****
-Const SENSOR_IRGASON     = FALSE                  'Unique: IRGASON, if TRUE, SENSOR_CSAT3AEC150 must be set to FALSE
-Const SENSOR_CSAT3AEC150 = TRUE                   'Unique: CSAT3A + EC150, if TRUE, SENSOR_IRGASON must be set to FALSE.
+Const SENSOR_IRGASON     = TRUE                   'Unique: IRGASON, if TRUE, SENSOR_CSAT3AEC150 must be set to FALSE
+Const SENSOR_CSAT3AEC150 = FALSE                  'Unique: CSAT3A + EC150, if TRUE, SENSOR_IRGASON must be set to FALSE.
 Const SENSOR_FW          = FALSE                  'Unique: FW05, FW1, FW3, or other fine wire thermocouple
-Const SENSOR_TMPR_RH     = TRUE                    'Unique: HC2S3 or HMP155A: temperature and relative humidity probe
-Const SENSOR_NR_LITE     = TRUE                   'Unique: NR Lite2: net radiometer, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
+Const SENSOR_TMPR_RH     = FALSE                   'Unique: HC2S3 or HMP155A: temperature and relative humidity probe
+Const SENSOR_NR_LITE     = FALSE                  'Unique: NR Lite2: net radiometer, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
 Const SENSOR_CS300       = FALSE                  'Unique: CS300: pyranometer, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
 Const SENSOR_LI200X      = FALSE                  'Unique: LI200X: pyranometer, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
-Const SENSOR_LI190SB     = TRUE                   'Unique: LI190SB: Quantum, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
+Const SENSOR_LI190SB     = FALSE                  'Unique: LI190SB: Quantum, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
 Const SENSOR_SI111       = FALSE                  'Unique: SI111: Infrared radiometer, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
 Const SENSOR_NR01        = FALSE                   'Unique: NR01: 4-way net radiometer, if true, SENSOR_NR_LITE and SENSOR_CNR4 must be set to FALSE
 Const SENSOR_CNR4        = FALSE                  'Unique: CNR4: 4-way net radiometer, if true, SENSOR_NR_LITE and SENSOR_NR01 must be set to FALSE
-Const SENSOR_TE525mm     = TRUE                    'Unique: TE525mm rain gauge
-Const SENSOR_TCAV        = TRUE                    'Unique: TCAV: type E thermocouple averaging soil temperature probes
-Const SENSOR_HFP01       = TRUE                   'Unique: HFP01: soil heat flux plates, if true, SENSOR_HFP01SC must be set to FALSE
-Const SENSOR_HFP01SC     = FALSE                   'Unique: HFP01SC: self-calibrated soil heat flux plates, if true, SENSOR_HFP01 must be set to FALSE
-Const SENSOR_CS616       = FALSE                  'Unique: CS616: water content reflectometers for volumetric soil moisture, if true, SENSOR_CS65X, SENSOR_TDR31X and SENSOR_5TM must be set to FALSE
+Const SENSOR_TE525mm     = FALSE                   'Unique: TE525mm rain gauge
+Const SENSOR_TCAV        = FALSE                   'Unique: TCAV: type E thermocouple averaging soil temperature probes
+Const SENSOR_CS616       = FALSE                   'Unique: CS616: water content reflectometers for volumetric soil moisture, if true, SENSOR_CS65X, SENSOR_TDR31X and SENSOR_5TM must be set to FALSE
 Const SENSOR_CS65X       = FALSE                  'Unique: CS650 or CS655: water content reflectometers for volumetric soil moisture, if true, SENSOR_CS616, SENSOR_TDR31X and SENSOR_5TM must be set to FALSE
-Const SENSOR_TDR31X      = TRUE                   'Unique: Acclima TDR series soil moisture sensors, if true, SENSOR_CS616, SENSOR_CS65X and SENSOR_5TM must be set to FALSE
+Const SENSOR_TDR31X      = FALSE                  'Unique: Acclima TDR series soil moisture sensors, if true, SENSOR_CS616, SENSOR_CS65X and SENSOR_5TM must be set to FALSE
 Const SENSOR_5TM         = FALSE                  'Unique: Decagon Devices 5TM soil water content/temperature probes, if true, SENSOR_CS616, SENSOR_CS65X and SENSOR_TDR31X must be set to FALSE
-Const PROFILE_TDR31X     = TRUE                   'Unique: soil profile composed of Acclima TDR-315L probes, if true, PROFILE_5TM must be false
+Const SENSOR_HFP01       = FALSE                  'Unique: HFP01: soil heat flux plates, if true, SENSOR_HFP01SC must be set to FALSE
+Const SENSOR_HFP01SC     = FALSE                   'Unique: HFP01SC: self-calibrated soil heat flux plates, if true, SENSOR_HFP01 must be set to FALSE
+Const PROFILE_TDR31X     = FALSE                  'Unique: soil profile composed of Acclima TDR-315L probes, if true, PROFILE_5TM must be false
 Const PROFILE_5TM        = FALSE                  'Unique: soil profile composed of Decagon Devices 5TM probes, if true, PROFILE_TDR31X must be false
-Const SENSOR_034B        = TRUE                   'Unique: MetOne 034B cup & vane wind set, if true, either SENSOR_NR01 must be set to FALSE or SE input channel for WD must be changed
-Const SENSOR_GPS16X      = TRUE                   'Unique: Garmin GPS16x-HVS GPS receiver; if serial no. >1A4189318 then level shifter is required for 3V PPS signal
-Const SENSOR_DOOR        = TRUE                   'Unique: reed switch enclosure door sensor
-Const SENSOR_TS45        = TRUE                   'Unique: MorningStar TriStar TS-45 charge controller
+Const SENSOR_034B        = FALSE                  'Unique: MetOne 034B cup & vane wind set, if true, either SENSOR_NR01 must be set to FALSE or SE input channel for WD must be changed
+Const SENSOR_GPS16X      = FALSE                  'Unique: Garmin GPS16x-HVS GPS receiver; if serial no. >1A4189318 then level shifter is required for 3V PPS signal
+Const SENSOR_DOOR        = FALSE                  'Unique: reed switch enclosure door sensor
+Const SENSOR_TS45        = FALSE                  'Unique: MorningStar TriStar TS-45 charge controller
 
 'adjust to reflect reality
-Const NMBR_SHFP = 1         'Unique: number of HFP01 or HFP01SC sensors to measure (Maximum is 4)
-Const NMBR_CS6xx = 1        'Unique: number of CS616, CS650, CS655, TDR-315 or 5TM sensors (Maximum is 2)
+Const NMBR_SHFP = 4         'Unique: number of HFP01 or HFP01SC sensors to measure (Maximum is 4)
+Const NMBR_TCAV = 2         'Unique: number of TCAV (Maximum is 2)
+Const NMBR_CS6xx = 2        'Unique: number of CS616, CS650, CS655, TDR-315 or 5TM sensors (Maximum is 2)
 Const NMBR_PROFILE = 6      'Unique: number of T/VWC probes (TDR-315 or 5TM) in profile (Maximum is 6)
 
 'Composite boolean variables for variables above
@@ -387,7 +388,6 @@ Const b2_SI111 =  13114           'Unique: calbration b2
 #If (SENSOR_TCAV) Then
 
 Const TCAV_ANALOG_INPUT = 11         'Staring differential analog input channel for TCAV.
-Const NMBR_TCAV         = 1          'Unique: number of TCAV (Maximum is 2)
 
 '*** Beginning of TCAV wiring ***
 '11H     Signal #1 (purple)
@@ -2295,7 +2295,7 @@ EndMenu
 '*** OUTPUT DATA TABLES ***'
 '**************************'
 
-Const ONE_FULL_TABLE = TRUE         'Unique: TRUE if all hourly or half-hourly data are stored in one table
+Const ONE_FULL_TABLE = FALSE         'Unique: TRUE if all hourly or half-hourly data are stored in one table
 '        FALSE if hourly or half-hourly variables for direct use are stored in Flux table and the variables for later reference are stored in Flux_Notes
 
 DataTable (Flux, TRUE, FLUX_SIZE_CPU)
