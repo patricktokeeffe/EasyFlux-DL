@@ -1,13 +1,70 @@
 'Ancillary file for online corrections flux program version 1.x
 'Copyright (c) 2017 Washington State University
 
-Const NRLITE_SENS = 16   'uV/W/m^2
+ConstTable(Const_Table)
+  
+#If (SENSOR_034B) Then
+Const CUPVANE_AZIMUTH = 0                'Unique: azimuth angle of windset w.r.t. True North
+#EndIf
 
-Const QUANTUM_SENS = 5   'uA per 1000 umol/m^2/s
+#If (SENSOR_NR_LITE) Then
+Const NRLITE_SENS As Float = 16          'Unique: uV/W/m^2, multiplier for NR Lite (1000/sensitivity)
+#EndIf
 
-Const SHFP_1_SENS = 62    'uV/W/m^2
-Const SHFP_2_SENS = 62    'uV/W/m^2
-Const SHFP_3_SENS = 62    'uV/W/m^2
-Const SHFP_4_SENS = 62    'uV/W/m^2
+#If (SENSOR_NR01) Then
+Const NR01_SW_IN_SENS As Float  = 15     'Unique: uV/W/m^2, multiplier for NR01 shortwave downwelling radiation (1000/sensitivity)
+Const NR01_SW_OUT_SENS As Float = 15     'Unique: uV/W/m^2, multiplier for NR01 shortware upwelling radiation (1000/sensitivity)
+Const NR01_LW_IN_SENS As Float  = 8      'Unique: uV/W/m^2, multiplier for NR01 longwave downwelling radiation (1000/sensitivity)
+Const NR01_LW_OUT_SENS As Float = 8      'Unique: uV/W/m^2, multiplier for NR01 longwave upwelling radiation (1000/sensitivity)
+#EndIf
 
+#If (SENSOR_CNR4) Then
+Const CNR4_SW_IN_SENS As Float  = 15     'Unique: uV/W/m^2, multiplier for CNR4 shortwave downwelling radiation (1000/sensitivity)
+Const CNR4_SW_OUT_SENS As Float = 15     'Unique: uV/W/m^2, multiplier for CNR4 shortware upwelling radiation (1000/sensitivity)
+Const CNR4_LW_IN_SENS As Float  = 8      'Unique: uV/W/m^2, multiplier for CNR4 longwave downwelling radiation (1000/sensitivity)
+Const CNR4_LW_OUT_SENS As Float = 8      'Unique: uV/W/m^2, multiplier for CNR4 longwave upwelling radiation (1000/sensitivity)
+#EndIf
+
+#If (SENSOR_LI200X) OR (SENSOR_CS300) Then
+Const PYRAN_MULT As Float = 200          'Unique: multiplier for LI200X [200 W/(m^2 * mV)] or CS300 [5 W/(m^2 * mV)] pyranometer
+Const PYRAN_OFFSET As Float = 0          'Unique: offset for LI200X [0 W/m^2] or CS300 (0 W/m^2) pyranometer
+#EndIf
+
+#If (SENSOR_LI190SB) Then
+Const QUANTUM_MULT As Float = 250        'Unique: umol/(s m^2)/mV, multiplier (1000 C) for quantum PAR sensor
+Const QUANTUM_OFFSET As Float = 0        'Unique: offset for quantum PAR sensor.
+#EndIf
+
+#If (SENSOR_SI111) Then
+Const SI111_m0 As Float =  1.41970e9     'Unique: calbration m0
+Const SI111_m1 As Float =  7.84100e6     'Unique: calbration m1
+Const SI111_m2 As Float =  82213         'Unique: calbration m2
+Const SI111_b0 As Float = -1.72150e7     'Unique: calbration b0
+Const SI111_b1 As Float =  1.85020e5     'Unique: calbration b1
+Const SI111_b2 As Float =  13114         'Unique: calbration b2
+#EndIf
+
+#If (SENSOR_HFP) Then
+Const SHFP_1_SENS As Float = 62          'Unique: uV/W/m^2, multiplier for HFP01xx #1 (1000/sensitivity)
+#If (NMBR_SHFP >1) Then
+Const SHFP_2_SENS As Float = 62          'Unique: uV/W/m^2, multiplier for HFP01xx #2 (1000/sensitivity)
+#EndIf
+#If (NMBR_SHFP >2) Then
+Const SHFP_3_SENS As Float = 62          'Unique: uV/W/m^2, multiplier for HFP01xx #3 (1000/sensitivity)
+#EndIf
+#If (NMBR_SHFP >3) Then
+Const SHFP_4_SENS As Float = 62          'Unique: uV/W/m^2, multiplier for HFP01xx #4 (1000/sensitivity)
+#EndIf
+#EndIf
+
+#If (SENSOR_TMPR_RH) Then
+Const TMPR_RH_T_MULT As Float   = 0.14   'Unique: multiplier for temperature; HC2S3 = 0.1, HMP155A = 0.14, or HMP45C = 0.1
+Const TMPR_RH_T_OFFSET As Float = -80    'Unique: offset for temperature; HC2S3 = -40, HMP155A = -80, or HMP45C = -40
+#EndIf
+
+#If (SENSOR_TE525mm) Then
+Const TE525_MULT As Float = 0.1          'Unique: multiplier for TE525MM [0.1], TE525 or TE525WS [0.254], or 8" funnel on TE525 or TE525MM [0.1459] rain gauge
+#EndIf
+
+EndConstTable
 

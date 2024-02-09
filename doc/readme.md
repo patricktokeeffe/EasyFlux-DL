@@ -157,41 +157,44 @@ The content in this section of the Instruction Manual applies to this version of
 however, several important notes apply:
 
 * Category 3, Sensor Calibration Constants, have been relocated to a separate include file: `constants.cr3`.
-    * ***N.B.** the include file does not yet support all sensor types so some sensor calibration constants may still reside in the program file.*
-* The program file will not compile if the include file is not present in the same directory.
+* If you use a sensor with unique constants, the include file must be present in the same directory. 
+* If no sensors with unique constants are used, the include file is not required.
 * In some cases, the corresponding constant in the include file is used to compute the correct program constant.
-    In these cases, the constant in the include file will be expressed in different units.
+  **Ensure the values provided match units specified in comments.**
+
+> **NOTE**<br/>The unique constants for sensor quantities remain in the main program file 
+> since modifying them results in data table structures changing and a potential loss of data or failure to record new data.
 
 ### 4.1.1. Sending the program (new section)
 
-After all constants are verified and both files are saved, the program file may be compiled to test for errors.
-Once it is error-free, send the include file and program file to the datalogger using *CRBasic Editor* or the *File Control* screen.
-Send the include file first, but do not run it (since it will not compile on its own).
-Next send the program file and configure run options as desired. 
+After unique constants are verified, send the include file and program file to the datalogger using *CRBasic Editor* or the *File Control* screen.
+Send the include file first, if required, but do not run it; then send the program file and configure run options as desired. 
 If the include file has not been modified, it does not need to be resent to the logger before sending an updated program file.
 
 ### 4.1.2 Field editing unique constants (new section)
 
 The sensor calibration constants in the include file will be incorporated when the program compiles and begins running. 
-Once running, the include file can be modifed without impacting the program. 
-New values in the include file are only adopted after restarting due to power loss or by run control commands.
+Once running, constants become user-editable through the ConstTable menu or data table. 
+Only constants for enabled sensors will be shown.
 There are two options for modifying the include file:
 
-Option 1, using CRBasic Editor and a remote client (e.g. PC400):
+Option 1, using a remote client (e.g. LoggerLink, LoggerNet or PC400):
 
-1. Update values in the include file.
-1. Push the include file to the `CPU:` drive of the datalogger. 
-    * To prevent interrupting the running program, **do not** enable *Run Now* or *Run at Power-on*.
-1. Use Run Control to stop the program (retaining data is recommended).
-1. Use Run Control to restart the program (if file was renamed to `default.cr3` it restarts automatically).
+1. Connect to the datalogger.
+1. Use the Table Monitor to view the *Const_Table* table.
+1. Update values, as needed. Be sure values are provided in correct units.
+1. When finished, set ApplyAndRestart to True.
 
 Option 2, using the local keyboard display:
 
-1. Open <kbd>System Menu<kbd>&rarr;<kbd>File</kbd>&rarr;<kbd>Edit</kbd>&rarr;<kbd>CPU:</kbd>
-1. Select the include file (`constants.cr3`)
-1. Use the keyboard to edit unique sensor constants as needed.
-1. Press <kbd>Esc</kbd> to exit and when prompted, save changes.
-1. Restart the program, or power cycle the datalogger.
+1. Open <kbd>System Menu<kbd>&rarr;<kbd>Const Table</kbd>
+1. Update values, as needed. Be sure values are provided in correct units.
+1. When finished, use Save and Apply to update the program.
+
+A third, older option which is still supported is to 
+(a) upload a modified copy of the include file or 
+(b) edit the file in-memory using the logger keyboard display,
+and then restart the program.
 
 ### 4.3 Data Retrieval
 
@@ -251,8 +254,6 @@ And insert or update rows as follows:
 | Update row | tau | (kg m/s)/(m^2 s)<br/>*[reformatted]* | - | - |
 | Update row | Td &rarr; Td_Avg<br/>*[misnamed]* | - | - | - |
 | Update row | wnd_dir_Std &rarr; std_wnd_dir<br/>*[misnamed]* | - | - | - |
-| Insert 1 row after Rn_meas_Avg | NRLITE_SENS | &micro;V/(W m<sup>2</sup>) | Net radiometer calibration factor | If NR_LITE is used |
-| Insert 1 row after PAR_density_Avg | QUANTUM_SENS | &micro;A per mmol/(m<sup>2</sup> s) | Quantum (PAR) calibration factor | If LI190SB is used |
 | Insert 4 rows after T_SI111_body_Avg | cupvane_WS_Avg | m/s | Average wind speed from cup-and-vane anemometer | If 034B is used |
 | | cupvane_WS_rslt_Avg | m/s | Average wind vector magnitude from cup-and-vane anemometer | If 034B is used |
 | | cupvane_WD_rslt_Avg | degrees | Average compass wind direction from cup-and-vane anemometer | If 034B is used |
@@ -267,10 +268,6 @@ And insert or update rows as follows:
 | | soil_5TM_E_Avg(i) | unitless | Average soil permittivity for each sensor; i identifies which 5TM sensor | If 5TM is used |
 | | soil_5TM_tmpr_Avg(i) | &deg;C | Average soil temperature for each sensor; i identifies which 5TM sensor | If 5TM is used |
 | | soil_5TM_wc_Avg(i) | frac_v_wtr | Average soil water content for each sensor; i identifies which 5TM sensor | If 5TM is used |
-| Insert 4 rows after shf_plate_Avg(i) | SHFP_1_SENS | &micro;V/(W m<sup>2</sup>) | Heat flux plate #1 calibration factor | If one HFP is used |
-| | SHFP_2_SENS | &micro;V/(W m<sup>2</sup>) | Heat flux plate #2 calibration factor | If two HFP are used |
-| | SHFP_3_SENS | &micro;V/(W m<sup>2</sup>) | Heat flux plate #3 calibration factor | If three HFP are used |
-| | SHFP_4_SENS | &micro;V/(W m<sup>2</sup>) | Heat flux plate #4 calibration factor | If four HFP are used |
 | shf_plate_cal(i) | unitless<br/>*[add missing units]* | - | - | - |
 | Insert 8 rows after shf_plate_cal(i) | profile_tdr31x_wc_Avg(i) | % | Average soil water content for each sensor; i identifies which TDR3x sensor | If TDR31X is used |
 | | profile_tdr31x_tmpr_Avg(i) | &deg;C | Average soil temperature for each sensor; i identifies which TDR3x sensor | If TDR31X is used |
@@ -355,10 +352,6 @@ Insert new table, **Table 4-9: Data fields in the LTAR_Met output table**:
 | profile_tdr31X_bulkEC_Avg(i) | &micro;S/cm | Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor | If TDR31X is used |
 | profile_tdr31X_poreEC_Avg(i) | &micro;S/cm | Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor | If TDR31X is used |
 | shf_plate_Avg(i) | W/m<sup>2</sup> | Average soil heat flux; i identifies which sensor | If HFP or HFP01SC is used |
-| SHFP_1_SENS | &micro;V/(W m<sup>2</sup>) | Heat flux plate #1 calibration factor | If one HFP is used |
-| SHFP_2_SENS | &micro;V/(W m<sup>2</sup>) | Heat flux plate #2 calibration factor | If two HFP are used |
-| SHFP_3_SENS | &micro;V/(W m<sup>2</sup>) | Heat flux plate #3 calibration factor | If three HFP are used |
-| SHFP_4_SENS | &micro;V/(W m<sup>2</sup>) | Heat flux plate #4 calibration factor | If four HFP are used |
 | shf_plate_cal(i) | &micro;V/(W m<sup>2</sup>) | Coefficients found from the HFP01SC self-calibration and used to calculate shf_plate_Avg(i); i indicates which sensor | If HFP01SC is used |
 
 Insert new table, **Table 4-10: Data fields in the LTAR_Met_1Minute output table**:
@@ -383,9 +376,35 @@ Insert new table, **Table 4-10: Data fields in the LTAR_Met_1Minute output table
 | tdr31X_poreEC_Avg(i) | &micro;S/cm | Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor | If TDR31X is used |
 | Tsoil(i) | ºC | Average soil temperature for each TCAV sensor; i identifies which TCAV sensor | If TCAV is used |
 | shf_plate_Avg(i) | W/m<sup>2</sup> | Average soil heat flux; i identifies which sensor | If HFP01 or HFP01SC is used |
-| SHFP_1_SENS | &micro;V/(W m<sup>2</sup>) | Heat flux plate #1 calibration factor | If one HFP01 is used |
-| SHFP_2_SENS | &micro;V/(W m<sup>2</sup>) | Heat flux plate #2 calibration factor | If two HFP01 are used |
-| SHFP_3_SENS | &micro;V/(W m<sup>2</sup>) | Heat flux plate #3 calibration factor | If three HFP01 are used |
-| SHFP_4_SENS | &micro;V/(W m<sup>2</sup>) | Heat flux plate #4 calibration factor | If four HFP01 are used |
 | shf_plate_cal(i) | &micro;V/(W m<sup>2</sup>) | Coefficients found from the HFP01SC self-calibration and used to calculate shf_plate_Avg(i); i indicates which sensor | If HFP01SC is used |
+
+Insert new table, **Table 4-11: Data fields in the Cal_Constants output table**:
+
+| Data Field Name | Units | Description | Data Field Included |
+|:-:|:-:|:-:|:-:|
+| CUPVANE_AZIMUTH | degrees | Azimuth angle of windset w.r.t. True North | If 034B is used |
+| NRLITE_SENS | &micro;V/W/m<sup>2</sup> | Sensitivity for NR Lite2 net radiometer | If NR_LITE is used |
+| NR01_SW_IN_SENS | &micro;V/W/m<sup>2</sup>| Sensitivity for NR01 shortwave downwelling radiation | If NR01 is used |
+| NR01_SW_OUT_SENS | &micro;V/W/m<sup>2</sup> | Sensitivity for NR01 shortwave upwelling radiation | If NR01 is used |
+| NR01_LW_IN_SENS | &micro;V/W/m<sup>2</sup> | Sensitivity for NR01 longwave downwelling radiation | If NR01 is used |
+| NR01_LW_OUT_SENS | &micro;V/W/m<sup>2</sup> | Sensitivity for NR01 longwave upwelling radiation | If NR01 is used |
+| CNR4_SW_IN_SENS | &micro;V/W/m<sup>2</sup>| Sensitivity for CNR4 shortwave downwelling radiation | If CNR4 is used |
+| CNR4_SW_OUT_SENS | &micro;V/W/m<sup>2</sup> | Sensitivity for CNR4 shortwave upwelling radiation | If CNR4 is used |
+| CNR4_LW_IN_SENS | &micro;V/W/m<sup>2</sup> | Sensitivity for CNR4 longwave downwelling radiation | If CNR4 is used |
+| CNR4_LW_OUT_SENS | &micro;V/W/m<sup>2</sup> | Sensitivity for CNR4 longwave upwelling radiation | If CNR4 is used |
+| PYRAN_MULT | W/m<sup>2</sup>/mV | Multiplier for pyranometer | If LI200X or CS300 is used |
+| PYRAN_OFFSET | W/m<sup>2</sup> | Offset for pyranometer | If LI200X or CS300 is used |
+| QUANTUM_MULT | &micro;mol/(s m<sup>2</sup>)/mV | Multiplier for quantum (PAR) sensor | If LI190SB is used |
+| QUANTUM_OFFSET | &micro;mol/(s m<sup>2</sup>) | Offset for quantum (PAR) sensor | If LI190SB is used |
+| SI111_m0 |  | Calibration m0 for SI-111 | If SI111 is used |
+| SI111_m1 |  | Calibration m1 for SI-111 | If SI111 is used |
+| SI111_m2 |  | Calibration m2 for SI-111 | If SI111 is used |
+| SI111_b0 |  | Calibration b0 for SI-111 | If SI111 is used |
+| SI111_b1 |  | Calibration b1 for SI-111 | If SI111 is used |
+| SI111_b2 |  | Calibration b2 for SI-111 | If SI111 is used |
+| SHFP_1_SENS | &micro;V/W/m<sup>2</sup> | Heat flux plate #1 calibration factor | If one HFP01 or HFP01SC is used |
+| SHFP_2_SENS | &micro;V/W/m<sup>2</sup> | Heat flux plate #2 calibration factor | If two HFP01 or HFP01SC are used |
+| SHFP_3_SENS | &micro;V/W/m<sup>2</sup> | Heat flux plate #3 calibration factor | If three HFP01 or HFP01SC are used |
+| SHFP_4_SENS | &micro;V/W/m<sup>2</sup> | Heat flux plate #4 calibration factor | If four HFP01 or HFP01SC are used |
+
 

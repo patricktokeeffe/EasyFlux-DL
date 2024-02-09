@@ -128,10 +128,11 @@ Const SENSOR_HFP         = ((SENSOR_HFP01) OR (SENSOR_HFP01SC))
 Const SENSOR_CS6XX       = ((SENSOR_CS616) OR (SENSOR_CS65X) OR (SENSOR_TDR31X) OR (SENSOR_5TM))
 Const SENSOR_SOIL_T      = ((SENSOR_TCAV) OR (SENSOR_CS65X) OR (SENSOR_TDR31X) OR (SENSOR_5TM))
 Const SENSOR_PROFILE     = ((PROFILE_TDR31X) OR (PROFILE_5TM))
-
+Const SENSOR_UNIQUE = (SENSOR_034B OR SENSOR_Rn OR SENSOR_LI200X OR SENSOR_CS300 OR SENSOR_LI190SB OR _
+                       SENSOR_SI111 OR SENSOR_HFP OR SENSOR_TMPR_RH OR SENSOR_TE525mm)
 
 '*** Beginning field-configurable constants ***
-#If (SENSOR_NR_LITE OR SENSOR_LI190SB OR SENSOR_HFP) Then
+#If (SENSOR_UNIQUE) Then
   Include("CPU:constants.cr3")
 #EndIf
 '*** End of field-configurable constants ***
@@ -155,25 +156,21 @@ Const SENSOR_PROFILE     = ((PROFILE_TDR31X) OR (PROFILE_5TM))
 Const SHF_ANALOG_INPUT = 1  'Starting differential analog input channel.
 'Use `NMBR_SHFP` above to specify number of HFP01 or HFP01SC sensors to measure (Maximum is 4) .
 
-Data 1000/SHFP_1_SENS                'Unique: multiplier for HFP01xx #1 (1000/sensitivity).
+Data 1000/SHFP_1_SENS       'Unique: set in include file `constants.cr3`
 #If (NMBR_SHFP >1) Then     'This conditional statement can avoid the confliction with Data statements for the numerical wTs transfer function from Dijk (2002)) if NMBR_SHFP < 2
 
-Data 1000/SHFP_2_SENS                'Unique: multiplier for HFP01xx #2 (1000/sensitivity).
+Data 1000/SHFP_2_SENS       'Unique: set in include file `constants.cr3`
 #EndIf
 #If (NMBR_SHFP >2) Then     'This conditional statement can avoid the confliction with Data statements for the numerical wTs transfer function from Dijk (2002)) if NMBR_SHFP < 3
 
 Data 1000/SHFP_3_SENS
-#EndIf                      'Unique: multiplier for HFP01xx #3 (1000/sensitivity).
+#EndIf                      'Unique: set in include file `constants.cr3`
 #If (NMBR_SHFP >3) Then     'This conditional statement can avoid the confliction with Data statements for the numerical wTs transfer function from Dijk (2002)) if NMBR_SHFP < 4
 
-Data 1000/SHFP_4_SENS                'Unique: multiplier for HFP01xx #4 (1000/sensitivity).
+Data 1000/SHFP_4_SENS       'Unique: set in include file `constants.cr3`
 #EndIf
 
 #If (SENSOR_HFP01) Then
-Units SHFP_1_SENS = uV/W/m^2
-Units SHFP_2_SENS = uV/W/m^2
-Units SHFP_3_SENS = uV/W/m^2
-Units SHFP_4_SENS = uV/W/m^2
 '*** Beginning of HFP01 wiring ***
 '1H      Signal #1 (white)
 '1L      Signal reference #1 (green)
@@ -259,7 +256,7 @@ Const NR_ANALOG_INPUT = 6           'Starting differential analog input channel 
 #EndIf
 #If (SENSOR_NR_LITE) Then
 
-Const NRLITE_CAL = 1000/NRLITE_SENS          'Unique: multiplier for NR Lite (1000/sensitivity).
+Const NRLITE_CAL = 1000/NRLITE_SENS          'Unique: set in include file `constants.cr3`
 '*** Beginning of NR Lite wiring ***
 '6H      Signal (white/red)
 '6L      Signal reference (green/blue)
@@ -276,10 +273,10 @@ Const T_NR_ANALOG_INPUT = 10            'Differential analog input channel to me
 #If (SENSOR_NR01) Then
 
 Const T_NR_CURRENT_EXCITATION = Ix1     'Current excitation channel.
-Const NR01_SW_IN_CAL  = 1000/15         'Unique: multiplier for NR01 shortwave downwelling radiation (1000/sensitivity).
-Const NR01_SW_OUT_CAL = 1000/15         'Unique: multiplier for NR01 shortware upwelling radiation (1000/sensitivity).
-Const NR01_LW_IN_CAL  = 1000/8          'Unique: multiplier for NR01 longwave downwelling radiation (1000/sensitivity).
-Const NR01_LW_OUT_CAL = 1000/8          'Unique: multiplier for NR01 longwave upwelling radiation (1000/sensitivity).
+Const NR01_SW_IN_CAL  = 1000/NR01_SW_IN_SENS          'Unique: set in include file `constants.cr3`
+Const NR01_SW_OUT_CAL = 1000/NR01_SW_OUT_SENS         'Unique: set in include file `constants.cr3`
+Const NR01_LW_IN_CAL  = 1000/NR01_LW_IN_SENS          'Unique: set in include file `constants.cr3`
+Const NR01_LW_OUT_CAL = 1000/NR01_LW_OUT_SENS         'Unique: set in include file `constants.cr3`
 
 '*** Beginning of NR01 wiring ***
 '6H      Downwelling (incoming) shortwave radiation signal (red)
@@ -306,10 +303,10 @@ Const NR01_LW_OUT_CAL = 1000/8          'Unique: multiplier for NR01 longwave up
 #If (SENSOR_CNR4) Then
 
 Const T_NR_VOLTAGE_EXCITATION = Vx1     'Voltage excitation channel.
-Const CNR4_SW_IN_CAL    = 1000/15       'Unique: multiplier for CNR4 shortwave downwelling radiation (1000/sensitivity).
-Const CNR4_SW_OUT_CAL   = 1000/15       'Unique: multiplier for CNR4 shortware upwelling radiation (1000/sensitivity).
-Const CNR4_LW_IN_CAL    = 1000/8        'Unique: multiplier for CNR4 longwave downwelling radiation (1000/sensitivity).
-Const CNR4_LW_OUT_CAL   = 1000/8        'Unique: multiplier for CNR4 longwave upwelling radiation (1000/sensitivity).
+Const CNR4_SW_IN_CAL    = 1000/CNR4_SW_IN_SENS       'Unique: set in include file `constants.cr3`
+Const CNR4_SW_OUT_CAL   = 1000/CNR4_SW_OUT_SENS      'Unique: set in include file `constants.cr3`
+Const CNR4_LW_IN_CAL    = 1000/CNR4_LW_IN_SENS       'Unique: set in include file `constants.cr3`
+Const CNR4_LW_OUT_CAL   = 1000/CNR4_LW_OUT_SENS      'Unique: set in include file `constants.cr3`
 
 '*** Beginning of CNR4 wiring ***
 '6H      Downwelling shortwave radiation signal (red)
@@ -341,8 +338,8 @@ Const CNR4_LW_OUT_CAL   = 1000/8        'Unique: multiplier for CNR4 longwave up
 
 Const PYRAN_ANALOG_INPUT  = 7     'Differential analog input channel for LI200X or CS300 Pyranometer
 Const PYRAN_VOLTAGE_RANG  = mV20  'Unique: measurement range of voltage mV20 for LI200 and mV250 for CS300 pyranometer
-Const PYRAN_MULT          = 200   'Unique: multiplier for LI200X [200 W/(m^2 * mV)] or CS300 [5 W/(m^2 * mV)] pyranometer .
-Const PYRAN_OFFSET        = 0     'Unique: offset for LI200X [0 W/m^2] or CS300 (0 W/m^2) pyranometer.
+'Const PYRAN_MULT          = 200   'Unique: set in include file `constants.cr3`
+'Const PYRAN_OFFSET        = 0     'Unique: set in include file `constants.cr3`
 
 '*** Beginning of Pyranometer wiring ***
 '7H      Pyranometer signal (red)
@@ -359,8 +356,8 @@ Const PYRAN_OFFSET        = 0     'Unique: offset for LI200X [0 W/m^2] or CS300 
 
 Const QUANTUM_ANALOG_INPUT  = 8     'Differential analog input channel for quantum PAR sensor
 Const QUANTUM_VOLTAGE_RANGE = mV20  'Unique: measurement range of voltage
-Const QUANTUM_MULT          = 1000/(QUANTUM_SENS*0.604)   'Unique: multiplier (1000 C) for quantum PAR sensor.
-Const QUANTUM_OFFSET        = 0     'Unique: offset for for quantum PAR sensor.
+'Const QUANTUM_MULT                 'Unique: set in include file `constants.cr3`
+'Const QUANTUM_OFFSET               'Unique: set in include file `constants.cr3`
 
 '*** Beginning of quantum wiring ***
 '8H      Quantum signal (red)
@@ -372,12 +369,12 @@ Const QUANTUM_OFFSET        = 0     'Unique: offset for for quantum PAR sensor.
 Const SI111_ANALOG_INPUT  = 9     'Differential analog input channel for SI-111 sensor
 Const SI111_EXCITATION    = Vx2   'Voltage excitation channel for SI-111 sensor
 
-Const m0_SI111 =  1.41970e9       'Unique: calbration m0
-Const m1_SI111 =  7.84100e6       'Unique: calbration m1
-Const m2_SI111 =  82213           'Unique: calbration m2
-Const b0_SI111 = -1.72150e7       'Unique: calbration b0
-Const b1_SI111 =  1.85020e5       'Unique: calbration b1
-Const b2_SI111 =  13114           'Unique: calbration b2
+Const m0_SI111 = SI111_m0       'Unique: set in include file `constants.cr3`
+Const m1_SI111 = SI111_m1       'Unique: set in include file `constants.cr3`
+Const m2_SI111 = SI111_m2       'Unique: set in include file `constants.cr3`
+Const b0_SI111 = SI111_b0       'Unique: set in include file `constants.cr3`
+Const b1_SI111 = SI111_b1       'Unique: set in include file `constants.cr3`
+Const b2_SI111 = SI111_b2       'Unique: set in include file `constants.cr3`
 
 '*** Beginning of SI-111 precision infrared radiometer wiring***
 '9H      SI111 target signal (red)
@@ -517,8 +514,8 @@ Const fiveTM_SDI12_PORT   = 5       'Control port for SDI-12 data
 #If (SENSOR_TMPR_RH) Then
 
 Const TMPR_RH_ANALOG_INPUT = 27     'Single-end analog input channel for temperature and humidity probe.
-Const TMPR_RH_T_MULT       = 0.14   'Unique: multiplier for temperature; HC2S3 = 0.1, HMP155A = 0.14, or HMP45C = 0.1.
-Const TMPR_RH_T_OFFSET     = -80    'Unique: offset for temperature; HC2S3 = -40, HMP155A = -80, or HMP45C = -40.
+'Const TMPR_RH_T_MULT       = 0.14   'Unique: set in include file `constants.cr3`
+'Const TMPR_RH_T_OFFSET     = -80    'Unique: set in include file `constants.cr3`
 
 '*** Beginning of HC2S3 or HMP wiring ***
 '14H     Temperature signal (brown/yellow)
@@ -535,7 +532,7 @@ Const TMPR_RH_T_OFFSET     = -80    'Unique: offset for temperature; HC2S3 = -40
 #If (SENSOR_TE525mm) Then
 
 Const TE525_PULSE_INPUT = 1          'Pulse input channel rain gauge.
-Const TE525_MULT        = 0.1        'Unique: multiplier for TE525MM [0.1], TE525 or TE525WS [0.254], or 8" funnel on TE525 or TE525MM [0.1459] rain gauge
+'Const TE525_MULT        = 0.1        'Unique: set in include file `constants.cr3`
 
 '*** Beginning of TE525mm wiring ***
 'P1      Precipitation (black)
@@ -553,9 +550,7 @@ Const o34B_WD_MULT = 720             'Unique: multipler for wind direction
 Const o34B_WD_OFFSET = 0             'Unique: offset for wind direction
 Const o34B_WS_MULT = 0.7989          'Unique: multiplier for wind speed
 Const o34B_WS_OFFSET = 0.28          'Unique: offset for wind speed
-
-'lower case'd in anticipation of future integration into settings array
-Const cupvane_azimuth = 0  'Unique: orientation of windset w.r.t. true north
+'Const CUPVANE_AZIMUTH = 0            'Unique: set in include file `constants.cr3`
 
 '*** Beginning of 034B wiring ***
 '10L     Wind direction signal (green)
@@ -2436,9 +2431,6 @@ DataTable (Flux, TRUE, FLUX_SIZE_CPU)
 
   '*** Beginning of net radiometer output data ***
   Average (1, Rn_meas, IEEE4, slowsequence_disable_flg)
-  Sample (1, NRLITE_SENS, FP2)
-    FieldNames("NRLITE_SENS")
-    Units NRLITE_SENS = uV/W/m^2
   '*** End of net radiometer output data ***
   #EndIf
   #If ((SENSOR_NR01) OR (SENSOR_CNR4)) Then
@@ -2458,9 +2450,6 @@ DataTable (Flux, TRUE, FLUX_SIZE_CPU)
 
   '*** Beginning of LI190SB output data ***
   Average  (1, PAR_density, IEEE4, slowsequence_disable_flg)
-  Sample (1, QUANTUM_SENS, FP2)
-    FieldNames("QUANTUM_SENS")
-    Units QUANTUM_SENS = uA/mmol/m^2/s
   '*** End of LI190SB output data ***
   #EndIf
   #If (SENSOR_SI111) Then
@@ -2528,22 +2517,6 @@ DataTable (Flux, TRUE, FLUX_SIZE_CPU)
 
   '*** Beginning of HFP01 output data ***
   Sample (NMBR_SHFP, shf_plate_avg(1), IEEE4)                                    'Heat flux through a soil heat flux plate
-  #If (NOT SENSOR_HFP01SC) Then
-  Sample (1, SHFP_1_SENS, FP2)
-    FieldNames("SHFP_1_SENS")
-  #If (NMBR_SHFP > 1) Then
-  Sample (1, SHFP_2_SENS, FP2)
-    FieldNames("SHFP_2_SENS")
-  #EndIf
-  #If (NMBR_SHFP > 2) Then
-  Sample (1, SHFP_3_SENS, FP2)
-    FieldNames("SHFP_3_SENS")
-  #EndIf
-  #If (NMBR_SHFP > 3) Then
-  Sample (1, SHFP_4_SENS, FP2)
-    FieldNames("SHFP_4_SENS")
-  #EndIf
-  #EndIf
   '*** End of HFP01 output data ***
   #EndIf
   #If (SENSOR_HFP01SC) Then
@@ -2936,22 +2909,6 @@ DataTable (LTAR_Met_1Minute, TRUE, -1)
   #If (SENSOR_HFP) Then
   '*** Beginning of HFP01 output data ***
   Sample (NMBR_SHFP, shf_plate_avg(1), IEEE4)                                    'Heat flux through a soil heat flux plate
-  #If (NOT SENSOR_HFP01SC) Then
-  Sample (1, SHFP_1_SENS, FP2)
-    FieldNames("SHFP_1_SENS")
-  #If (NMBR_SHFP > 1) Then
-  Sample (1, SHFP_2_SENS, FP2)
-    FieldNames("SHFP_2_SENS")
-  #EndIf
-  #If (NMBR_SHFP > 2) Then
-  Sample (1, SHFP_3_SENS, FP2)
-    FieldNames("SHFP_3_SENS")
-  #EndIf
-  #If (NMBR_SHFP > 3) Then
-  Sample (1, SHFP_4_SENS, FP2)
-    FieldNames("SHFP_4_SENS")
-  #EndIf
-  #EndIf
   '*** End of HFP01 output data ***  
   #EndIf
   #If (SENSOR_HFP01SC) Then
@@ -3038,22 +2995,6 @@ Sample (1,LTAR_e_sat,IEEE4)
     #If (SENSOR_HFP) Then
   '*** Beginning of HFP01 output data ***
   Sample (NMBR_SHFP, shf_plate_avg(1), IEEE4)                                    'Heat flux through a soil heat flux plate
-  #If (NOT SENSOR_HFP01SC) Then
-  Sample (1, SHFP_1_SENS, FP2)
-    FieldNames("SHFP_1_SENS")
-  #If (NMBR_SHFP > 1) Then
-  Sample (1, SHFP_2_SENS, FP2)
-    FieldNames("SHFP_2_SENS")
-  #EndIf
-  #If (NMBR_SHFP > 2) Then
-  Sample (1, SHFP_3_SENS, FP2)
-    FieldNames("SHFP_3_SENS")
-  #EndIf
-  #If (NMBR_SHFP > 3) Then
-  Sample (1, SHFP_4_SENS, FP2)
-    FieldNames("SHFP_4_SENS")
-  #EndIf
-  #EndIf
   '*** End of HFP01 output data ***  
   #EndIf
   #If (SENSOR_HFP01SC) Then
@@ -3065,6 +3006,118 @@ Sample (1,LTAR_e_sat,IEEE4)
   EndTable
 #EndIf
 
+'Sensor calibration values
+#If (SENSOR_UNIQUE) Then
+DataTable (Cal_Constants, TRUE, 100) 'FIXME how many records
+  #If (SENSOR_034B) Then
+  Sample (1, CUPVANE_AZIMUTH, IEEE4)     'azimuth angle of windset w.r.t. True North
+  FieldNames ("CUPVANE_AZIMUTH")
+  Units CUPVANE_AZIMUTH = degrees
+  #EndIf
+
+  #If (SENSOR_NR_LITE) Then
+  Sample (1, NRLITE_SENS, IEEE4)         'sensitivity for NR Lite
+  FieldNames ("NRLITE_SENS")
+  Units NRLITE_SENS = uV/W/m^2
+  #EndIf
+
+  #If (SENSOR_NR01) Then
+  Sample (1, NR01_SW_IN_SENS, IEEE4)     'sensitivity for NR01 shortwave downwelling radiation
+  FieldNames ("NR01_SW_IN_SENS")
+  Units NR01_SW_IN_SENS = uV/W/m^2
+  Sample (1, NR01_SW_OUT_SENS, IEEE4)    'sensitivity for NR01 shortwave upwelling radiation
+  FieldNames ("NR01_SW_OUT_SENS")
+  Units NR01_SW_OUT_SENS = uV/W/m^2
+  Sample (1, NR01_LW_IN_SENS, IEEE4)     'sensitivity for NR01 longwave downwelling radiation
+  FieldNames ("NR01_LW_IN_SENS")
+  Units NR01_LW_IN_SENS = uV/W/m^2
+  Sample (1, NR01_LW_OUT_SENS, IEEE4)    'sensitivity for NR01 longwave upwelling radiation
+  FieldNames ("NR01_LW_OUT_SENS")
+  Units NR01_LW_OUT_SENS = uV/W/m^2
+  #EndIf
+  
+  #If (SENSOR_CNR4) Then
+  Sample (1, CNR4_SW_IN_SENS, IEEE4)     'multiplier for CNR4 shortwave downwelling radiation (1000/sensitivity)
+  FieldNames ("CNR4_SW_IN_SENS")
+  Units CNR4_SW_IN_SENS = uV/W/m^2
+  Sample (1, CNR4_SW_OUT_SENS, IEEE4)    'multiplier for CNR4 shortwave upwelling radiation (1000/sensitivity)
+  FieldNames ("CNR4_SW_OUT_SENS")
+  Units CNR4_SW_OUT_SENS = uV/W/m^2
+  Sample (1, CNR4_LW_IN_SENS, IEEE4)     'multiplier for CNR4 longwave downwelling radiation (1000/sensitivity)
+  FieldNames ("CNR4_LW_IN_SENS")
+  Units CNR4_LW_IN_SENS = uV/W/m^2
+  Sample (1, CNR4_LW_OUT_SENS, IEEE4)    'multiplier for CNR4 longwave upwelling radiation (1000/sensitivity)
+  FieldNames ("CNR4_LW_OUT_SENS")
+  Units CNR4_LW_OUT_SENS = uV/W/m^2
+  #EndIf
+  
+  #If (SENSOR_LI200X) OR (SENSOR_CS300) Then
+  Sample (1, PYRAN_MULT, IEEE4)          'multiplier for LI200X [200 W/(m^2 * mV)] or CS300 [5 W/(m^2 * mV)] pyranometer
+  FieldNames ("PYRAN_MULT")
+  Units PYRAN_MULT = W/m^2/mV
+  Sample (1, PYRAN_OFFSET, IEEE4)        'offset for LI200X [0 W/m^2] or CS300 (0 W/m^2) pyranometer
+  FieldNames ("PYRAN_OFFSET")
+  Units PYRAN_OFFSET = W/m^2
+  #EndIf
+  
+  #If (SENSOR_LI190SB) Then
+  Sample (1, QUANTUM_MULT, IEEE4)        'multiplier (1000 C) for quantum PAR sensor
+  FieldNames ("QUANTUM_MULT")
+  Units QUANTUM_MULT = umol/(s m^2)/mV
+  Sample (1, QUANTUM_OFFSET, IEEE4)      'offset for quantum PAR sensor.
+  FieldNames ("QUANTUM_OFFSET")
+  Units QUANTUM_OFFSET = umol/(s m^2)
+  #EndIf
+  
+  #If (SENSOR_SI111) Then
+  Sample (1, SI111_m0, IEEE4)       'calbration m0
+  FieldNames ("SI111_m0")
+  Sample (1, SI111_m1, IEEE4)       'calbration m1
+  FieldNames ("SI111_m1")
+  Sample (1, SI111_m2, IEEE4)       'calbration m2
+  FieldNames ("SI111_m2")
+  Sample (1, SI111_b0, IEEE4)       'calbration b0
+  FieldNames ("SI111_b0")
+  Sample (1, SI111_b1, IEEE4)       'calbration b1
+  FieldNames ("SI111_b1")
+  Sample (1, SI111_b2, IEEE4)       'calbration b2
+  FieldNames ("SI111_b2")
+  #EndIf
+  
+  #If (SENSOR_HFP) Then
+  Sample (1, SHFP_1_SENS, IEEE4)    'multiplier for HFP01xx #1 (1000/sensitivity)
+  FieldNames ("SHFP_1_SENS")
+  Units SHFP_1_SENS = uV/W/m^2
+  #If (NMBR_SHFP >1) Then
+  Sample (1, SHFP_2_SENS, IEEE4)    'multiplier for HFP01xx #2 (1000/sensitivity)
+  FieldNames ("SHFP_2_SENS")
+  Units SHFP_2_SENS = uV/W/m^2
+  #EndIf
+  #If (NMBR_SHFP >2) Then
+  Sample (1, SHFP_3_SENS, IEEE4)    'multiplier for HFP01xx #3 (1000/sensitivity)
+  FieldNames ("SHFP_3_SENS")
+  Units SHFP_3_SENS = uV/W/m^2
+  #EndIf
+  #If (NMBR_SHFP >3) Then
+  Sample (1, SHFP_4_SENS, IEEE4)    'multiplier for HFP01xx #4 (1000/sensitivity)
+  FieldNames ("SHFP_4_SENS")
+  Units SHFP_4_SENS = uV/W/m^2
+  #EndIf
+  #EndIf
+  
+  #If (SENSOR_TMPR_RH) Then
+  Sample (1, TMPR_RH_T_MULT, IEEE4)      'Unique: multiplier for temperature; HC2S3 = 0.1, HMP155A = 0.14, or HMP45C = 0.1
+  FieldNames ("TMPR_RH_T_MULT")
+  Sample (1, TMPR_RH_T_OFFSET, IEEE4)    'Unique: offset for temperature; HC2S3 = -40, HMP155A = -80, or HMP45C = -40
+  FieldNames ("TMPR_RH_T_OFFSET")
+  #EndIf
+  
+  #If (SENSOR_TE525mm) Then
+  Sample (1, TE525_MULT, IEEE4)         'Unique: multiplier for TE525MM [0.1], TE525 or TE525WS [0.254], or 8" funnel on TE525 or TE525MM [0.1459] rain gauge
+  FieldNames ("TE525_MULT")
+  #EndIf
+EndTable
+#EndIf '(SENSOR_UNIQUE)
 
 '*******************'
 '*** SUBROUTINEs ***'
@@ -4767,6 +4820,10 @@ BeginProg
   #If (SENSOR_TS45) Then
   	SerialOpen(TS45_COM,9600,7,50,1000) 'Open serial port for ModbusMaster
   #EndIf
+  
+  #If (SENSOR_UNIQUE) Then
+  CallTable Cal_Constants
+  #EndIf
 
   '*************************** SCAN LOOP  **************************************************
   Scan (SCAN_INTERVAL, mSec, SCAN_BUFFER_SIZE, 0)
@@ -5581,7 +5638,7 @@ BeginProg
       '*** Beginning of cup and vane processing ***
       If (stats_cupvane.Output(1,1)) Then
         GetRecord (stats_out_cupvane(1), stats_cupvane, 1)
-        cupvane_WD_rslt_Avg = cupvane_WD_rslt_Avg + cupvane_azimuth
+        cupvane_WD_rslt_Avg = cupvane_WD_rslt_Avg + CUPVANE_AZIMUTH
       EndIf
       '*** End of cup and vane processing ***
 

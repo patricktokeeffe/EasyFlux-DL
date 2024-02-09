@@ -64,7 +64,6 @@ rho_a_probe_Avg	kg/m^3	Average air density derived from temp/RH probe
 rho_d_probe_Avg	kg/m^3	Average dry air density derived from temp/RH probe
 Precipitation_Tot	mm	Total precipitation
 Rn_meas_Avg	W/m^2	Average net radiation (raw, not corrected for wind)
-NRLITE_SENS	uV/W/m^2	Net radiometer calibration factor
 albedo_Avg	unitless	Average albedo
 R_SW_in_Avg	W/m^2	Average incoming short wave radiation
 R_SW_out_Avg	W/m^2	Average outgoing short wave radiation
@@ -75,7 +74,6 @@ R_LW_in_meas_Avg	W/m^2	Average raw incoming long wave radiation
 R_LW_out_meas_Avg	W/m^2	Average raw outgoing long wave radiation
 R_pyran_Avg	W/m^2	Average radiation measured by pyranometer
 PAR_density_Avg	umol/(s m^2)	Average density of photosynthetic active radiation
-QUANTUM_SENS	uA/mmol/m^2/s	Quantum (PAR) calibration factor
 T_SI111_targeted_Avg	C	Average temperature of targeted object
 T_SI111_body_Avg	C	Average temperature of sensor body
 cupvane_WS_Avg	m/s	Average wind speed from cup-and-vane anemometer
@@ -116,10 +114,6 @@ shf_plate_avg(1)	W/m^2	Average soil heat flux; i identifies which sensor
 shf_plate_avg(2)	W/m^2	Average soil heat flux; i identifies which sensor
 shf_plate_avg(3)	W/m^2	Average soil heat flux; i identifies which sensor
 shf_plate_avg(4)	W/m^2	Average soil heat flux; i identifies which sensor
-SHFP_1_SENS	uv/W/m^2	Heat flux plate #1 calibration factor
-SHFP_2_SENS	uv/W/m^2	Heat flux plate #2 calibration factor
-SHFP_3_SENS	uv/W/m^2	Heat flux plate #3 calibration factor
-SHFP_4_SENS	uv/W/m^2	Heat flux plate #4 calibration factor
 shf_plate_cal(1)	unitless	Coefficients found from the HFP01SC self-calibration and used to calculate shf_plate_Avg(1); i indicates which sensor
 shf_plate_cal(2)	unitless	Coefficients found from the HFP01SC self-calibration and used to calculate shf_plate_Avg(2); i indicates which sensor
 shf_plate_cal(3)	unitless	Coefficients found from the HFP01SC self-calibration and used to calculate shf_plate_Avg(3); i indicates which sensor

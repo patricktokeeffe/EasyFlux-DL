@@ -36,11 +36,10 @@ including sensor wiring, program configuration, data table descriptions and impo
 
 ### Editable constants
 
-This version of EddyFlux<sup>&reg;</sup> DL is modified to enable field editing of unique sensor constants using the keyboard display or a remote client (e.g. PC400).
-By separating constants to a separate include file, it becomes possible to edit the file in-memory and recompile the program despite the memory restrictions of the data logger.
-To facilitate quality-control and post-processing corrections, unique sensor constants are stored adjacent to corresponding sensor field names in output data tables.
+This version of EddyFlux<sup>&reg;</sup> DL is modified to enable field editing of sensor calibration constants using the keyboard display or a remote client (e.g. PC400).
+By introducing a ConstTable and custom menu, the unique constants can be modified without editing or uploading program files, which simplifies exchanging sensors during site maintenance.
+To facilitate quality-control and post-processing corrections, unique sensor constants are stored in output table *Cal_Constants* each time the program is compiled.
 
-> ***N.B.** Field modification of unique sensor constants is currently not generalized and can only be used for particular sensor configurations.*
 
 ### New hardware support
 
@@ -108,7 +107,6 @@ For full details, refer to the [instruction manual supplement](doc/readme.md).
 * Time_Series
     * New field `CO2_hf` contains alternate CO<sub>2</sub> density output
 * Flux and Flux_Notes
-    * New fields for unique sensor calibration factors
     * New fields for 034B cup-and-vane anemometer
     * New fields for soil water content sensors
     * New fields for vertical profile soil sensors
@@ -122,6 +120,10 @@ For full details, refer to the [instruction manual supplement](doc/readme.md).
     * Added to acquire high-resolution meteorology data
     * Does averaging on a 1-minute basis
     * Contains same metrics as LTAR_Met, except no precipitation or soil vertical profile
+* New table: Cal_Constants
+    * Added to track unique sensor calibration values
+    * Triggered once during program compilation (due to power-on or program changes)
+    * Stores up to 100 records
 
 ## License
 
