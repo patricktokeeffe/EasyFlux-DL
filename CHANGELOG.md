@@ -28,10 +28,15 @@ Significant realignment means users will need to modify current deployments to c
 It also includes a number of fixes and enhancements:
 
 * Eliminate compiler warning about unused Topp equation function if not using Decagon 5TM sensors. Fixes [#4]
+* Fix *Time_Series* table to log alternate CO2 density derived from sonic temperature when using IRGASON (not just EC150). Fixes [#7]
+* Add user control over handling of alternate CO2 density derived from high-frequency sonic temperature:
+    * User-defined boolean enables or disables storage of alternate CO2 in *Time_Series* table 
+    * If enabled, a second boolean optionally allows calculating fluxes using alternate CO2 density
 * Fix intermediate processing of energy balance SWC sensors and clean-up related code for profile sensors. Fixes [#3], [#8] and [#9]
 
 [#3]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/3
 [#4]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/4
+[#7]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/7
 [#8]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/8
 [#9]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/9
 

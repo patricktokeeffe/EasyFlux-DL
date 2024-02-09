@@ -89,14 +89,14 @@ The supported sensor list is expanded as follows (additions in bold):
 
 ### High-frequency CO<sub>2</sub>
 
-This version of *EasyFlux DL* exposes the alternate CO<sub>2</sub> density output using humidity-corrected sonic temperature
-and adds it to the high-frequency time series output table.
-The value is not used for online flux computations and cannot be disabled.
-
+This version of *EasyFlux DL* adds the capability to log alternate CO<sub>2</sub> density output using sonic temperature in the time series (high-frequency) output table. 
+If enabled, users can specify the alternate CO<sub>2</sub> density be used in flux computations, instead of standard CO<sub>2</sub> density output using slow-response temperature probe.
 Using the fast-response temperature measurements from the sonic anemometer compensates for spectroscopic effects during high sensible heat flux regimes
-as explained in *Helbig et al. (2016)*. For more information, see:
+as explained in *Helbig et al. (2016)*.
 
 * CRBasic Program Reference for `EC100`. *Campbell Scientific, Inc.* CR3000.Std.32.04
+* Campbell Scientific. *Improved Flux Measurements from Campbell Scientific Open-Path Gas Analyzers: Utilizing Sonic Temperature to Account for Spectroscopic Effects on CO2 Density.* May 23, 2017. Online:
+  <https://s.campbellsci.com/documents/us/miscellaneous/Improved-Flux-Measurements-from-Campbell-Scientific-Open-Path-Gas-Analyzers.pdf>
 * Helbig, M., et al.: “Addressing a Systematic Bias in Carbon Dioxide Flux Measurements with the EC150 and the IRGASON Open-Path Gas Analyzers”, Agricultural and Forest Meteorol., 228-229 (2016), 349-359. [doi:10.1016/j.agrformet.2016.07.018](https://doi.org/10.1016/j.agrformet.2016.07.018)
 * Russell, E.S., et al.: "Adjustment of CO2 flux measurements due to the bias in the EC150 infrared gas analyzer", Agricultural and Forest Meteorol., 276-277 (2019), 107593. [doi:10.1016/j.agrformet.2019.05.024](https://doi.org/10.1016/j.agrformet.2019.05.024)
 
