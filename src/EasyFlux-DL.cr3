@@ -120,7 +120,7 @@ Const SENSOR_TS45        = FALSE                  'Unique: MorningStar TriStar T
 Const NMBR_SHFP = 4         'Unique: number of HFP01 or HFP01SC sensors to measure (Maximum is 4)
 Const NMBR_TCAV = 2         'Unique: number of TCAV (Maximum is 2)
 Const NMBR_CS6xx = 2        'Unique: number of CS616, CS650, CS655, TDR-315 or 5TM sensors (Maximum is 2)
-Const NMBR_PROFILE = 6      'Unique: number of T/VWC probes (TDR-315 or 5TM) in profile (Maximum is 6)
+Const NMBR_PROFILE = 6      'Unique: number of T/VWC probes (TDR31X or 5TM) in profile (Maximum is 9)
 
 'Composite boolean variables for variables above
 Const SENSOR_Rn          = ((SENSOR_CNR4) OR (SENSOR_NR01) OR (SENSOR_NR_LITE))
@@ -449,9 +449,9 @@ Const CS65X_SDI12_Address_2 = 2        'Unique: SDI address for CS655 #2
 #If (SENSOR_TDR31X) Then
 
 Const TDR31X_SDI12_PORT      = 5    'Control port for SDI-12 data
-Const TDR31X_SDI12_Address_1 = 1    'Unique: SDI address for TDR-315 #1
+Const TDR31X_SDI12_Address_1 = 1    'Unique: SDI address for TDR-31X #1
 #If (NMBR_CS6xx = 2) Then
-Const TDR31X_SDI12_Address_2 = 2    'Unique: SDI address for TDR-315 #2
+Const TDR31X_SDI12_Address_2 = 2    'Unique: SDI address for TDR-31X #2
 #EndIf
 '*** Beginning of TDR-315 wiring ***
 'C5       SDI-12 data #1 (blue)
@@ -465,9 +465,9 @@ Const TDR31X_SDI12_Address_2 = 2    'Unique: SDI address for TDR-315 #2
 #If (SENSOR_5TM) Then
 
 Const fiveTM_SDI12_PORT        = 5     'Control port for SDI-12 data
-Const fiveTM_SDI12_Address_1   = 1     'Unique: SDI address for TDR-315 #1
+Const fiveTM_SDI12_Address_1   = 1     'Unique: SDI address for 5TM #1
 #If (NMBR_CS6xx = 2) Then
-Const fiveTM_SDI12_Address_2   = 2     'Unique: SDI address for TDR-315 #2
+Const fiveTM_SDI12_Address_2   = 2     'Unique: SDI address for 5TM #2
 #EndIf
 '*** Beginning of 5TM wiring ***
 'C5       SDI-12 data #1 (red)
@@ -481,11 +481,11 @@ Const fiveTM_SDI12_Address_2   = 2     'Unique: SDI address for TDR-315 #2
 #EndIf
 #If (SENSOR_PROFILE) Then
 
-'Use `NMBR_PROFILE` above to specify number of T/VWC probes in profile (Maximum is 6)
+'Use `NMBR_PROFILE` above to specify number of T/VWC probes in profile (Maximum is 9)
 
 #If (PROFILE_TDR31X) Then
 
-Const TDR31X_SDI12_Address_P = 3      'Unique: first address in sequential series
+Const TDR31X_SDI12_Address_P = 3    'Unique: SDI address for first TDR-31X; profile sensors must be sequentially addressed, to maximum of address 9
 #If (NOT SENSOR_TDR31X) Then
 Const TDR31X_SDI12_PORT    = 5      'Control port for SDI-12 data
 '*** Beginning of TDR-315 wiring ***
@@ -500,9 +500,9 @@ Const TDR31X_SDI12_PORT    = 5      'Control port for SDI-12 data
 #EndIf
 #If (PROFILE_5TM) Then
 
-Const fiveTM_SDI12_Address_P = 3      'Unique: first address in sequential series
+Const fiveTM_SDI12_Address_P = 3    'Unique: SDI address for first 5TM; profile sensors must be sequentially addressed, to maximum of address 9
 #If (NOT SENSOR_5TM) Then
-Const fiveTM_SDI12_PORT   = 5      'Control port for SDI-12 data
+Const fiveTM_SDI12_PORT   = 5       'Control port for SDI-12 data
 #EndIf
 '*** Beginning of 5TM wiring ***
 'C5       SDI-12 data #1 (red)
@@ -620,6 +620,7 @@ Const TS45_COM = Com1    'Serial port for TS45
 '*** Beginning station constants and variables ***.
 Const SCAN_INTERVAL              = 100           'Unique: measurement rate 100 ms (10 Hz), 200 ms (5 Hz), or 1000 ms (1 Hz) (For this CR3K program, the shortest scan interval is 100 ms)
 Const SLOWSEQUENCE_SCAN_INTERVAL = 5000          'Unique: slow sequence measurement rate (ms) (For this CR3K program, the shortest scan interval is 2000 ms)
+Const SLOWERSEQ_SCAN_INTERVAL    = 20            'Unique: slower sequence measurement rate (sec), for vertical soil profile SDI-12 sensors
 Const OUTPUT_INTERVAL            = 30            'Unique: online flux data output interval (minutes).
 Const NMBR_DAY_CPU               = 7             'Number of days for flux data to store on the CPU.
 Const NMBR_DAY_FLUX_CRD          = 30            'Unique: number of days of Flux and Flux_Notes table data to store in each file on the card.  Number of files stored depends on card size.
@@ -747,8 +748,9 @@ Dim scan_count                As Long        'Number scans executed. Working var
 Dim slowsequence_finished_flg As Boolean     'Flag used to indicate that the slowSequence has finished its scan.
 Dim slowsequence_disable_flg  As Boolean     'Flag used to decimate statistics in main scan.
 
-Dim slowsequence_5_finished_flg As Boolean  'Flag used to indicate that the 5-minute slowSequence has finished its scan.
-Dim slowsequence_5_disable_flg As Boolean   'Flag used to decimate statistics in main scan for 5-minute scan.
+Dim slowersequence_finished_flg As Boolean  'Flag used to indicate that the 5-minute slowSequence has finished its scan.
+Dim slowersequence_disable_flg As Boolean   'Flag used to decimate statistics in main scan for 5-minute scan.
+
 Dim sys_conf_var_file         As Long        'Filehandle for the file that contains the system configuration variables in the CPU.
 
 Dim i, i_slow                 As Long        'Index variables for the outmost loop. "i" in main scan and "i_slow" in slow scan sequence
@@ -1932,7 +1934,6 @@ Units profile_tdr31X_poreEC = uS/cm
 #If (SENSOR_5TM) Then
 
 '*** Beginning of 5TM constants and variables ***
-'XXXX HACK use `soil_` prefix to mitigate starting numeral in model name
 Public soil_5TM_E(NMBR_CS6xx)     'soil permittivity, unitless
 Public soil_5TM_tmpr(NMBR_CS6xx)  'soil temperature, degC
 Public soil_5TM_wc(NMBR_CS6xx)    'volumetric water content, v/v
@@ -2502,11 +2503,11 @@ DataTable (Flux, TRUE, FLUX_SIZE_CPU)
   #If (SENSOR_TDR31X) Then
   
   '*** Beginning of TDR31X output data ***
-  Average (NMBR_CS6xx, tdr31X_wc(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_tmpr(1), IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_E(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_bulkEC(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_poreEC(1),   IEEE4, slowsequence_5_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_wc(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_tmpr(1), IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_E(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_bulkEC(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_poreEC(1),   IEEE4, slowsequence_disable_flg)
   '*** End of TDR31X output data ***
   #EndIf
   #If (SENSOR_5TM) Then
@@ -2549,19 +2550,19 @@ DataTable (Flux, TRUE, FLUX_SIZE_CPU)
   #If (PROFILE_TDR31X) Then
   
   '*** Beginning of TDR31X profile output data ***
-  Average (NMBR_PROFILE, profile_tdr31X_wc(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_tmpr(1), IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_E(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_bulkEC(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_poreEC(1),   IEEE4, slowsequence_5_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_wc(1),   IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_tmpr(1), IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_E(1),   IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_bulkEC(1),   IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_poreEC(1),   IEEE4, slowersequence_disable_flg)
   '*** End of TDR31X profile output data ***
   #EndIf  
   #If (PROFILE_5TM) Then
   
   '*** Beginning of 5TM output data ***
-  Average (NMBR_PROFILE, profile_5TM_E(1),    IEEE4, slowsequence_disable_flg)
-  Average (NMBR_PROFILE, profile_5TM_tmpr(1), IEEE4, slowsequence_disable_flg)
-  Average (NMBR_PROFILE, profile_5TM_wc(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_PROFILE, profile_5TM_E(1),    IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_5TM_tmpr(1), IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_5TM_wc(1),   IEEE4, slowersequence_disable_flg)
   '*** End of 5TM output data ***
   #EndIf
   '*** Footprint characteristics ****
@@ -2913,11 +2914,11 @@ DataTable (LTAR_Met_1Minute, TRUE, -1)
   #If (SENSOR_TDR31X) Then
  
   '*** Beginning of TDR31X output data ***
-  Average (NMBR_CS6xx, tdr31X_wc(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_tmpr(1), IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_E(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_bulkEC(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_poreEC(1),   IEEE4, slowsequence_5_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_wc(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_tmpr(1), IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_E(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_bulkEC(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_poreEC(1),   IEEE4, slowsequence_disable_flg)
   '*** End of TDR31X output data ***
   #EndIf
 
@@ -3005,11 +3006,11 @@ Sample (1,LTAR_e_sat,IEEE4)
   #If (SENSOR_TDR31X) Then
   
   '*** Beginning of TDR31X output data ***
-  Average (NMBR_CS6xx, tdr31X_wc(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_tmpr(1), IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_E(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_bulkEC(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_poreEC(1),   IEEE4, slowsequence_5_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_wc(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_tmpr(1), IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_E(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_bulkEC(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_poreEC(1),   IEEE4, slowsequence_disable_flg)
   '*** End of TDR31X output data ***
   #EndIf
 
@@ -3020,11 +3021,11 @@ Sample (1,LTAR_e_sat,IEEE4)
   #EndIf
   #If (PROFILE_TDR31X) Then
   '*** Beginning of TDR31X profile output data ***
-  Average (NMBR_PROFILE, profile_tdr31X_wc(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_tmpr(1), IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_E(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_bulkEC(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_poreEC(1),   IEEE4, slowsequence_5_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_wc(1),   IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_tmpr(1), IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_E(1),   IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_bulkEC(1),   IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_poreEC(1),   IEEE4, slowersequence_disable_flg)
   '*** End of TDR31X profile output data ***
   #EndIf  
   '*** End of anticipated future measurements ***
@@ -5644,10 +5645,10 @@ BeginProg
         slowsequence_disable_flg  = FALSE
       EndIf
 
-  slowsequence_5_disable_flg = TRUE
-      If (slowsequence_5_finished_flg) Then
-        slowsequence_5_finished_flg = FALSE
-        slowsequence_5_disable_flg  = FALSE
+      slowersequence_disable_flg = TRUE
+      If (slowersequence_finished_flg) Then
+        slowersequence_finished_flg = FALSE
+        slowersequence_disable_flg  = FALSE
       EndIf
       
     Else
@@ -5658,12 +5659,11 @@ BeginProg
   NextScan
 
   SlowSequence
- Scan (1, Min, 0, 0)   
-#If (SENSOR_PROFILE) Then
-    '*** Beginning of TDR-31X profile measurements ***
+  Scan (SLOWERSEQ_SCAN_INTERVAL, Sec, 0, 0)   
+    #If (SENSOR_PROFILE) Then
     For i_slow = 1 To NMBR_PROFILE
+      '*** Beginning of TDR-31X profile measurements ***
       #If (PROFILE_TDR31X) Then
-      'XXXX WARNING assumes no address above 9 (default: 6 sensors #3-8)
       SDI12Recorder (tdr31X_raw(1), TDR31X_SDI12_PORT, TDR31X_SDI12_Address_P+i_slow-1, "M!", 1, 0)
       profile_tdr31X_wc(i_slow) = tdr31X_raw(1)
       profile_tdr31X_tmpr(i_slow) = tdr31X_raw(2)
@@ -5671,55 +5671,19 @@ BeginProg
       profile_tdr31X_bulkEC(i_slow) = tdr31X_raw(4)
       profile_tdr31X_poreEC(i_slow) = tdr31X_raw(5)
       #EndIf
-      
+      '*** End of TDR-31X profile measurements ***
+
+      '*** Beginning of 5TM profile measurements ***
       #If (PROFILE_5TM) Then
-      'XXXX WARNING assumes no address above 9 (default: 6 sensors #3-8)
       SDI12Recorder (fiveTM_raw(1), fiveTM_SDI12_PORT, fiveTM_SDI12_Address_P+i_slow-1, "M!", 1, 0)
       profile_5TM_E(i_slow) = fiveTM_raw(1)
       profile_5TM_tmpr(i_slow) = fiveTM_raw(2)
       profile_5TM_wc(i_slow) = Topp_equation(fiveTM_raw(3))
       #EndIf
+      '*** End of 5TM profile measurements
     Next i_slow
-    '*** End of TDR-31X profile measurements ***
     #EndIf
-    #If (SENSOR_TDR31X) Then
-
-    '*** Beginning of TDR-31X measurements ***
-    SDI12Recorder (tdr31X_raw(1), TDR31X_SDI12_PORT, TDR31X_SDI12_Address_1, "M!", 1, 0)
-    tdr31X_wc(1)     = tdr31X_raw(1)
-    tdr31X_tmpr(1)   = tdr31X_raw(2)
-    tdr31X_E(1)      = tdr31X_raw(3)
-    tdr31X_bulkEC(1) = tdr31X_raw(4)
-    tdr31X_poreEC(1) = tdr31X_raw(5)
-    
-    #If (NMBR_CS6xx = 2) Then
-    SDI12Recorder (tdr31X_raw(1), TDR31X_SDI12_PORT, TDR31X_SDI12_Address_2, "M!", 1, 0)
-    tdr31X_wc(2)     = tdr31X_raw(1)
-    tdr31X_tmpr(2)   = tdr31X_raw(2)
-    tdr31X_E(2)      = tdr31X_raw(3)
-    tdr31X_bulkEC(2) = tdr31X_raw(4)
-    tdr31X_poreEC(2) = tdr31X_raw(5)
-    #EndIf
-    
-    #If ((SENSOR_HFP) AND (SENSOR_CS6XX) AND (SENSOR_SOIL_T))) Then
-
-    AvgRun (soil_wtr_current(1), NMBR_CS6xx, (tdr31X_wc(1)/100), NMBR_SOIL_T_WTR_DEL_SAMPLES) 'HINT scale % -> v/v
-    
-    If (soil_wtr_prev_Avg = NaN) Then
-      AvgSpa (soil_wtr_prev_Avg, NMBR_CS6xx, (tdr31X_wc(1)/100)) 'HINT scale % -> v/v
-    EndIf
-
-    #If ((SENSOR_TDR31X) AND ( NOT SENSOR_TCAV)) Then
-    AvgRun (Tsoil_current(1), NMBR_CS6xx, tdr31X_tmpr(1), NMBR_SOIL_T_WTR_DEL_SAMPLES)
-
-    If (Tsoil_prev_Avg = NaN) Then                         'As soon as program starts
-      AvgSpa (Tsoil_prev_Avg, NMBR_CS6xx, tdr31X_tmpr(1))
-    EndIf
-    #EndIf
-    #EndIf
-    '*** End of TDR-31X measurements ***
-    #EndIf
-        slowsequence_5_finished_flg = TRUE
+    slowersequence_finished_flg = TRUE
     NextScan
   
   SlowSequence
@@ -5997,6 +5961,43 @@ BeginProg
     #EndIf
     #EndIf
     '*** End of CS65X measurements ***
+    #EndIf
+    #If (SENSOR_TDR31X) Then
+
+    '*** Beginning of TDR-31X measurements ***
+    SDI12Recorder (tdr31X_raw(1), TDR31X_SDI12_PORT, TDR31X_SDI12_Address_1, "M!", 1, 0)
+    tdr31X_wc(1)     = tdr31X_raw(1)
+    tdr31X_tmpr(1)   = tdr31X_raw(2)
+    tdr31X_E(1)      = tdr31X_raw(3)
+    tdr31X_bulkEC(1) = tdr31X_raw(4)
+    tdr31X_poreEC(1) = tdr31X_raw(5)
+    
+    #If (NMBR_CS6xx = 2) Then
+    SDI12Recorder (tdr31X_raw(1), TDR31X_SDI12_PORT, TDR31X_SDI12_Address_2, "M!", 1, 0)
+    tdr31X_wc(2)     = tdr31X_raw(1)
+    tdr31X_tmpr(2)   = tdr31X_raw(2)
+    tdr31X_E(2)      = tdr31X_raw(3)
+    tdr31X_bulkEC(2) = tdr31X_raw(4)
+    tdr31X_poreEC(2) = tdr31X_raw(5)
+    #EndIf
+    
+    #If ((SENSOR_HFP) AND (SENSOR_CS6XX) AND (SENSOR_SOIL_T))) Then
+
+    AvgRun (soil_wtr_current(1), NMBR_CS6xx, (tdr31X_wc(1)/100), NMBR_SOIL_T_WTR_DEL_SAMPLES) 'HINT scale % -> v/v
+    
+    If (soil_wtr_prev_Avg = NaN) Then
+      AvgSpa (soil_wtr_prev_Avg, NMBR_CS6xx, (tdr31X_wc(1)/100)) 'HINT scale % -> v/v
+    EndIf
+
+    #If ((SENSOR_TDR31X) AND ( NOT SENSOR_TCAV)) Then
+    AvgRun (Tsoil_current(1), NMBR_CS6xx, tdr31X_tmpr(1), NMBR_SOIL_T_WTR_DEL_SAMPLES)
+
+    If (Tsoil_prev_Avg = NaN) Then                         'As soon as program starts
+      AvgSpa (Tsoil_prev_Avg, NMBR_CS6xx, tdr31X_tmpr(1))
+    EndIf
+    #EndIf
+    #EndIf
+    '*** End of TDR-31X measurements ***
     #EndIf
     #If (SENSOR_5TM) Then
     

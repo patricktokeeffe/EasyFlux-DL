@@ -28,8 +28,12 @@ Significant realignment means users will need to modify current deployments to c
 It also includes a number of fixes and enhancements:
 
 * Eliminate compiler warning about unused Topp equation function if not using Decagon 5TM sensors. Fixes [#4]
+* Fix intermediate processing of energy balance SWC sensors and clean-up related code for profile sensors. Fixes [#3], [#8] and [#9]
 
+[#3]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/3
 [#4]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/4
+[#8]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/8
+[#9]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/9
 
 
 ## [ProgSig 40826] 2018-11-29

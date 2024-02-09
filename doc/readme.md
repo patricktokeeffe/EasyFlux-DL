@@ -78,11 +78,12 @@ The default wiring for the cup-and-vane anemometer is shown in Table 3-11.
 
 This version of *EasyFlux DL* supports two models of soil sensors for vertical profiles:
 METER Group (Decagon Devices) 5TM, or Acclima TDR series.
-From zero to six of any one model is supported.
+From zero to nine of any one model is supported.
 The default wiring shown in Table 3-12 uses the same SDI-12 input channel as soil water content sensors.
 
-By default, sensor quantity is 6 and sequential SDI-12 addresses are 3 to 8 (maximum address is 9).
-Data field output labels (from 1 up to 6) correspond to these addresses, from low to high.
+To accomodate SDI-12  soil probes for energy balance, default profile sensor quantity is 6 and SDI-12 addresses are 3 to 8.
+The maximum number of sensors is 9 using SDI-12 addresses from 1..9, assuming other SDI-12 sensors use higher addresses (`A`, `B`, `C`, ...).
+Field names in data output tables contain a numeric index ranging from 1 to \{qty} which corresponds to addresses from low to high.
 
 > **NOTE**<br/>Some early 5TM units may have the older Decagon wiring scheme, which is denoted by an * in Table 3-8.
 
