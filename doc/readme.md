@@ -9,6 +9,12 @@
 Make the following additions to the list of supported sensors (in bold):
 
 * Biometeorology (biomet) and energy balance sensors (optional)
+    * Radiation measurements
+        * **Option 3**
+            * **SN500 4-way Radiometer (qty 0 to 1)**
+            * CS300 or LI200x Pyranometer (qty 0 to 1)
+            * LI190x Quantum Sensor (qty 0 to 1)
+            * SI-111 Infrared Radiometer (qty 0 to 1)
     * **03B Cup-and-Vane Anemometer (qty 0 to 1)**<br/>*(Backported from Campbell Scientific pre-EasyFlux OPEC program)*
     * Soil Water Content Reflectometer (qty 0 to 2)
         * CS616
@@ -28,11 +34,27 @@ Make the following additions to the list of supported sensors (in bold):
 
 ## 2. Precautions
 
-Insert this additional note:
+Insert these additional notes:
 
 * *EasyFlux DL* requires the EC100 to have operating system version 7.01 or newer.
+* To use radiation measurement option 3 (SN500 four-way radiometer), the CR3000 must have firmware 30.01 or newer.
 
 ## 3.1 Wiring
+
+### 3.1.4-5 Radiation Measurements
+
+This version of *EasyFlux DL* adds support for a third option for radiation measurements:
+using an Apogee SN-500 four-way radiometer with any combination of sensors from Table 3-4 except for the NR-LITE2 net radiometer.
+The default wiring for the SN-500 is shown in Table 3-4B.
+
+**Table 3-4B. Default Wiring for SN-500 four-way radiometer**
+
+| Sensor | Quantity | Wire Description | Color | Datalogger terminal |
+|:-:|:-:|:-:|:-:|:-:|
+| SN500 | 0 or 1 | SDI-12 Data | White | **C5** |
+| | | Shield | Clear | **&#x23DA;** |
+| | | Power | Red | **+12 V** |
+| | | Power ground | Black | **G** |
 
 ### 3.1.8 Soil Water Content 
 
@@ -253,6 +275,9 @@ And insert or update rows as follows:
 | Update row | tau | (kg m/s)/(m^2 s)<br/>*[reformatted]* | - | - |
 | Update row | Td &rarr; Td_Avg<br/>*[misnamed]* | - | - | - |
 | Update row | wnd_dir_Std &rarr; std_wnd_dir<br/>*[misnamed]* | - | - | - |
+| Update 5 rows | albedo_Avg *to* R_LW_out_Avg | - | - | If CNR4, NR01 or SN500 is used |
+| Insert 2 rows after T_nr_Avg | T_nr_in_Avg | K | Average face-up sensor body temperature | If SN500 is used |
+| | T_nr_out_Avg | K | Average face-down sensor body temperature | If SN500 is used |
 | Insert 4 rows after T_SI111_body_Avg | cupvane_WS_Avg | m/s | Average wind speed from cup-and-vane anemometer | If 034B is used |
 | | cupvane_WS_rslt_Avg | m/s | Average wind vector magnitude from cup-and-vane anemometer | If 034B is used |
 | | cupvane_WD_rslt_Avg | degrees | Average compass wind direction from cup-and-vane anemometer | If 034B is used |
@@ -317,6 +342,7 @@ And insert or update rows as follows:
 | | state_num | unitless | PV charge controller control state | If TS45 is used |
 | | pwm_duty | unitless | PV charge controller PWM Duty Cycle | If TS45 is used |
 | | door_is_open_Hist | | Fraction of time door was open (0-1) | If DOOR is used |
+| Insert 1 row after slowsequence_Tot | sn500_heater_secs |  | Number of seconds in the averaging interval that SN500SS heater was enabled | If SN500 is used |
 | Update row | process_time_Avg | &micro;s&rarr;ms<br/>*[mislabeled]* | - | - |
 | Update row | process_time_Max | &micro;s&rarr;ms<br/>*[mislabeled]* | - | - |
 | Update row | buff_depth_Max | number&rarr;scans<br/>*[mislabeled]* | - | - |

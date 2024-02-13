@@ -99,6 +99,7 @@ Const SENSOR_LI190SB     = FALSE                  'Unique: LI190SB: Quantum, if 
 Const SENSOR_SI111       = FALSE                  'Unique: SI111: Infrared radiometer, if true, SENSOR_NR01 and SENSOR_CNR4 must be set to FALSE
 Const SENSOR_NR01        = FALSE                   'Unique: NR01: 4-way net radiometer, if true, SENSOR_NR_LITE and SENSOR_CNR4 must be set to FALSE
 Const SENSOR_CNR4        = FALSE                  'Unique: CNR4: 4-way net radiometer, if true, SENSOR_NR_LITE and SENSOR_NR01 must be set to FALSE
+Const SENSOR_SN500       = FALSE                  'Unique: SN500SS 4-way net radiometer. FALSE as default. If true, SENSOR_NR_LITE, SENSOR_CNR4, and SENSOR_NR01, must be set to FALSE
 Const SENSOR_TE525mm     = FALSE                   'Unique: TE525mm rain gauge
 Const SENSOR_TCAV        = FALSE                   'Unique: TCAV: type E thermocouple averaging soil temperature probes
 Const SENSOR_CS616       = FALSE                   'Unique: CS616: water content reflectometers for volumetric soil moisture, if true, SENSOR_CS65X, SENSOR_TDR31X and SENSOR_5TM must be set to FALSE
@@ -121,12 +122,13 @@ Const NMBR_CS6xx = 2        'Unique: number of CS616, CS650, CS655, TDR-315 or 5
 Const NMBR_PROFILE = 6      'Unique: number of T/VWC probes (TDR31X or 5TM) in profile (Maximum is 9)
 
 'Composite boolean variables for variables above
-Const SENSOR_Rn          = ((SENSOR_CNR4) OR (SENSOR_NR01) OR (SENSOR_NR_LITE))
+Const SENSOR_Rn          = ((SENSOR_CNR4) OR (SENSOR_NR01) OR (SENSOR_NR_LITE) OR (SENSOR_SN500))
 Const SENSOR_HFP         = ((SENSOR_HFP01) OR (SENSOR_HFP01SC))
 Const SENSOR_CS6XX       = ((SENSOR_CS616) OR (SENSOR_CS65X) OR (SENSOR_TDR31X) OR (SENSOR_5TM))
 Const SENSOR_SOIL_T      = ((SENSOR_TCAV) OR (SENSOR_CS65X) OR (SENSOR_TDR31X) OR (SENSOR_5TM))
 Const SENSOR_PROFILE     = ((PROFILE_TDR31X) OR (PROFILE_5TM))
-Const SENSOR_UNIQUE = (SENSOR_034B OR SENSOR_Rn OR SENSOR_LI200X OR SENSOR_CS300 OR SENSOR_LI190SB OR _
+Const SENSOR_UNIQUE = (SENSOR_034B OR SENSOR_CNR4 OR SENSOR_NR01 OR SENSOR_NR_LITE OR _
+                       SENSOR_LI200X OR SENSOR_CS300 OR SENSOR_LI190SB OR _
                        SENSOR_SI111 OR SENSOR_HFP OR SENSOR_TMPR_RH OR SENSOR_TE525mm)
 
 '*** Beginning field-configurable constants ***
@@ -330,6 +332,18 @@ Const CNR4_LW_OUT_CAL   = 1000/CNR4_LW_OUT_SENS      'Unique: set in include fil
 
 'VX1     Thermistor excitation (red)
 '*** End of CNR4 wiring ***
+
+#EndIf
+#If (SENSOR_SN500) Then 
+  
+Const SN500SDI_ADR        = 3      'Unique: SDI address for SN500 (3 as default)
+Const SN500_SDI_PORT      = 5     'SDI input port
+
+'*** Beginning of SN500 wiring
+'C5      SDI-12 data (white if SN1086 or later and black if SN1085 or earlier)
+'12V     SDI-12 power (Red, external 12V power is recommended because SN500 has a heater))
+'G       SDI-12 Ground (black if SN1086 or later and clear if SN1085 or earlier)
+'        Shield #1 (clear if SN1086 or later and N/A if SN1085 or earlier))
 
 #EndIf
 #If (SENSOR_LI200X) OR (SENSOR_CS300) Then
@@ -1768,7 +1782,7 @@ Dim hor_wind                                  'Running average of hor_wind_raw o
 Dim hor_wind_diag                             'Diagnosis code: non-zero if any of recent sonic_irga_raw(5) last 30 second
 '*** End of NR Lite constants and variables ***
 #EndIf
-#If ((SENSOR_NR01) OR (SENSOR_CNR4)) Then
+#If ((SENSOR_NR01) OR (SENSOR_CNR4) OR (SENSOR_SN500)) Then
 
 '*** Beginning of 4-way net radiometer constants and variables ****
 Public nr(8)                       'Radiation components measured from a 4-way net radiometer.
@@ -1777,17 +1791,29 @@ Alias nr(2) = R_SW_in              'Incoming (downwelling) short wave radiation
 Alias nr(3) = R_SW_out             'Outgoing (upwelling) short wave radiation
 Alias nr(4) = R_LW_in              'Incoming (downwelling) long wave radiation
 Alias nr(5) = R_LW_out             'Outgoing (upwelling) long wave radiation
+#If (SENSOR_SN500) Then
+Alias nr(6) = T_nr_in              'Sensor body 
+Alias nr(7) = T_nr_out             'Sensor body temperature of SN500 for long-wave outgoing 
+#EndIf
+#If (SENSOR_NR01 OR SENSOR_CNR4) Then
 Alias nr(6) = T_nr                 'Sensor body temperature
 Alias nr(7) = R_LW_in_meas         'Measured signal of incoming (downwelling) long wave radiation
 Alias nr(8) = R_LW_out_meas        'Measured signal of outgoing (upwelling) long wave radiation
+#EndIf
 Units albedo        = unitless
 Units R_SW_in       = W/m^2
 Units R_SW_out      = W/m^2
 Units R_LW_in       = W/m^2
 Units R_LW_out      = W/m^2
+#If (SENSOR_SN500) Then
+Units T_nr_in = Klvin
+Units T_nr_out = Klvin
+#EndIf
+#If (SENSOR_NR01 OR SENSOR_CNR4) Then
 Units T_nr          = Klvin
 Units R_LW_in_meas  = W/m^2
 Units R_LW_out_meas = W/m^2
+#EndIf
 '*** End of NR01/CNR4 constants and variables ***
 
 #If (SENSOR_CNR4) Then
@@ -1799,6 +1825,21 @@ Const C_SHH = 1.5680e-7           'Steinhart-Hart C coefficient (from Kipp & Zne
 Dim X_cnr4
 Dim ln_R
 #EndIf
+
+#If (SENSOR_SN500) Then 
+'SN500: Constants and variables
+Dim body_tmpr_SN500(4) 
+Alias  body_tmpr_SN500(1) = LW_in_sgnl_mV
+Alias  body_tmpr_SN500(2) = LW_in_tmpr
+Alias  body_tmpr_SN500(3) = LW_out_sgnl_mV
+Alias  body_tmpr_SN500(4) = LW_out_tmpr      
+        
+Const SN500_HEATER_T_TD_THRSHLD  = 2                       'Threshold of difference between air temperature and dew point temperature   
+     
+Dim sn500_heater_set_dummy                                 'Dummy variable 
+Dim sn500_heater_on_f As Boolean
+Dim sn500_heater_secs = SCAN_INTERVAL/1000  
+#EndIf '(SENSOR_SN500)
 
 '*** End of 4-way net radiometer constants and variables ****
 #EndIf
@@ -2401,6 +2442,13 @@ DataTable (Flux, TRUE, FLUX_SIZE_CPU)
   '*** End of 4-way radiometer output data ***
 
   #EndIf
+  #If (SENSOR_SN500) Then
+
+  '*** Beginning of 4-way radiometer output data ***
+  Average (7, albedo, IEEE4, slowsequence_disable_flg)                          'albedo, R_SW_in, R_SW_out, R_SW_in, R_SW_out, T_nr_in, T_nr_out
+  '*** End of 4-way radiometer output data ***
+
+  #EndIf
   #If (SENSOR_LI200X) OR (SENSOR_CS300) Then
 
   '*** Beginning of LI200X output data ***
@@ -2762,6 +2810,12 @@ DataTable (Flux_Notes, TRUE, FLUX_SIZE_CPU)
   Totalize (1, n,          IEEE4, slowsequence_disable_flg)
   FieldNames ("slowsequence_Tot")
   '*** End of other output data ***
+
+  #If (SENSOR_SN500) Then 
+  '*** Beginning of recording SN500 heater actions ***
+  Totalize (1, sn500_heater_secs,  IEEE4, (NOT sn500_heater_on_f))
+  FieldNames("sn500_heater_secs")
+  #EndIf
 
   Average  (1, process_time, IEEE4, FALSE)
   Maximum  (1, process_time, IEEE4, FALSE, FALSE)
@@ -5775,6 +5829,48 @@ BeginProg
     '*** End of net radiation measurements ***
 
     #EndIf
+    #If (SENSOR_SN500) Then
+    '*** A 4-way radiometer measurements 
+    SDI12Recorder(R_SW_in, SN500_SDI_PORT, SN500SDI_ADR, "C!",  1, 0, -1)
+
+    'Compute net radiation, albedo, downwelling and upwelling long-wave radiation.
+    Rn_raw = R_SW_in - R_SW_out + R_LW_in - R_LW_out
+
+    'The value of 10 for zero offset is used here for this threshold although this is approximation.
+    If ((R_SW_in > 10) AND (R_SW_in >= R_SW_out)) Then
+      albedo = R_SW_out/R_SW_in
+    Else
+      albedo = 0.0
+    EndIf 
+             
+    SDI12Recorder(LW_in_sgnl_mV, SN500_SDI_PORT, SN500SDI_ADR, "C3!",  1, 0, -1)
+    T_nr_in  = LW_in_tmpr  + T_0C_K
+    T_nr_out = LW_out_tmpr + T_0C_K
+     
+    'Turn off heater when the difference between T and TD is greater than setting threshold 
+    #If (SENSOR_TMPR_RH) Then                 
+    If ((T_probe - Td_probe >= SN500_HEATER_T_TD_THRSHLD) OR (batt_volt <= 11)) Then  
+    #Else 
+    If ((Tc - Td >= SN500_HEATER_T_TD_THRSHLD) OR (batt_volt <= 11)) Then               
+    #EndIf 
+      If (sn500_heater_on_f) Then 
+        SDI12Recorder(sn500_heater_set_dummy, SN500_SDI_PORT, SN500SDI_ADR, "XHOFF!", 1, 0, -1)
+        sn500_heater_on_f = FALSE
+      EndIf 
+    EndIf 
+     
+    'Turn on heater when the difference between T and TD is smaller than setting threshold 
+    #If (SENSOR_TMPR_RH) Then                 
+    If ((T_probe - Td_probe < SN500_HEATER_T_TD_THRSHLD) AND (batt_volt > 11.5)) Then  
+    #Else 
+    If ((Tc - Td < SN500_HEATER_T_TD_THRSHLD) AND (batt_volt > 11.5)) Then               
+    #EndIf  
+      If (NOT sn500_heater_on_f) Then 
+        SDI12Recorder(sn500_heater_set_dummy, SN500_SDI_PORT, SN500SDI_ADR, "XHON!", 1, 0, -1)
+        sn500_heater_on_f = TRUE
+        EndIf 
+      EndIf 
+    #EndIf '(SENSOR_SN500)
     #If (SENSOR_HFP01) Then
 
     '*** Beginning of HFP01 measurements ***

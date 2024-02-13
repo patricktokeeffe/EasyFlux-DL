@@ -70,6 +70,8 @@ R_SW_out_Avg	W/m^2	Average outgoing short wave radiation
 R_LW_in_Avg	W/m^2	Average incoming long wave radiation
 R_LW_out_Avg	W/m^2	Average outgoing long wave radiation
 T_nr_Avg	Klvin	Average sensor body temperature
+T_nr_in_Avg	Klvin	Average face-up sensor body temperature
+T_nr_out_Avg	Klvin	Average face-down sensor body temperature
 R_LW_in_meas_Avg	W/m^2	Average raw incoming long wave radiation
 R_LW_out_meas_Avg	W/m^2	Average raw outgoing long wave radiation
 R_pyran_Avg	W/m^2	Average radiation measured by pyranometer
@@ -316,6 +318,7 @@ door_is_open_Hst		Fraction of time door was open (0-1)
 panel_tmpr_Avg	C	Average temperature of the datalogger wiring panel
 batt_volt_Avg	V	Average battery voltage supplying power to the datalogger
 slowsequence_Tot	samples	Number of slow sequences during the averaging interval (for example, the number of times biomet and energy balance sensors were measured)
+sn500_heater_secs		Number of seconds in the averaging interval that SN500SS heater was enabled
 process_time_Avg	ms	Average processing time for each scan
 process_time_Max	ms	Maximum processing time for a scan
 buff_depth_Max	scans	Maximum number of records stored in the buffer

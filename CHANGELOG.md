@@ -9,7 +9,8 @@ Revision history for our modified version of EasyFlux&reg; DL for CR3000.
 
 ## Unreleased (easyflux-1.2-update)
 
-This version imports changesets from EasyFlux-DL_CR3OP version 1.1&rarr;1.2.
+This version imports changesets from *EasyFlux DL for CR3000* version 1.1&rarr;1.2 and
+backports certain features from *EasyFlux DL for CR6 or CR1000X with open-path analyzers* version 2.01.
 Significant realignment means users will need to modify current deployments to conform to updated input channel locations.
 
 * Support for ambient T/RH probes (HMP155A, HSC23, HMP45C) is reverted such that users now specify a multiplier and offset instead of selecting sensor type.
@@ -34,6 +35,10 @@ Significant realignment means users will need to modify current deployments to c
 * Add user control over handling of alternate CO2 density derived from high-frequency sonic temperature:
     * User-defined boolean enables or disables storage of alternate CO2 in *Time_Series* table 
     * If enabled, a second boolean optionally allows calculating fluxes using alternate CO2 density
+* Add support for Apogee SN-500 component radiometer
+    * Backported from EasyFlux DL v2.01 for CR1000X
+    * Minor changes to output data tables
+    * **Requires CR3000 firmware 30 or newer**
 
 ### Fixed
 

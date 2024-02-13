@@ -12,6 +12,7 @@ More information is available on the project website:
 ## Requirements
 
 * CR3000 firmware version &ge; 28.0
+    * To use an SN500 component radiometer, requires firmware &ge; 30
 * EC100 firmware version &ge; 7.01
 
 ## Usage
@@ -64,6 +65,11 @@ The supported sensor list is expanded as follows (additions in bold):
             * SI-111 Infrared Radiometer (qty 0 to 1)
         * Option 2
             * NR01 or CNR4 4-Way Radiometers (qty 0 to 1)
+        * **Option 3**
+            * **SN500 4-way Radiometer (qty 0 to 1)**
+            * CS300 or LI200x Pyranometer (qty 0 to 1)
+            * LI190x Quantum Sensor (qty 0 to 1)
+            * SI-111 Infrared Radiometer (qty 0 to 1)
     * TE525x Rain gauge (qty 0 to 1))
     * **034B Cup-and-Vane Anemometer (qty 0 to 1)**<br/>*(Backported from Campbell Scientific pre-EasyFlux OPEC program)*
     * TCAV Soil Thermocouple Probe (qty 0 to 2)
