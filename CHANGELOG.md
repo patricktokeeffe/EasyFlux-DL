@@ -41,6 +41,10 @@ Significant realignment means users will need to modify current deployments to c
 * Fix *Time_Series* table to log alternate CO2 density derived from sonic temperature when using IRGASON (not just EC150). Fixes [#7]
 * Fix intermediate processing of energy balance SWC sensors and clean-up related code for profile sensors. Fixes [#3], [#8] and [#9]
 
+### Removed
+
+* Remove *LTAR_Met_1Minute* output table
+
 [#3]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/3
 [#4]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/4
 [#7]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/7

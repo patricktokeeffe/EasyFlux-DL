@@ -116,10 +116,6 @@ For full details, refer to the [instruction manual supplement](doc/readme.md).
     * Added to satisfy reporting requirements for LTAR Common Observation Repository (CORe)
     * Does averaging on a 15-minute basis
     * Contains basic meteorology (TA, RH, PA, WS, WD, PAR, Rn, precip...) and soil-related data, including heat flux plates and vertical profile sensors
-* New table: LTAR_Met_1minute
-    * Added to acquire high-resolution meteorology data
-    * Does averaging on a 1-minute basis
-    * Contains same metrics as LTAR_Met, except no precipitation or soil vertical profile
 * New table: Cal_Constants
     * Added to track unique sensor calibration values
     * Triggered once during program compilation (due to power-on or program changes)

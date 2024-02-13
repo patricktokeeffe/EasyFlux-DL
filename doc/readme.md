@@ -219,7 +219,7 @@ Files are in tab-separated format with a single header row and the following col
 |:-|:-|
 | Time_Series | [datadict-Time_Series.txt](datadict-Time_Series.txt)
 | Flux<br/>Flux_Notes | [datadict-Flux.txt](datadict-Flux.txt)
-| LTAR_Met<br/>LTAR_Met_1Minute | [datadict-LTAR_Met.txt](datadict-LTAR_Met.txt)
+| LTAR_Met | [datadict-LTAR_Met.txt](datadict-LTAR_Met.txt)
 
 ### 4.4 Output tables
 
@@ -228,7 +228,6 @@ Add the following rows to **Table 4-4. Data Output Tables**:
 | Table name | Description | Recording interval | Memory on CR3000 CPU | Memory on CF card |
 |:-:|:-:|:-:|:-:|:-:|
 | LTAR_Met | Processed biomet data | 15 minutes | Auto-Allocate (typically less than 1 hour) | The LTAR_Met table is broken up into 30-day files |
-| LTAR_Met_1Minute | Processed biomet data | 1 minute | Auto-Allocate (typically less than 1 hour) | The LTAR_Met_1Minute table is broken up into 30-day files |
 
 For **Table 4-5. Data Fields in the Time_Series Data Output Table**:
 
@@ -354,31 +353,7 @@ Insert new table, **Table 4-9: Data fields in the LTAR_Met output table**:
 | shf_plate_Avg(i) | W/m<sup>2</sup> | Average soil heat flux; i identifies which sensor | If HFP or HFP01SC is used |
 | shf_plate_cal(i) | &micro;V/(W m<sup>2</sup>) | Coefficients found from the HFP01SC self-calibration and used to calculate shf_plate_Avg(i); i indicates which sensor | If HFP01SC is used |
 
-Insert new table, **Table 4-10: Data fields in the LTAR_Met_1Minute output table**:
-
-| Data Field Name | Units | Description | Data Field Included |
-|:-:|:-:|:-:|:-:|
-| amb_tmpr_Avg | &deg;C | Average ambient temperature from EC100 temperature probe | Always |
-| rslt_wnd_spd | m/s | Average horizontal wind speed | Always |
-| wnd_dir_compass | deg | Average compass wind direction | Always |
-| RH_Avg | % | Average relative humidity | Always |
-| amb_press_Avg | kPa | Average ambient air pressure | Always |
-| PAR_density | &micro;mol/(m<sup>2</sup> s) | Average density of photosynthetic active radiation | If LI190SB is used |
-| std_wnd_dir | deg | Standard deviation of wind direction | Always |
-| VPD_air | kPa | Average vapor pressure deficit | Always |
-| Rn_meas_Avg | W/m<sup>2</sup> | Average net radiation (raw, not corrected for wind) | IF NR_LITE is used |
-| e_sat | kPa | Average saturation water vapor pressure | Always |
-| e | kPa | Average water vapor pressure | Always |
-| tdr31X_wc_Avg(i) | % | Average volumetric soil water content for each sensor; i identifies which TDR3x sensor | If TDR31X is used |
-| tdr31X_tmpr_Avg(i) | &deg;C | Average soil temperature for each sensor; i identifies which TDR3x sensor | If TDR31X is used |
-| tdr31X_E_Avg(i) | unitless | Average soil permittivity for each sensor; i identifies which TDR3x sensor | If TDR31X is used |
-| tdr31X_bulkEC_Avg(i) | &micro;S/cm | Average bulk electrical conductivity for each sensor; i identifies which TDR3x sensor | If TDR31X is used |
-| tdr31X_poreEC_Avg(i) | &micro;S/cm | Average pore water electrical conductivity for each sensor; i identifies which TDR3x sensor | If TDR31X is used |
-| Tsoil(i) | ºC | Average soil temperature for each TCAV sensor; i identifies which TCAV sensor | If TCAV is used |
-| shf_plate_Avg(i) | W/m<sup>2</sup> | Average soil heat flux; i identifies which sensor | If HFP01 or HFP01SC is used |
-| shf_plate_cal(i) | &micro;V/(W m<sup>2</sup>) | Coefficients found from the HFP01SC self-calibration and used to calculate shf_plate_Avg(i); i indicates which sensor | If HFP01SC is used |
-
-Insert new table, **Table 4-11: Data fields in the Cal_Constants output table**:
+Insert new table, **Table 4-10: Data fields in the Cal_Constants output table**:
 
 | Data Field Name | Units | Description | Data Field Included |
 |:-:|:-:|:-:|:-:|
