@@ -7,6 +7,25 @@ Revision history for our modified version of EasyFlux&reg; DL for CR3000.
 >
 > *Supported sections: Security, Issues, Fixed, Added, Changed, Deprecated, Removed*
 
+## Unreleased (easyflux-1.2-update)
+
+This version imports changesets from EasyFlux-DL_CR3OP version 1.1&rarr;1.2.
+Significant realignment means users will need to modify current deployments to conform to updated input channel locations.
+
+* Support for ambient T/RH probes (HMP155A, HSC23, HMP45C) is reverted such that users now specify a multiplier and offset instead of selecting sensor type.
+* Support for rain gauges (TE525 series) is likewise reverted so users specify the multiplier instead of selecting sensor type.
+* All whitespace conflicts were resolved in favor of EasyFlux-DL base code.
+* **All sensor input locations were reverted to match EasyFlux-DL base code. This highly substantial change affects most sensors.**
+  As a result of limited input locations, the 034B cup-and-vane anemometer and NR01 component radiometer are mutually exclusive by default (to use both, specify different input channels).
+* All hard-coded numbers for computations are changed from integer to float.
+* Subroutine `FootprintCharacteristics_KormannMeixner`:
+  * Incorporates thermal stratification as a function of stability from eqns (11) and (32) in *Kormann and Meixner (2001)*.
+  * Modifies fourth footprint integration segment to increase integration interval by factor of 2.5 (4&rarr;10 x aerodynamic height)
+    and increase scale factor of aerodynamic height used to calculate max range by factor of 5 (200&rarr;1000).
+  * Modifies fifth footprint integration segment to increase scale factor of aerodynamic height used to calculate max range by factor of 5 (200&rarr;1000)
+    and to iterate up to a fixed number of times instead of estimating number of steps required.
+
+
 ## [ProgSig 40826] 2018-11-29
 
 ### Added

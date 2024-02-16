@@ -1,7 +1,7 @@
 'Ancillary file for online corrections flux program version 1.x
 'Copyright (c) 2017 Washington State University
 
-Const NRLITE_SENS = 12   'uV/W/m^2
+Const NRLITE_SENS = 16   'uV/W/m^2
 
 Const QUANTUM_SENS = 5   'uA per 1000 umol/m^2/s
 
