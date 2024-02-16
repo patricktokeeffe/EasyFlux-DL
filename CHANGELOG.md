@@ -25,6 +25,28 @@ Significant realignment means users will need to modify current deployments to c
   * Modifies fifth footprint integration segment to increase scale factor of aerodynamic height used to calculate max range by factor of 5 (200&rarr;1000)
     and to iterate up to a fixed number of times instead of estimating number of steps required.
 
+### Added
+
+* Adds ability to update unique sensor calibration constants without editing program files:
+    * Locally, using the keyboard display and Const Table menu
+    * Or remotely, using a logger client to edit values in the *Const_Table* table
+    * Unique sensor constants are saved in output table *Cal_Constants* each time program is compiled
+* Add user control over handling of alternate CO2 density derived from high-frequency sonic temperature:
+    * User-defined boolean enables or disables storage of alternate CO2 in *Time_Series* table 
+    * If enabled, a second boolean optionally allows calculating fluxes using alternate CO2 density
+
+### Fixed
+
+* Eliminate compiler warning about unused Topp equation function if not using Decagon 5TM sensors. Fixes [#4]
+* Fix *Time_Series* table to log alternate CO2 density derived from sonic temperature when using IRGASON (not just EC150). Fixes [#7]
+* Fix intermediate processing of energy balance SWC sensors and clean-up related code for profile sensors. Fixes [#3], [#8] and [#9]
+
+[#3]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/3
+[#4]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/4
+[#7]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/7
+[#8]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/8
+[#9]: https://github.com/wsular/EasyFlux-DL-CR3000/issues/9
+
 
 ## [ProgSig 40826] 2018-11-29
 

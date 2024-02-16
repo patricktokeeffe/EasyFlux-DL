@@ -1,0 +1,28 @@
+Field	Units	Description
+CUPVANE_AZIMUTH	degrees	Azimuth angle of windset w.r.t. True North
+NRLITE_SENS	uV/W/m^2	Sensitivity for NR Lite2 net radiometer
+NR01_SW_IN_SENS	uV/W/m^2	Sensitivity for NR01 shortwave downwelling radiation
+NR01_SW_OUT_SENS	uV/W/m^2	Sensitivity for NR01 shortwave upwelling radiation
+NR01_LW_IN_SENS	uV/W/m^2	Sensitivity for NR01 longwave downwelling radiation
+NR01_LW_OUT_SENS	uV/W/m^2	Sensitivity for NR01 longwave upwelling radiation
+CNR4_SW_IN_SENS	uV/W/m^2	Sensitivity for CNR4 shortwave downwelling radiation
+CNR4_SW_OUT_SENS	uV/W/m^2	Sensitivity for CNR4 shortwave upwelling radiation
+CNR4_LW_IN_SENS	uV/W/m^2	Sensitivity for CNR4 longwave downwelling radiation
+CNR4_LW_OUT_SENS	uV/W/m^2	Sensitivity for CNR4 longwave upwelling radiation
+PYRAN_MULT	W/m^2/mV	Multiplier for pyranometer
+PYRAN_OFFSET	W/m^2	Offset for pyranometer
+QUANTUM_MULT	umol/(s m^2)/mV	Multiplier for quantum (PAR) sensor
+QUANTUM_OFFSET	umol/(s m^2)	Offset for quantum (PAR) sensor
+SI111_m0		Calibration m0 for SI-111
+SI111_m1		Calibration m1 for SI-111
+SI111_m2		Calibration m2 for SI-111
+SI111_b0		Calibration b0 for SI-111
+SI111_b1		Calibration b1 for SI-111
+SI111_b2		Calibration b2 for SI-111
+SHFP_1_SENS	uV/W/m^2	Heat flux plate #1 calibration factor
+SHFP_2_SENS	uV/W/m^2	Heat flux plate #2 calibration factor
+SHFP_3_SENS	uV/W/m^2	Heat flux plate #3 calibration factor
+SHFP_4_SENS	uV/W/m^2	Heat flux plate #4 calibration factor
+TMPR_RH_T_MULT		Multiplier for temperature/RH probe
+TMPR_RH_T_OFFSET		Offset for temperature/RH probe
+TE525_MULT		Multiplier for TE525 rain gauge

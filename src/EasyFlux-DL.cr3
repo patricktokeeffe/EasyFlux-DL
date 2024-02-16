@@ -120,7 +120,7 @@ Const SENSOR_TS45        = FALSE                  'Unique: MorningStar TriStar T
 Const NMBR_SHFP = 4         'Unique: number of HFP01 or HFP01SC sensors to measure (Maximum is 4)
 Const NMBR_TCAV = 2         'Unique: number of TCAV (Maximum is 2)
 Const NMBR_CS6xx = 2        'Unique: number of CS616, CS650, CS655, TDR-315 or 5TM sensors (Maximum is 2)
-Const NMBR_PROFILE = 6      'Unique: number of T/VWC probes (TDR-315 or 5TM) in profile (Maximum is 6)
+Const NMBR_PROFILE = 6      'Unique: number of T/VWC probes (TDR31X or 5TM) in profile (Maximum is 9)
 
 'Composite boolean variables for variables above
 Const SENSOR_Rn          = ((SENSOR_CNR4) OR (SENSOR_NR01) OR (SENSOR_NR_LITE))
@@ -128,10 +128,11 @@ Const SENSOR_HFP         = ((SENSOR_HFP01) OR (SENSOR_HFP01SC))
 Const SENSOR_CS6XX       = ((SENSOR_CS616) OR (SENSOR_CS65X) OR (SENSOR_TDR31X) OR (SENSOR_5TM))
 Const SENSOR_SOIL_T      = ((SENSOR_TCAV) OR (SENSOR_CS65X) OR (SENSOR_TDR31X) OR (SENSOR_5TM))
 Const SENSOR_PROFILE     = ((PROFILE_TDR31X) OR (PROFILE_5TM))
-
+Const SENSOR_UNIQUE = (SENSOR_034B OR SENSOR_Rn OR SENSOR_LI200X OR SENSOR_CS300 OR SENSOR_LI190SB OR _
+                       SENSOR_SI111 OR SENSOR_HFP OR SENSOR_TMPR_RH OR SENSOR_TE525mm)
 
 '*** Beginning field-configurable constants ***
-#If (SENSOR_NR_LITE OR SENSOR_LI190SB OR SENSOR_HFP) Then
+#If (SENSOR_UNIQUE) Then
   Include("CPU:constants.cr3")
 #EndIf
 '*** End of field-configurable constants ***
@@ -155,18 +156,18 @@ Const SENSOR_PROFILE     = ((PROFILE_TDR31X) OR (PROFILE_5TM))
 Const SHF_ANALOG_INPUT = 1  'Starting differential analog input channel.
 'Use `NMBR_SHFP` above to specify number of HFP01 or HFP01SC sensors to measure (Maximum is 4) .
 
-Data 1000/SHFP_1_SENS                'Unique: multiplier for HFP01xx #1 (1000/sensitivity).
+Data 1000/SHFP_1_SENS       'Unique: set in include file `constants.cr3`
 #If (NMBR_SHFP >1) Then     'This conditional statement can avoid the confliction with Data statements for the numerical wTs transfer function from Dijk (2002)) if NMBR_SHFP < 2
 
-Data 1000/SHFP_2_SENS                'Unique: multiplier for HFP01xx #2 (1000/sensitivity).
+Data 1000/SHFP_2_SENS       'Unique: set in include file `constants.cr3`
 #EndIf
 #If (NMBR_SHFP >2) Then     'This conditional statement can avoid the confliction with Data statements for the numerical wTs transfer function from Dijk (2002)) if NMBR_SHFP < 3
 
 Data 1000/SHFP_3_SENS
-#EndIf                      'Unique: multiplier for HFP01xx #3 (1000/sensitivity).
+#EndIf                      'Unique: set in include file `constants.cr3`
 #If (NMBR_SHFP >3) Then     'This conditional statement can avoid the confliction with Data statements for the numerical wTs transfer function from Dijk (2002)) if NMBR_SHFP < 4
 
-Data 1000/SHFP_4_SENS                'Unique: multiplier for HFP01xx #4 (1000/sensitivity).
+Data 1000/SHFP_4_SENS       'Unique: set in include file `constants.cr3`
 #EndIf
 
 #If (SENSOR_HFP01) Then
@@ -255,7 +256,7 @@ Const NR_ANALOG_INPUT = 6           'Starting differential analog input channel 
 #EndIf
 #If (SENSOR_NR_LITE) Then
 
-Const NRLITE_CAL = 1000/NRLITE_SENS          'Unique: multiplier for NR Lite (1000/sensitivity).
+Const NRLITE_CAL = 1000/NRLITE_SENS          'Unique: set in include file `constants.cr3`
 '*** Beginning of NR Lite wiring ***
 '6H      Signal (white/red)
 '6L      Signal reference (green/blue)
@@ -272,10 +273,10 @@ Const T_NR_ANALOG_INPUT = 10            'Differential analog input channel to me
 #If (SENSOR_NR01) Then
 
 Const T_NR_CURRENT_EXCITATION = Ix1     'Current excitation channel.
-Const NR01_SW_IN_CAL  = 1000/15         'Unique: multiplier for NR01 shortwave downwelling radiation (1000/sensitivity).
-Const NR01_SW_OUT_CAL = 1000/15         'Unique: multiplier for NR01 shortware upwelling radiation (1000/sensitivity).
-Const NR01_LW_IN_CAL  = 1000/8          'Unique: multiplier for NR01 longwave downwelling radiation (1000/sensitivity).
-Const NR01_LW_OUT_CAL = 1000/8          'Unique: multiplier for NR01 longwave upwelling radiation (1000/sensitivity).
+Const NR01_SW_IN_CAL  = 1000/NR01_SW_IN_SENS          'Unique: set in include file `constants.cr3`
+Const NR01_SW_OUT_CAL = 1000/NR01_SW_OUT_SENS         'Unique: set in include file `constants.cr3`
+Const NR01_LW_IN_CAL  = 1000/NR01_LW_IN_SENS          'Unique: set in include file `constants.cr3`
+Const NR01_LW_OUT_CAL = 1000/NR01_LW_OUT_SENS         'Unique: set in include file `constants.cr3`
 
 '*** Beginning of NR01 wiring ***
 '6H      Downwelling (incoming) shortwave radiation signal (red)
@@ -302,10 +303,10 @@ Const NR01_LW_OUT_CAL = 1000/8          'Unique: multiplier for NR01 longwave up
 #If (SENSOR_CNR4) Then
 
 Const T_NR_VOLTAGE_EXCITATION = Vx1     'Voltage excitation channel.
-Const CNR4_SW_IN_CAL    = 1000/15       'Unique: multiplier for CNR4 shortwave downwelling radiation (1000/sensitivity).
-Const CNR4_SW_OUT_CAL   = 1000/15       'Unique: multiplier for CNR4 shortware upwelling radiation (1000/sensitivity).
-Const CNR4_LW_IN_CAL    = 1000/8        'Unique: multiplier for CNR4 longwave downwelling radiation (1000/sensitivity).
-Const CNR4_LW_OUT_CAL   = 1000/8        'Unique: multiplier for CNR4 longwave upwelling radiation (1000/sensitivity).
+Const CNR4_SW_IN_CAL    = 1000/CNR4_SW_IN_SENS       'Unique: set in include file `constants.cr3`
+Const CNR4_SW_OUT_CAL   = 1000/CNR4_SW_OUT_SENS      'Unique: set in include file `constants.cr3`
+Const CNR4_LW_IN_CAL    = 1000/CNR4_LW_IN_SENS       'Unique: set in include file `constants.cr3`
+Const CNR4_LW_OUT_CAL   = 1000/CNR4_LW_OUT_SENS      'Unique: set in include file `constants.cr3`
 
 '*** Beginning of CNR4 wiring ***
 '6H      Downwelling shortwave radiation signal (red)
@@ -337,8 +338,8 @@ Const CNR4_LW_OUT_CAL   = 1000/8        'Unique: multiplier for CNR4 longwave up
 
 Const PYRAN_ANALOG_INPUT  = 7     'Differential analog input channel for LI200X or CS300 Pyranometer
 Const PYRAN_VOLTAGE_RANG  = mV20  'Unique: measurement range of voltage mV20 for LI200 and mV250 for CS300 pyranometer
-Const PYRAN_MULT          = 200   'Unique: multiplier for LI200X [200 W/(m^2 * mV)] or CS300 [5 W/(m^2 * mV)] pyranometer .
-Const PYRAN_OFFSET        = 0     'Unique: offset for LI200X [0 W/m^2] or CS300 (0 W/m^2) pyranometer.
+'Const PYRAN_MULT          = 200   'Unique: set in include file `constants.cr3`
+'Const PYRAN_OFFSET        = 0     'Unique: set in include file `constants.cr3`
 
 '*** Beginning of Pyranometer wiring ***
 '7H      Pyranometer signal (red)
@@ -355,8 +356,8 @@ Const PYRAN_OFFSET        = 0     'Unique: offset for LI200X [0 W/m^2] or CS300 
 
 Const QUANTUM_ANALOG_INPUT  = 8     'Differential analog input channel for quantum PAR sensor
 Const QUANTUM_VOLTAGE_RANGE = mV20  'Unique: measurement range of voltage
-Const QUANTUM_MULT          = 1000/(QUANTUM_SENS*0.604)   'Unique: multiplier (1000 C) for quantum PAR sensor.
-Const QUANTUM_OFFSET        = 0     'Unique: offset for for quantum PAR sensor.
+'Const QUANTUM_MULT                 'Unique: set in include file `constants.cr3`
+'Const QUANTUM_OFFSET               'Unique: set in include file `constants.cr3`
 
 '*** Beginning of quantum wiring ***
 '8H      Quantum signal (red)
@@ -368,12 +369,12 @@ Const QUANTUM_OFFSET        = 0     'Unique: offset for for quantum PAR sensor.
 Const SI111_ANALOG_INPUT  = 9     'Differential analog input channel for SI-111 sensor
 Const SI111_EXCITATION    = Vx2   'Voltage excitation channel for SI-111 sensor
 
-Const m0_SI111 =  1.41970e9       'Unique: calbration m0
-Const m1_SI111 =  7.84100e6       'Unique: calbration m1
-Const m2_SI111 =  82213           'Unique: calbration m2
-Const b0_SI111 = -1.72150e7       'Unique: calbration b0
-Const b1_SI111 =  1.85020e5       'Unique: calbration b1
-Const b2_SI111 =  13114           'Unique: calbration b2
+Const m0_SI111 = SI111_m0       'Unique: set in include file `constants.cr3`
+Const m1_SI111 = SI111_m1       'Unique: set in include file `constants.cr3`
+Const m2_SI111 = SI111_m2       'Unique: set in include file `constants.cr3`
+Const b0_SI111 = SI111_b0       'Unique: set in include file `constants.cr3`
+Const b1_SI111 = SI111_b1       'Unique: set in include file `constants.cr3`
+Const b2_SI111 = SI111_b2       'Unique: set in include file `constants.cr3`
 
 '*** Beginning of SI-111 precision infrared radiometer wiring***
 '9H      SI111 target signal (red)
@@ -445,9 +446,9 @@ Const CS65X_SDI12_Address_2 = 2        'Unique: SDI address for CS655 #2
 #If (SENSOR_TDR31X) Then
 
 Const TDR31X_SDI12_PORT      = 5    'Control port for SDI-12 data
-Const TDR31X_SDI12_Address_1 = 1    'Unique: SDI address for TDR-315 #1
+Const TDR31X_SDI12_Address_1 = 1    'Unique: SDI address for TDR-31X #1
 #If (NMBR_CS6xx = 2) Then
-Const TDR31X_SDI12_Address_2 = 2    'Unique: SDI address for TDR-315 #2
+Const TDR31X_SDI12_Address_2 = 2    'Unique: SDI address for TDR-31X #2
 #EndIf
 '*** Beginning of TDR-315 wiring ***
 'C5       SDI-12 data #1 (blue)
@@ -461,9 +462,9 @@ Const TDR31X_SDI12_Address_2 = 2    'Unique: SDI address for TDR-315 #2
 #If (SENSOR_5TM) Then
 
 Const fiveTM_SDI12_PORT        = 5     'Control port for SDI-12 data
-Const fiveTM_SDI12_Address_1   = 1     'Unique: SDI address for TDR-315 #1
+Const fiveTM_SDI12_Address_1   = 1     'Unique: SDI address for 5TM #1
 #If (NMBR_CS6xx = 2) Then
-Const fiveTM_SDI12_Address_2   = 2     'Unique: SDI address for TDR-315 #2
+Const fiveTM_SDI12_Address_2   = 2     'Unique: SDI address for 5TM #2
 #EndIf
 '*** Beginning of 5TM wiring ***
 'C5       SDI-12 data #1 (red)
@@ -477,11 +478,11 @@ Const fiveTM_SDI12_Address_2   = 2     'Unique: SDI address for TDR-315 #2
 #EndIf
 #If (SENSOR_PROFILE) Then
 
-'Use `NMBR_PROFILE` above to specify number of T/VWC probes in profile (Maximum is 6)
+'Use `NMBR_PROFILE` above to specify number of T/VWC probes in profile (Maximum is 9)
 
 #If (PROFILE_TDR31X) Then
 
-Const TDR31X_SDI12_Address_P = 3      'Unique: first address in sequential series
+Const TDR31X_SDI12_Address_P = 3    'Unique: SDI address for first TDR-31X; profile sensors must be sequentially addressed, to maximum of address 9
 #If (NOT SENSOR_TDR31X) Then
 Const TDR31X_SDI12_PORT    = 5      'Control port for SDI-12 data
 '*** Beginning of TDR-315 wiring ***
@@ -496,9 +497,9 @@ Const TDR31X_SDI12_PORT    = 5      'Control port for SDI-12 data
 #EndIf
 #If (PROFILE_5TM) Then
 
-Const fiveTM_SDI12_Address_P = 3      'Unique: first address in sequential series
+Const fiveTM_SDI12_Address_P = 3    'Unique: SDI address for first 5TM; profile sensors must be sequentially addressed, to maximum of address 9
 #If (NOT SENSOR_5TM) Then
-Const fiveTM_SDI12_PORT   = 5      'Control port for SDI-12 data
+Const fiveTM_SDI12_PORT   = 5       'Control port for SDI-12 data
 #EndIf
 '*** Beginning of 5TM wiring ***
 'C5       SDI-12 data #1 (red)
@@ -513,8 +514,8 @@ Const fiveTM_SDI12_PORT   = 5      'Control port for SDI-12 data
 #If (SENSOR_TMPR_RH) Then
 
 Const TMPR_RH_ANALOG_INPUT = 27     'Single-end analog input channel for temperature and humidity probe.
-Const TMPR_RH_T_MULT       = 0.14   'Unique: multiplier for temperature; HC2S3 = 0.1, HMP155A = 0.14, or HMP45C = 0.1.
-Const TMPR_RH_T_OFFSET     = -80    'Unique: offset for temperature; HC2S3 = -40, HMP155A = -80, or HMP45C = -40.
+'Const TMPR_RH_T_MULT       = 0.14   'Unique: set in include file `constants.cr3`
+'Const TMPR_RH_T_OFFSET     = -80    'Unique: set in include file `constants.cr3`
 
 '*** Beginning of HC2S3 or HMP wiring ***
 '14H     Temperature signal (brown/yellow)
@@ -531,7 +532,7 @@ Const TMPR_RH_T_OFFSET     = -80    'Unique: offset for temperature; HC2S3 = -40
 #If (SENSOR_TE525mm) Then
 
 Const TE525_PULSE_INPUT = 1          'Pulse input channel rain gauge.
-Const TE525_MULT        = 0.1        'Unique: multiplier for TE525MM [0.1], TE525 or TE525WS [0.254], or 8" funnel on TE525 or TE525MM [0.1459] rain gauge
+'Const TE525_MULT        = 0.1        'Unique: set in include file `constants.cr3`
 
 '*** Beginning of TE525mm wiring ***
 'P1      Precipitation (black)
@@ -549,9 +550,7 @@ Const o34B_WD_MULT = 720             'Unique: multipler for wind direction
 Const o34B_WD_OFFSET = 0             'Unique: offset for wind direction
 Const o34B_WS_MULT = 0.7989          'Unique: multiplier for wind speed
 Const o34B_WS_OFFSET = 0.28          'Unique: offset for wind speed
-
-'lower case'd in anticipation of future integration into settings array
-Const cupvane_azimuth = 0  'Unique: orientation of windset w.r.t. true north
+'Const CUPVANE_AZIMUTH = 0            'Unique: set in include file `constants.cr3`
 
 '*** Beginning of 034B wiring ***
 '10L     Wind direction signal (green)
@@ -616,12 +615,15 @@ Const TS45_COM = Com1    'Serial port for TS45
 '*** Beginning station constants and variables ***.
 Const SCAN_INTERVAL              = 100           'Unique: measurement rate 100 ms (10 Hz), 200 ms (5 Hz), or 1000 ms (1 Hz) (For this CR3K program, the shortest scan interval is 100 ms)
 Const SLOWSEQUENCE_SCAN_INTERVAL = 5000          'Unique: slow sequence measurement rate (ms) (For this CR3K program, the shortest scan interval is 2000 ms)
+Const SLOWERSEQ_SCAN_INTERVAL    = 20            'Unique: slower sequence measurement rate (sec), for vertical soil profile SDI-12 sensors
 Const OUTPUT_INTERVAL            = 30            'Unique: online flux data output interval (minutes).
 Const NMBR_DAY_CPU               = 7             'Number of days for flux data to store on the CPU.
 Const NMBR_DAY_FLUX_CRD          = 30            'Unique: number of days of Flux and Flux_Notes table data to store in each file on the card.  Number of files stored depends on card size.
 Const NMBR_DAY_TIMESERIES_CRD    = 1             'Unique: number of days of Time_Series table data to store in each file on the card (days). Number of files stored depends on card size.
 Const SDM_PER                    = 30            'Unique: default SDM clock speed (uS).
 Const EC100_SDM_ADDR             = 1             'Unique: SDM address for EC100.
+Const HIFREQ_CO2                 = FALSE         'Unique: set to TRUE to also report CO2 density (mg/m^3) calculated using fast-response temperature in Time_Series data table; requires EC100 OS version 7.01 or later.
+Const HIFREQ_CO2_COV             = FALSE         'Unique: set to TRUE to use CO2 density calculated using fast-reponse temperature in calculations for Flux data table. If TRUE, then HIFREQ_CO2 must also be TRUE.
 
 Const ANALOG_INTEGRATION         = _60Hz         'Unique: slowsequence analog measurement integration time, _60Hz (e.g. in US, Canada, etc.) or _50Hz (e.g. in Europe, China, etc.)
 
@@ -743,8 +745,9 @@ Dim scan_count                As Long        'Number scans executed. Working var
 Dim slowsequence_finished_flg As Boolean     'Flag used to indicate that the slowSequence has finished its scan.
 Dim slowsequence_disable_flg  As Boolean     'Flag used to decimate statistics in main scan.
 
-Dim slowsequence_5_finished_flg As Boolean  'Flag used to indicate that the 5-minute slowSequence has finished its scan.
-Dim slowsequence_5_disable_flg As Boolean   'Flag used to decimate statistics in main scan for 5-minute scan.
+Dim slowersequence_finished_flg As Boolean  'Flag used to indicate that the 5-minute slowSequence has finished its scan.
+Dim slowersequence_disable_flg As Boolean   'Flag used to decimate statistics in main scan for 5-minute scan.
+
 Dim sys_conf_var_file         As Long        'Filehandle for the file that contains the system configuration variables in the CPU.
 
 Dim i, i_slow                 As Long        'Index variables for the outmost loop. "i" in main scan and "i_slow" in slow scan sequence
@@ -754,7 +757,7 @@ Dim array_index               As Long        'Used for array index that must be 
 Dim n = 1                                    'Used for counting the number of samples
 Units n = samples
 
-Dim dly_data_out(8)                          'Array used to temporarily store the lagged record from the raw data table (hidden)
+Dim dly_data_out(7-HIFREQ_CO2)               'Array used to temporarily store the lagged record from the raw data table (hidden)
 
 Dim x_tmp                                    'Temporary variable used in intermediate calculations
 
@@ -934,7 +937,8 @@ Alias diag_bits_sonic(5) = sonic_aq_sig_f  'Sonic acquiring signals warning flag
 Alias diag_bits_sonic(6) = sonic_cal_err_f 'Signature error in reading sonic head calibration data
 Units diag_bits_sonic    = unitless
 
-Dim sonic_irga_raw(13)                     'Hold the first 12 data of EC100 from sonic, IRGA, temperature sensor, and barometer (raw data before applying instrument scan lag).
+Dim sonic_irga_raw(12-HIFREQ_CO2)          'Hold the first 12 data of EC100 from sonic, IRGA, temperature sensor, and barometer (raw data before applying instrument scan lag).
+                                           'If HIFREQ_CO2 is True, 13th array element holds CO2 density calculated using fast-response temperature.
 
 Dim diag_sonic_tmp  As Long                'Working variable used to break out the sonic head diagnostic bits.
 Dim sonic_disable_f As Boolean             'TRUE when any sonic diagnostic warning flag is on, sonic has not sent data, or an SDM signature error is reported.
@@ -1179,7 +1183,7 @@ Units  separation_lag_dist_irga  =  m
 Units  separation_lag_scan_irga  =  scans
 
 'Data from IRGA
-Public irga(15)                     'Hold IRGA data
+Public irga(14)                     'Hold IRGA data
 Alias irga(1)  = CO2
 Alias irga(2)  = H2O
 Alias irga(3)  = diag_irga
@@ -1187,16 +1191,20 @@ Alias irga(4)  = amb_tmpr           'Temperature measured by temperature probe c
 Alias irga(5)  = amb_press          'Pressure measured by a barometer connected to EC100
 Alias irga(6)  = CO2_sig_strgth
 Alias irga(7)  = H2O_sig_strgth
-Alias irga(8)  = CO2_hf             'irga(1) calculated using sonic temp instead of temperature probe
 
-Alias irga(9)  = Tc                 'Air temperature (C), found from IRGASON' sonic temperature, water vapor density, or in case of the EC150/CSAT3A Tc=amb_tmpr from EC100 T probe
-Alias irga(10) = RH                 'Relative humidity (%): derived from Tc, H2O, and amb_press
-Alias irga(11) = e_sat              'Saturation vapor pressure (kPa): derived from Tc, H2O, and amb_press
-Alias irga(12) = e                  'Vapor pressure (kPa): derived from Tc, H2O. and amb_press
-Alias irga(13) = Td                 'Dew point temperature (C): derived from Tc, H2O, and amb_press
+Alias irga(8)  = Tc                 'Air temperature (C), found from IRGASON' sonic temperature, water vapor density, or in case of the EC150/CSAT3A Tc=amb_tmpr from EC100 T probe
+Alias irga(9)  = RH                 'Relative humidity (%): derived from Tc, H2O, and amb_press
+Alias irga(10) = e_sat              'Saturation vapor pressure (kPa): derived from Tc, H2O, and amb_press
+Alias irga(11) = e                  'Vapor pressure (kPa): derived from Tc, H2O. and amb_press
+Alias irga(12) = Td                 'Dew point temperature (C): derived from Tc, H2O, and amb_press
 
-Alias irga(14) = CO2_mixratio       'CO2 mixing ratio
-Alias irga(15) = H2O_mixratio       'H2O mixing ratio
+Alias irga(13) = CO2_mixratio       'CO2 mixing ratio
+Alias irga(14) = H2O_mixratio       'H2O mixing ratio
+
+#If (HIFREQ_CO2) Then
+Public CO2_hf                     'irga(1) calculated using sonic temp instead of temperature probe
+Units CO2_hf         = mg/m^3
+#EndIf
 
 Units CO2            = mg/m^3
 Units H2O            = g/m^3
@@ -1205,7 +1213,6 @@ Units amb_tmpr       = C
 Units amb_press      = kPa
 Units CO2_sig_strgth = fraction
 Units H2O_sig_strgth = fraction
-Units CO2_hf         = mg/m^3
 Units Tc             = C
 Units RH             = %
 Units e_sat          = kPa
@@ -1471,7 +1478,7 @@ Units  LE_qc_grade = Grade
 'Data table for delayed data from IRGA
 DataTable (delay_cs, TRUE, (OFFSET + MAX_LAG))
   TableHide
-  Sample (8,sonic_irga_raw(6),IEEE4)
+  Sample (7-HIFREQ_CO2,sonic_irga_raw(6),IEEE4)
 EndTable
 
 ' 5-minute statistics
@@ -1928,7 +1935,6 @@ Units profile_tdr31X_poreEC = uS/cm
 #If (SENSOR_5TM) Then
 
 '*** Beginning of 5TM constants and variables ***
-'XXXX HACK use `soil_` prefix to mitigate starting numeral in model name
 Public soil_5TM_E(NMBR_CS6xx)     'soil permittivity, unitless
 Public soil_5TM_tmpr(NMBR_CS6xx)  'soil temperature, degC
 Public soil_5TM_wc(NMBR_CS6xx)    'volumetric water content, v/v
@@ -1951,6 +1957,11 @@ Units profile_5TM_E = unitless
 Units profile_5TM_tmpr = C
 Units profile_5TM_wc = frac_v_wtr
 '*** End of 5TM profile constants and variables ***
+#EndIf
+#If ((SENSOR_5TM) OR (PROFILE_5TM)) Then
+Function Topp_equation( dielectric )
+  Return 4.3e-6*dielectric^3 - 5.5e-4*dielectric^2 + 2.92e-2*dielectric - 5.3e-2
+EndFunction
 #EndIf
 #If ((SENSOR_HFP) AND  (SENSOR_CS6XX) AND (SENSOR_SOIL_T)) Then
 
@@ -2420,9 +2431,6 @@ DataTable (Flux, TRUE, FLUX_SIZE_CPU)
 
   '*** Beginning of net radiometer output data ***
   Average (1, Rn_meas, IEEE4, slowsequence_disable_flg)
-  Sample (1, NRLITE_SENS, FP2)
-    FieldNames("NRLITE_SENS")
-    Units NRLITE_SENS = uV/W/m^2
   '*** End of net radiometer output data ***
   #EndIf
   #If ((SENSOR_NR01) OR (SENSOR_CNR4)) Then
@@ -2442,9 +2450,6 @@ DataTable (Flux, TRUE, FLUX_SIZE_CPU)
 
   '*** Beginning of LI190SB output data ***
   Average  (1, PAR_density, IEEE4, slowsequence_disable_flg)
-  Sample (1, QUANTUM_SENS, FP2)
-    FieldNames("QUANTUM_SENS")
-    Units QUANTUM_SENS = uA/mmol/m^2/s
   '*** End of LI190SB output data ***
   #EndIf
   #If (SENSOR_SI111) Then
@@ -2493,11 +2498,11 @@ DataTable (Flux, TRUE, FLUX_SIZE_CPU)
   #If (SENSOR_TDR31X) Then
   
   '*** Beginning of TDR31X output data ***
-  Average (NMBR_CS6xx, tdr31X_wc(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_tmpr(1), IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_E(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_bulkEC(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_poreEC(1),   IEEE4, slowsequence_5_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_wc(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_tmpr(1), IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_E(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_bulkEC(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_poreEC(1),   IEEE4, slowsequence_disable_flg)
   '*** End of TDR31X output data ***
   #EndIf
   #If (SENSOR_5TM) Then
@@ -2512,26 +2517,6 @@ DataTable (Flux, TRUE, FLUX_SIZE_CPU)
 
   '*** Beginning of HFP01 output data ***
   Sample (NMBR_SHFP, shf_plate_avg(1), IEEE4)                                    'Heat flux through a soil heat flux plate
-  #If (NOT SENSOR_HFP01SC) Then
-  Sample (1, SHFP_1_SENS, FP2)
-    FieldNames("SHFP_1_SENS")
-    Units SHFP_1_SENS = uv/W/m^2
-  #If (NMBR_SHFP > 1) Then
-  Sample (1, SHFP_2_SENS, FP2)
-    FieldNames("SHFP_2_SENS")
-    Units SHFP_2_SENS = uv/W/m^2
-  #EndIf
-  #If (NMBR_SHFP > 2) Then
-  Sample (1, SHFP_3_SENS, FP2)
-    FieldNames("SHFP_3_SENS")
-    Units SHFP_3_SENS = uv/W/m^2
-  #EndIf
-  #If (NMBR_SHFP > 3) Then
-  Sample (1, SHFP_4_SENS, FP2)
-    FieldNames("SHFP_4_SENS")
-    Units SHFP_4_SENS = uv/W/m^2
-  #EndIf
-  #EndIf
   '*** End of HFP01 output data ***
   #EndIf
   #If (SENSOR_HFP01SC) Then
@@ -2544,19 +2529,19 @@ DataTable (Flux, TRUE, FLUX_SIZE_CPU)
   #If (PROFILE_TDR31X) Then
   
   '*** Beginning of TDR31X profile output data ***
-  Average (NMBR_PROFILE, profile_tdr31X_wc(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_tmpr(1), IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_E(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_bulkEC(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_poreEC(1),   IEEE4, slowsequence_5_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_wc(1),   IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_tmpr(1), IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_E(1),   IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_bulkEC(1),   IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_poreEC(1),   IEEE4, slowersequence_disable_flg)
   '*** End of TDR31X profile output data ***
   #EndIf  
   #If (PROFILE_5TM) Then
   
   '*** Beginning of 5TM output data ***
-  Average (NMBR_PROFILE, profile_5TM_E(1),    IEEE4, slowsequence_disable_flg)
-  Average (NMBR_PROFILE, profile_5TM_tmpr(1), IEEE4, slowsequence_disable_flg)
-  Average (NMBR_PROFILE, profile_5TM_wc(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_PROFILE, profile_5TM_E(1),    IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_5TM_tmpr(1), IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_5TM_wc(1),   IEEE4, slowersequence_disable_flg)
   '*** End of 5TM output data ***
   #EndIf
   '*** Footprint characteristics ****
@@ -2852,14 +2837,14 @@ DataTable (Time_Series, TRUE, -1)
   #If (SENSOR_IRGASON) Then
   Sample (1, Tc, IEEE4)
   FieldNames ("Tc")
+  #EndIf
 
   Sample (4, amb_tmpr,IEEE4)
   FieldNames ("amb_tmpr,amb_press, CO2_sig_strgth, H2O_sig_strgth")
-  #EndIf
 
-  #If (SENSOR_CSAT3AEC150) Then
-  Sample (5, amb_tmpr,IEEE4)
-  FieldNames ("amb_tmpr,amb_press, CO2_sig_strgth, H2O_sig_strgth,CO2_hf")
+  #If (HIFREQ_CO2) Then
+  Sample (1, CO2_hf,IEEE4)
+  FieldNames ("CO2_hf")
   #EndIf
   '*** End of IRGA time series output ***
 
@@ -2908,11 +2893,11 @@ DataTable (LTAR_Met_1Minute, TRUE, -1)
   #If (SENSOR_TDR31X) Then
  
   '*** Beginning of TDR31X output data ***
-  Average (NMBR_CS6xx, tdr31X_wc(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_tmpr(1), IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_E(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_bulkEC(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_poreEC(1),   IEEE4, slowsequence_5_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_wc(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_tmpr(1), IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_E(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_bulkEC(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_poreEC(1),   IEEE4, slowsequence_disable_flg)
   '*** End of TDR31X output data ***
   #EndIf
 
@@ -2924,25 +2909,6 @@ DataTable (LTAR_Met_1Minute, TRUE, -1)
   #If (SENSOR_HFP) Then
   '*** Beginning of HFP01 output data ***
   Sample (NMBR_SHFP, shf_plate_avg(1), IEEE4)                                    'Heat flux through a soil heat flux plate
-  #If (NOT SENSOR_HFP01SC) Then
-  Sample (1, SHFP_1_SENS, FP2)
-    FieldNames("SHFP_1_SENS")
-  #If (NMBR_SHFP > 1) Then
-  Sample (1, SHFP_2_SENS, FP2)
-    FieldNames("SHFP_2_SENS")
-    Units SHFP_2_SENS = uv/W/m^2
-  #EndIf
-  #If (NMBR_SHFP > 2) Then
-  Sample (1, SHFP_3_SENS, FP2)
-    FieldNames("SHFP_3_SENS")
-    Units SHFP_3_SENS = uv/W/m^2
-  #EndIf
-  #If (NMBR_SHFP > 3) Then
-  Sample (1, SHFP_4_SENS, FP2)
-    FieldNames("SHFP_4_SENS")
-    Units SHFP_4_SENS = uv/W/m^2
-  #EndIf
-  #EndIf
   '*** End of HFP01 output data ***  
   #EndIf
   #If (SENSOR_HFP01SC) Then
@@ -3003,11 +2969,11 @@ Sample (1,LTAR_e_sat,IEEE4)
   #If (SENSOR_TDR31X) Then
   
   '*** Beginning of TDR31X output data ***
-  Average (NMBR_CS6xx, tdr31X_wc(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_tmpr(1), IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_E(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_bulkEC(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_CS6xx, tdr31X_poreEC(1),   IEEE4, slowsequence_5_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_wc(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_tmpr(1), IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_E(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_bulkEC(1),   IEEE4, slowsequence_disable_flg)
+  Average (NMBR_CS6xx, tdr31X_poreEC(1),   IEEE4, slowsequence_disable_flg)
   '*** End of TDR31X output data ***
   #EndIf
 
@@ -3018,36 +2984,17 @@ Sample (1,LTAR_e_sat,IEEE4)
   #EndIf
   #If (PROFILE_TDR31X) Then
   '*** Beginning of TDR31X profile output data ***
-  Average (NMBR_PROFILE, profile_tdr31X_wc(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_tmpr(1), IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_E(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_bulkEC(1),   IEEE4, slowsequence_5_disable_flg)
-  Average (NMBR_PROFILE, profile_tdr31X_poreEC(1),   IEEE4, slowsequence_5_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_wc(1),   IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_tmpr(1), IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_E(1),   IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_bulkEC(1),   IEEE4, slowersequence_disable_flg)
+  Average (NMBR_PROFILE, profile_tdr31X_poreEC(1),   IEEE4, slowersequence_disable_flg)
   '*** End of TDR31X profile output data ***
   #EndIf  
   '*** End of anticipated future measurements ***
     #If (SENSOR_HFP) Then
   '*** Beginning of HFP01 output data ***
   Sample (NMBR_SHFP, shf_plate_avg(1), IEEE4)                                    'Heat flux through a soil heat flux plate
-  #If (NOT SENSOR_HFP01SC) Then
-  Sample (1, SHFP_1_SENS, FP2)
-    FieldNames("SHFP_1_SENS")
-  #If (NMBR_SHFP > 1) Then
-  Sample (1, SHFP_2_SENS, FP2)
-    FieldNames("SHFP_2_SENS")
-    Units SHFP_2_SENS = uv/W/m^2
-  #EndIf
-  #If (NMBR_SHFP > 2) Then
-  Sample (1, SHFP_3_SENS, FP2)
-    FieldNames("SHFP_3_SENS")
-    Units SHFP_3_SENS = uv/W/m^2
-  #EndIf
-  #If (NMBR_SHFP > 3) Then
-  Sample (1, SHFP_4_SENS, FP2)
-    FieldNames("SHFP_4_SENS")
-    Units SHFP_4_SENS = uv/W/m^2
-  #EndIf
-  #EndIf
   '*** End of HFP01 output data ***  
   #EndIf
   #If (SENSOR_HFP01SC) Then
@@ -3059,6 +3006,118 @@ Sample (1,LTAR_e_sat,IEEE4)
   EndTable
 #EndIf
 
+'Sensor calibration values
+#If (SENSOR_UNIQUE) Then
+DataTable (Cal_Constants, TRUE, 100) 'FIXME how many records
+  #If (SENSOR_034B) Then
+  Sample (1, CUPVANE_AZIMUTH, IEEE4)     'azimuth angle of windset w.r.t. True North
+  FieldNames ("CUPVANE_AZIMUTH")
+  Units CUPVANE_AZIMUTH = degrees
+  #EndIf
+
+  #If (SENSOR_NR_LITE) Then
+  Sample (1, NRLITE_SENS, IEEE4)         'sensitivity for NR Lite
+  FieldNames ("NRLITE_SENS")
+  Units NRLITE_SENS = uV/W/m^2
+  #EndIf
+
+  #If (SENSOR_NR01) Then
+  Sample (1, NR01_SW_IN_SENS, IEEE4)     'sensitivity for NR01 shortwave downwelling radiation
+  FieldNames ("NR01_SW_IN_SENS")
+  Units NR01_SW_IN_SENS = uV/W/m^2
+  Sample (1, NR01_SW_OUT_SENS, IEEE4)    'sensitivity for NR01 shortwave upwelling radiation
+  FieldNames ("NR01_SW_OUT_SENS")
+  Units NR01_SW_OUT_SENS = uV/W/m^2
+  Sample (1, NR01_LW_IN_SENS, IEEE4)     'sensitivity for NR01 longwave downwelling radiation
+  FieldNames ("NR01_LW_IN_SENS")
+  Units NR01_LW_IN_SENS = uV/W/m^2
+  Sample (1, NR01_LW_OUT_SENS, IEEE4)    'sensitivity for NR01 longwave upwelling radiation
+  FieldNames ("NR01_LW_OUT_SENS")
+  Units NR01_LW_OUT_SENS = uV/W/m^2
+  #EndIf
+  
+  #If (SENSOR_CNR4) Then
+  Sample (1, CNR4_SW_IN_SENS, IEEE4)     'multiplier for CNR4 shortwave downwelling radiation (1000/sensitivity)
+  FieldNames ("CNR4_SW_IN_SENS")
+  Units CNR4_SW_IN_SENS = uV/W/m^2
+  Sample (1, CNR4_SW_OUT_SENS, IEEE4)    'multiplier for CNR4 shortwave upwelling radiation (1000/sensitivity)
+  FieldNames ("CNR4_SW_OUT_SENS")
+  Units CNR4_SW_OUT_SENS = uV/W/m^2
+  Sample (1, CNR4_LW_IN_SENS, IEEE4)     'multiplier for CNR4 longwave downwelling radiation (1000/sensitivity)
+  FieldNames ("CNR4_LW_IN_SENS")
+  Units CNR4_LW_IN_SENS = uV/W/m^2
+  Sample (1, CNR4_LW_OUT_SENS, IEEE4)    'multiplier for CNR4 longwave upwelling radiation (1000/sensitivity)
+  FieldNames ("CNR4_LW_OUT_SENS")
+  Units CNR4_LW_OUT_SENS = uV/W/m^2
+  #EndIf
+  
+  #If (SENSOR_LI200X) OR (SENSOR_CS300) Then
+  Sample (1, PYRAN_MULT, IEEE4)          'multiplier for LI200X [200 W/(m^2 * mV)] or CS300 [5 W/(m^2 * mV)] pyranometer
+  FieldNames ("PYRAN_MULT")
+  Units PYRAN_MULT = W/m^2/mV
+  Sample (1, PYRAN_OFFSET, IEEE4)        'offset for LI200X [0 W/m^2] or CS300 (0 W/m^2) pyranometer
+  FieldNames ("PYRAN_OFFSET")
+  Units PYRAN_OFFSET = W/m^2
+  #EndIf
+  
+  #If (SENSOR_LI190SB) Then
+  Sample (1, QUANTUM_MULT, IEEE4)        'multiplier (1000 C) for quantum PAR sensor
+  FieldNames ("QUANTUM_MULT")
+  Units QUANTUM_MULT = umol/(s m^2)/mV
+  Sample (1, QUANTUM_OFFSET, IEEE4)      'offset for quantum PAR sensor.
+  FieldNames ("QUANTUM_OFFSET")
+  Units QUANTUM_OFFSET = umol/(s m^2)
+  #EndIf
+  
+  #If (SENSOR_SI111) Then
+  Sample (1, SI111_m0, IEEE4)       'calbration m0
+  FieldNames ("SI111_m0")
+  Sample (1, SI111_m1, IEEE4)       'calbration m1
+  FieldNames ("SI111_m1")
+  Sample (1, SI111_m2, IEEE4)       'calbration m2
+  FieldNames ("SI111_m2")
+  Sample (1, SI111_b0, IEEE4)       'calbration b0
+  FieldNames ("SI111_b0")
+  Sample (1, SI111_b1, IEEE4)       'calbration b1
+  FieldNames ("SI111_b1")
+  Sample (1, SI111_b2, IEEE4)       'calbration b2
+  FieldNames ("SI111_b2")
+  #EndIf
+  
+  #If (SENSOR_HFP) Then
+  Sample (1, SHFP_1_SENS, IEEE4)    'multiplier for HFP01xx #1 (1000/sensitivity)
+  FieldNames ("SHFP_1_SENS")
+  Units SHFP_1_SENS = uV/W/m^2
+  #If (NMBR_SHFP >1) Then
+  Sample (1, SHFP_2_SENS, IEEE4)    'multiplier for HFP01xx #2 (1000/sensitivity)
+  FieldNames ("SHFP_2_SENS")
+  Units SHFP_2_SENS = uV/W/m^2
+  #EndIf
+  #If (NMBR_SHFP >2) Then
+  Sample (1, SHFP_3_SENS, IEEE4)    'multiplier for HFP01xx #3 (1000/sensitivity)
+  FieldNames ("SHFP_3_SENS")
+  Units SHFP_3_SENS = uV/W/m^2
+  #EndIf
+  #If (NMBR_SHFP >3) Then
+  Sample (1, SHFP_4_SENS, IEEE4)    'multiplier for HFP01xx #4 (1000/sensitivity)
+  FieldNames ("SHFP_4_SENS")
+  Units SHFP_4_SENS = uV/W/m^2
+  #EndIf
+  #EndIf
+  
+  #If (SENSOR_TMPR_RH) Then
+  Sample (1, TMPR_RH_T_MULT, IEEE4)      'Unique: multiplier for temperature; HC2S3 = 0.1, HMP155A = 0.14, or HMP45C = 0.1
+  FieldNames ("TMPR_RH_T_MULT")
+  Sample (1, TMPR_RH_T_OFFSET, IEEE4)    'Unique: offset for temperature; HC2S3 = -40, HMP155A = -80, or HMP45C = -40
+  FieldNames ("TMPR_RH_T_OFFSET")
+  #EndIf
+  
+  #If (SENSOR_TE525mm) Then
+  Sample (1, TE525_MULT, IEEE4)         'Unique: multiplier for TE525MM [0.1], TE525 or TE525WS [0.254], or 8" funnel on TE525 or TE525MM [0.1459] rain gauge
+  FieldNames ("TE525_MULT")
+  #EndIf
+EndTable
+#EndIf '(SENSOR_UNIQUE)
 
 '*******************'
 '*** SUBROUTINEs ***'
@@ -4641,15 +4700,6 @@ Sub Separation_Lag_Lateral_Distances (wnd_dir, separation_x, separation_y, separ
   separation_lat_dis = -separation_x*SIN(wnd_dir) + separation_y*COS(wnd_dir)
 EndSub
 
-
-'*****************'
-'*** FUNCTIONS ***'
-'*****************'
-Function Topp_equation( dielectric )
-  Return 4.3e-6*dielectric^3 - 5.5e-4*dielectric^2 + 2.92e-2*dielectric - 5.3e-2
-EndFunction
-
-
 '********************'
 '*** MAIN PROGRAM ***'
 '*********************'
@@ -4770,6 +4820,10 @@ BeginProg
   #If (SENSOR_TS45) Then
   	SerialOpen(TS45_COM,9600,7,50,1000) 'Open serial port for ModbusMaster
   #EndIf
+  
+  #If (SENSOR_UNIQUE) Then
+  CallTable Cal_Constants
+  #EndIf
 
   '*************************** SCAN LOOP  **************************************************
   Scan (SCAN_INTERVAL, mSec, SCAN_BUFFER_SIZE, 0)
@@ -4805,7 +4859,7 @@ BeginProg
 
     '*** Beginning of CSI IRGA + sonic measurements ***
     'Get EC100 data.
-    EC100 (sonic_irga_raw(1), EC100_SDM_ADDR, 2)                                 '1st to 5th elements: Sonic data and 6th to 12rd elements: IRGA, air temperature, and pressure data
+    EC100 (sonic_irga_raw(1), EC100_SDM_ADDR, (1-HIFREQ_CO2))                    '1st to 5th elements: Sonic data and 6th to 13th elements: IRGA, air temperature, and pressure data
     CallTable delay_3d                                                           'Sonic data
     CallTable delay_cs                                                           'IRGA, air temperature, and pressure data
 
@@ -5104,12 +5158,22 @@ BeginProg
         array_index = MAX_LAG + 1 - i                                'Convert i = 2, 1, 0, -1, -2 to array_index = 1, 2, 3, 4, 5
 
         GetRecord (dly_data_out(1), delay_CS, (EC100_REC_BCK + i))
-        If (i = 0) Then Move (CO2, 8, dly_data_out(1), 8)            'CO2, H2O, diag_irga, amb_tmpr, amb_press, CO2_sig_strgth, H2O_sig_strgth
+        If (i = 0) Then 
+        Move (CO2, 7, dly_data_out(1), 7)            'CO2, H2O, diag_irga, amb_tmpr, amb_press, CO2_sig_strgth, H2O_sig_strgth
+        #If (HIFREQ_CO2) Then
+          CO2_hf = dly_data_out(8)
+        #EndIf
+        EndIf
 
         'Load the arrays that hold the input data for the covariance instructions.
+        #If ((HIFREQ_CO2) AND (HIFREQ_CO2_COV))) Then
+        Move (cov_array_CO2(array_index, 1), 1, dly_data_out(8),1)   'CO2 using fast-response temperature
+        CO2_bad_rng_sig_array (array_index) = ((dly_data_out(6) < CO2_SIG_STRGTH_THRESHOULD) OR (dly_data_out(8) <0) OR (dly_data_out(8) > CO2_RNG_TOP_LIMIT))
+        #Else
         Move (cov_array_CO2(array_index, 1), 1, dly_data_out(1),1)   'CO2
-        Move (cov_array_CO2(array_index, 2), 3, Ux, 3)
         CO2_bad_rng_sig_array (array_index) = ((dly_data_out(6) < CO2_SIG_STRGTH_THRESHOULD) OR (dly_data_out(1) <0) OR (dly_data_out(1) > CO2_RNG_TOP_LIMIT))
+        #EndIf
+        Move (cov_array_CO2(array_index, 2), 3, Ux, 3)
 
         Move (cov_array_H2O(array_index, 1), 1, dly_data_out(2),1)   'H2O
         Move (cov_array_H2O(array_index, 2), 3, Ux, 3)
@@ -5574,7 +5638,7 @@ BeginProg
       '*** Beginning of cup and vane processing ***
       If (stats_cupvane.Output(1,1)) Then
         GetRecord (stats_out_cupvane(1), stats_cupvane, 1)
-        cupvane_WD_rslt_Avg = cupvane_WD_rslt_Avg + cupvane_azimuth
+        cupvane_WD_rslt_Avg = cupvane_WD_rslt_Avg + CUPVANE_AZIMUTH
       EndIf
       '*** End of cup and vane processing ***
 
@@ -5654,10 +5718,10 @@ BeginProg
         slowsequence_disable_flg  = FALSE
       EndIf
 
-  slowsequence_5_disable_flg = TRUE
-      If (slowsequence_5_finished_flg) Then
-        slowsequence_5_finished_flg = FALSE
-        slowsequence_5_disable_flg  = FALSE
+      slowersequence_disable_flg = TRUE
+      If (slowersequence_finished_flg) Then
+        slowersequence_finished_flg = FALSE
+        slowersequence_disable_flg  = FALSE
       EndIf
       
     Else
@@ -5668,12 +5732,11 @@ BeginProg
   NextScan
 
   SlowSequence
- Scan (1, Min, 0, 0)   
-#If (SENSOR_PROFILE) Then
-    '*** Beginning of TDR-31X profile measurements ***
+  Scan (SLOWERSEQ_SCAN_INTERVAL, Sec, 0, 0)   
+    #If (SENSOR_PROFILE) Then
     For i_slow = 1 To NMBR_PROFILE
+      '*** Beginning of TDR-31X profile measurements ***
       #If (PROFILE_TDR31X) Then
-      'XXXX WARNING assumes no address above 9 (default: 6 sensors #3-8)
       SDI12Recorder (tdr31X_raw(1), TDR31X_SDI12_PORT, TDR31X_SDI12_Address_P+i_slow-1, "M!", 1, 0)
       profile_tdr31X_wc(i_slow) = tdr31X_raw(1)
       profile_tdr31X_tmpr(i_slow) = tdr31X_raw(2)
@@ -5681,55 +5744,19 @@ BeginProg
       profile_tdr31X_bulkEC(i_slow) = tdr31X_raw(4)
       profile_tdr31X_poreEC(i_slow) = tdr31X_raw(5)
       #EndIf
-      
+      '*** End of TDR-31X profile measurements ***
+
+      '*** Beginning of 5TM profile measurements ***
       #If (PROFILE_5TM) Then
-      'XXXX WARNING assumes no address above 9 (default: 6 sensors #3-8)
       SDI12Recorder (fiveTM_raw(1), fiveTM_SDI12_PORT, fiveTM_SDI12_Address_P+i_slow-1, "M!", 1, 0)
       profile_5TM_E(i_slow) = fiveTM_raw(1)
       profile_5TM_tmpr(i_slow) = fiveTM_raw(2)
       profile_5TM_wc(i_slow) = Topp_equation(fiveTM_raw(3))
       #EndIf
+      '*** End of 5TM profile measurements
     Next i_slow
-    '*** End of TDR-31X profile measurements ***
     #EndIf
-    #If (SENSOR_TDR31X) Then
-
-    '*** Beginning of TDR-31X measurements ***
-    SDI12Recorder (tdr31X_raw(1), TDR31X_SDI12_PORT, TDR31X_SDI12_Address_1, "M!", 1, 0)
-    tdr31X_wc(1)     = tdr31X_raw(1)
-    tdr31X_tmpr(1)   = tdr31X_raw(2)
-    tdr31X_E(1)      = tdr31X_raw(3)
-    tdr31X_bulkEC(1) = tdr31X_raw(4)
-    tdr31X_poreEC(1) = tdr31X_raw(5)
-    
-    #If (NMBR_CS6xx = 2) Then
-    SDI12Recorder (tdr31X_raw(1), TDR31X_SDI12_PORT, TDR31X_SDI12_Address_2, "M!", 1, 0)
-    tdr31X_wc(2)     = tdr31X_raw(1)
-    tdr31X_tmpr(2)   = tdr31X_raw(2)
-    tdr31X_E(2)      = tdr31X_raw(3)
-    tdr31X_bulkEC(2) = tdr31X_raw(4)
-    tdr31X_poreEC(2) = tdr31X_raw(5)
-    #EndIf
-    
-    #If ((SENSOR_HFP) AND (SENSOR_CS6XX) AND (SENSOR_SOIL_T))) Then
-
-    AvgRun (soil_wtr_current(1), NMBR_CS6xx, (tdr31X_wc(1)/100), NMBR_SOIL_T_WTR_DEL_SAMPLES) 'HINT scale % -> v/v
-    
-    If (soil_wtr_prev_Avg = NaN) Then
-      AvgSpa (soil_wtr_prev_Avg, NMBR_CS6xx, (tdr31X_wc(1)/100)) 'HINT scale % -> v/v
-    EndIf
-
-    #If ((SENSOR_TDR31X) AND ( NOT SENSOR_TCAV)) Then
-    AvgRun (Tsoil_current(1), NMBR_CS6xx, tdr31X_tmpr(1), NMBR_SOIL_T_WTR_DEL_SAMPLES)
-
-    If (Tsoil_prev_Avg = NaN) Then                         'As soon as program starts
-      AvgSpa (Tsoil_prev_Avg, NMBR_CS6xx, tdr31X_tmpr(1))
-    EndIf
-    #EndIf
-    #EndIf
-    '*** End of TDR-31X measurements ***
-    #EndIf
-        slowsequence_5_finished_flg = TRUE
+    slowersequence_finished_flg = TRUE
     NextScan
   
   SlowSequence
@@ -6007,6 +6034,43 @@ BeginProg
     #EndIf
     #EndIf
     '*** End of CS65X measurements ***
+    #EndIf
+    #If (SENSOR_TDR31X) Then
+
+    '*** Beginning of TDR-31X measurements ***
+    SDI12Recorder (tdr31X_raw(1), TDR31X_SDI12_PORT, TDR31X_SDI12_Address_1, "M!", 1, 0)
+    tdr31X_wc(1)     = tdr31X_raw(1)
+    tdr31X_tmpr(1)   = tdr31X_raw(2)
+    tdr31X_E(1)      = tdr31X_raw(3)
+    tdr31X_bulkEC(1) = tdr31X_raw(4)
+    tdr31X_poreEC(1) = tdr31X_raw(5)
+    
+    #If (NMBR_CS6xx = 2) Then
+    SDI12Recorder (tdr31X_raw(1), TDR31X_SDI12_PORT, TDR31X_SDI12_Address_2, "M!", 1, 0)
+    tdr31X_wc(2)     = tdr31X_raw(1)
+    tdr31X_tmpr(2)   = tdr31X_raw(2)
+    tdr31X_E(2)      = tdr31X_raw(3)
+    tdr31X_bulkEC(2) = tdr31X_raw(4)
+    tdr31X_poreEC(2) = tdr31X_raw(5)
+    #EndIf
+    
+    #If ((SENSOR_HFP) AND (SENSOR_CS6XX) AND (SENSOR_SOIL_T))) Then
+
+    AvgRun (soil_wtr_current(1), NMBR_CS6xx, (tdr31X_wc(1)/100), NMBR_SOIL_T_WTR_DEL_SAMPLES) 'HINT scale % -> v/v
+    
+    If (soil_wtr_prev_Avg = NaN) Then
+      AvgSpa (soil_wtr_prev_Avg, NMBR_CS6xx, (tdr31X_wc(1)/100)) 'HINT scale % -> v/v
+    EndIf
+
+    #If ((SENSOR_TDR31X) AND ( NOT SENSOR_TCAV)) Then
+    AvgRun (Tsoil_current(1), NMBR_CS6xx, tdr31X_tmpr(1), NMBR_SOIL_T_WTR_DEL_SAMPLES)
+
+    If (Tsoil_prev_Avg = NaN) Then                         'As soon as program starts
+      AvgSpa (Tsoil_prev_Avg, NMBR_CS6xx, tdr31X_tmpr(1))
+    EndIf
+    #EndIf
+    #EndIf
+    '*** End of TDR-31X measurements ***
     #EndIf
     #If (SENSOR_5TM) Then
     
