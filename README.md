@@ -1,3 +1,5 @@
+[![DOI](https://sandbox.zenodo.org/badge/747821333.svg)](https://sandbox.zenodo.org/doi/10.5072/zenodo.32144)
+
 # EasyFlux<sup>&reg;</sup> DL for CR3000
 
 EasyFlux<sup>&reg;</sup> DL is a free CRBasic program by Campbell Scientific for
